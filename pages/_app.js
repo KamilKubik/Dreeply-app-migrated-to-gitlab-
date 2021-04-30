@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { AuthProvider } from '../lib/newAuth';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from 'next-themes';
-// import Navbar from '../components/dashboard/Navbar';
+import Navbar from '../components/dashboard/Navbar';
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
 
@@ -18,10 +18,10 @@ function MyApp({ Component, pageProps }) {
       <AuthProvider>
         <ThemeProvider attribute="class">
           <div className="bg-background dark:bg-secondary">
-            {/* <Navbar> */}
-            <DefaultSeo {...SEO} />
-            <Component {...pageProps} />
-            {/* </Navbar> */}
+            <Navbar>
+              <DefaultSeo {...SEO} />
+              <Component {...pageProps} />
+            </Navbar>
           </div>
         </ThemeProvider>
       </AuthProvider>
