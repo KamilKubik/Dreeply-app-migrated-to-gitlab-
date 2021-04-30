@@ -29,52 +29,50 @@ const Home = () => {
     // router.push('/dashboard/projects/[project]', `/dashboard/projects/${inputValue}`);
   };
   return (
-    <div>
+    // <div>
+    //   <Head>
+    //     <title>Next.js on the Jamstack with Netlify!</title>
+    //   </Head>
+    //   <h1>
+    //     Next.js on the <a href="https://jamstack.org">Jamstack</a>
+    //   </h1>
+
+    //   <h3>
+    //     Hooray 🎉 - you've built this with <a href="https://nextjs.org">Next.js</a>!
+    //   </h3>
+    //   <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Add new project" />
+    //   <Link href="/dashboard/projects/[project]" as={`/dashboard/projects/${inputValue}`}>
+    //     <a onClick={onProjectCreate}>Create your project!</a>
+    //   </Link>
+    //   {/* <button onClick={onProjectCreate}>Create your project!</button> */}
+    // </div>
+    <>
       <Head>
-        <title>Next.js on the Jamstack with Netlify!</title>
+        {/* <script
+        dangerouslySetInnerHTML={{ // Jeśli jesteśmy zalogowani, będzie kierowało nas cały czas na stronę /dashboard. Po zalogowaniu także, jeśli odświeżymy stronę
+          __html: `
+        if (document.cookie && document.cookie.includes('start-up-auth')) {
+          window.location.href = "/dashboard"
+        }
+      `,
+        }}
+      /> */}
       </Head>
-      <h1>
-        Next.js on the <a href="https://jamstack.org">Jamstack</a>
-      </h1>
-
-      <h3>
-        Hooray 🎉 - you've built this with <a href="https://nextjs.org">Next.js</a>!
-      </h3>
-      <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Add new project" />
-      <Link href="/dashboard/projects/[project]" as={`/dashboard/projects/${inputValue}`}>
-        <a onClick={onProjectCreate}>Create your project!</a>
-      </Link>
-      {/* <button onClick={onProjectCreate}>Create your project!</button> */}
-
-      <style jsx>{`
-        :global(html, body) {
-          margin: 0;
-          padding: 0;
-          height: 100%;
-        }
-        :global(body) {
-          font-size: calc(10px + 1vmin);
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-            'Helvetica Neue', sans-serif;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          background-color: #282c34;
-          color: white;
-        }
-        a {
-          color: pink;
-          text-decoration: none;
-        }
-        .content {
-          padding: 0 32px;
-        }
-      `}</style>
-    </div>
+      <div className="h-screen w-full flex justify-center items-center flex-col">
+        <div className="text-center">
+          <p className="text-4xl font-medium"> Hello!</p>
+          <p className="text-lg pb-4 font-medium text-gray">
+            Let's grow your business together{' '}
+            <img src="/gifs/hit.gif" height={40} width={40} className="inline-block relative bottom-0.5" />
+          </p>
+        </div>
+        <Link href="/signup">
+          <a className="text-center mt-2 text-base text-primary border-2 border-primary rounded-2xl px-4 py-1 hover:bg-primary hover:text-white">
+            Start for free
+          </a>
+        </Link>
+      </div>
+    </>
   );
 };
 
