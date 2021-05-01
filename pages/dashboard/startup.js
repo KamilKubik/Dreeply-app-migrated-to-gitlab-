@@ -250,9 +250,9 @@ const StartupPage = () => {
     // };
     // await db.collection('projects').doc(projectName).set(newProject);
 
-    setTimeout(() => {
-      router.push('/dashboard/project/new-startup');
-    }, 1200);
+    // setTimeout(() => {
+    router.push('/dashboard/projects/new-startup');
+    // }, 1200);
   };
 
   const [projectsArray, setProjectsArray] = useState();
@@ -263,7 +263,7 @@ const StartupPage = () => {
       .collection('currentProject')
       .doc(currentUser.uid)
       .set({ projectId: currentProject.projectId, ...currentProject });
-    router.push('/dashboard/project/creator/overview');
+    router.push('/dashboard/projects/creator/overview');
   };
   console.log(projects);
 

@@ -201,7 +201,7 @@ const newStartupPage = () => {
                 <hr style={{ width: '100%', color: '#6C63FF' }} />
                 <div className="flex items-center justify-between mt-8">
                   <p className="text-primarydark">Back</p>
-                  <Link href="/dashboard/projects/[project]" as={`/dashboard/projects/${inputValue}`}>
+                  <Link href="/dashboard/projects/[project]" as={`/dashboard/projects/${projectName}`}>
                     <a
                       className="z-50 border-2 border-primary hover:bg-primary hover:text-white text-primary font-medium py-1.5 px-6 rounded-2xl focus:outline-none"
                       onClick={onProjectCreate}
