@@ -70,7 +70,7 @@ const newStartupPage = () => {
     await db.collection('projects').doc(projectId).set(newProject);
     // await db.collection('currentProject').doc(currentUser.uid).set(newProject);
 
-    // router.push(`/dashboard/works/${projectName}`);
+    router.push(`/dashboard/projects/[project]`, `/dashboard/projects/${projectName}`);
   };
 
   const onFileChange = async (e) => {
@@ -201,14 +201,20 @@ const newStartupPage = () => {
                 <hr style={{ width: '100%', color: '#6C63FF' }} />
                 <div className="flex items-center justify-between mt-8">
                   <p className="text-primarydark">Back</p>
-                  <Link href="/dashboard/projects/[project]" as={`/dashboard/projects/${projectName}`}>
+                  <button
+                    className="z-50 border-2 border-primary hover:bg-primary hover:text-white text-primary font-medium py-1.5 px-6 rounded-2xl focus:outline-none"
+                    onClick={onProjectCreate}
+                  >
+                    Create your project!
+                  </button>
+                  {/* <Link href="/dashboard/projects/[project]" as={`/dashboard/projects/${projectName}`}>
                     <a
                       className="z-50 border-2 border-primary hover:bg-primary hover:text-white text-primary font-medium py-1.5 px-6 rounded-2xl focus:outline-none"
                       onClick={onProjectCreate}
                     >
                       Create your project!
                     </a>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
