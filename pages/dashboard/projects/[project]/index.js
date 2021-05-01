@@ -9,9 +9,11 @@ const ProjectPage = ({ projects }) => {
   useEffect(() => {
     const uid = Cookies.get('uid');
     const filteredArray = projects && projects.filter((project) => project.uid == uid);
+    console.log(filteredArray);
     filteredArray && filteredArray.length == 1 && setSelectedProject(filteredArray[0]);
   }, [projects]);
   console.log(projects);
+  console.log(selectedProject);
   if (router.isFallback) {
     return (
       <div>
@@ -20,9 +22,14 @@ const ProjectPage = ({ projects }) => {
     );
   }
   return (
-    <div>
-      <h2>Welcome to the project page! Project name:</h2>
-      {selectedProject && <p>{selectedProject.projectName}</p>}
+    <div className="w-full h-full justify-center items-center">
+      <h2 className="text-center">Welcome to the project page! Project name:</h2>
+      {selectedProject !== null && (
+        <>
+          <p className="text-center">{selectedProject.projectName}</p>
+          <p className="text-center">{selectedProject.uid}</p>
+        </>
+      )}
     </div>
   );
 };

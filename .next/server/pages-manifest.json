@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/name": "pages/name.js",
-  "/dashboard/projects/new-startup": "pages/dashboard/projects/new-startup.js"
+  "/dashboard/projects/[project]": "pages/dashboard/projects/[project].js",
+  "/dashboard/welcome": "pages/dashboard/welcome.js"
 }
