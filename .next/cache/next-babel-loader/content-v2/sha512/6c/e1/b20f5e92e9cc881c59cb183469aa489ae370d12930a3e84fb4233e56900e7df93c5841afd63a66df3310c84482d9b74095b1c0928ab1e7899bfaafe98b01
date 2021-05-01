@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from 'react';\n\nconst ChartPDF = () => {\n  return `<p>Hello</p>`;\n};\n\nexport default ChartPDF;","map":null,"metadata":{},"sourceType":"module"}

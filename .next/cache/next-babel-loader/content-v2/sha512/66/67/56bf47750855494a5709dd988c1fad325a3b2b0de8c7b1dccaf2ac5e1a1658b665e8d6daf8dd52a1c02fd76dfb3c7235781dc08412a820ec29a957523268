@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { jsx as _jsx } from \"react/jsx-runtime\";\nimport React from 'react';\nimport CompetitorsPage from '../../../../components/dashboard/startup/project/business-app/competitors/CompetitorsPage';\n\nconst Competitors = () => /*#__PURE__*/_jsx(CompetitorsPage, {});\n\nexport default Competitors;","map":null,"metadata":{},"sourceType":"module"}

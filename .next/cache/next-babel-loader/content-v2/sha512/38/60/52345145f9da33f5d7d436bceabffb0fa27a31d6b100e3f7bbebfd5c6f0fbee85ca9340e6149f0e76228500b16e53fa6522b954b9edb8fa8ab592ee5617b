@@ -1,0 +1,1 @@
+{"ast":null,"code":"const fetcher = async (url, token) => {\n  const res = await fetch(url, {\n    method: 'GET',\n    headers: new Headers({\n      'Content-Type': 'application/json',\n      token\n    }),\n    credentials: 'same-origin'\n  });\n  return res.json();\n};\n\nexport default fetcher;","map":null,"metadata":{},"sourceType":"module"}

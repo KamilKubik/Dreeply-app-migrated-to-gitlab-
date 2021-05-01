@@ -1,6 +1,0 @@
-{
-  "/dashboard/projects/[project]": "pages/dashboard/projects/[project].js",
-  "/": "pages/index.html",
-  "/_error": "pages/_error.js",
-  "/404": "pages/404.html"
-}

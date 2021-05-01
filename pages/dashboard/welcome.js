@@ -85,7 +85,7 @@ const DasboardPage = () => {
             <p className="text-primarydark dark:text-background text-center text-md sm:text-lg">How would you like to get started?</p>
           </div>
           <div>
-            <Image src="/software.svg" height={175} width={175} />
+            <img src="/software.svg" height={175} width={175} />
           </div>
           <div className="flex flex-wrap justify-center">
             <Link href="/dashboard/startup">
