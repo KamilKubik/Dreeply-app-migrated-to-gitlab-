@@ -1,8 +1,20 @@
 {
-  "..\\node_modules\\next\\dist\\client\\next-dev.js -> ./dev/noop": {
-    "id": "./node_modules/next/dist/client/dev/noop.js",
+  "..\\components\\dashboard\\startup\\project\\business-app\\Editor.js -> react-quill": {
+    "id": "rmP6",
     "files": [
-      "static/chunks/0.js"
+      "static/chunks/framework.b8f98ae0cabfbf8d6dda.js",
+      "static/chunks/eabe11fc.a23481b1d6be3988bde1.js",
+      "static/chunks/ff16ada5ec2822fa5edf70c12c9a97f1114fd809.38265e7601c626efebdb.js",
+      "static/chunks/27.6dd55ccf93e9519f809d.js"
+    ]
+  },
+  "..\\components\\dashboard\\startup\\project\\business-app\\Text.js -> react-quill": {
+    "id": "rmP6",
+    "files": [
+      "static/chunks/framework.b8f98ae0cabfbf8d6dda.js",
+      "static/chunks/eabe11fc.a23481b1d6be3988bde1.js",
+      "static/chunks/ff16ada5ec2822fa5edf70c12c9a97f1114fd809.38265e7601c626efebdb.js",
+      "static/chunks/27.6dd55ccf93e9519f809d.js"
     ]
   }
 }

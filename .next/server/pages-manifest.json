@@ -2,12 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
-  "/signup": "pages/signup.js",
   "/name": "pages/name.js",
-  "/dashboard/welcome": "pages/dashboard/welcome.js",
-  "/dashboard/startup": "pages/dashboard/startup.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/dashboard/projects/new-startup": "pages/dashboard/projects/new-startup.js",
-  "/dashboard/projects/[project]": "pages/dashboard/projects/[project].js"
+  "/dashboard/projects/new-startup": "pages/dashboard/projects/new-startup.js"
 }

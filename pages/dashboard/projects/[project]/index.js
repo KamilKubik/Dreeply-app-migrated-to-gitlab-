@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../../lib/firebase-admin';
 import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 
 const ProjectPage = ({ projects }) => {
   const [selectedProject, setSelectedProject] = useState(null);
   const router = useRouter();
   useEffect(() => {
-    projects && setSelectedProject(projects[0]);
+    const uid = Cookies.get('uid');
+    const filteredArray = projects && projects.filter((project) => project.uid == uid);
+    filteredArray && filteredArray.length == 1 && setSelectedProject(filteredArray[0]);
   }, [projects]);
   console.log(projects);
   if (router.isFallback) {
@@ -47,6 +50,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   // const { projects } = await getParticularProject(params.work);
+  // const uid = Cookies.get('uid');
   let ref = db.collection('projects').where('projectName', '==', params.project);
 
   const snapshot = await ref.get();
