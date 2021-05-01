@@ -3,9 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Router from 'next/router';
 import gsap, { Linear, Power1 } from 'gsap';
-import PDFDocument from './startup/PDFDocument';
-import CashFlowPDF from './startup/project/business-app/cash-flow/CashFlowPDF';
-import CompetitorsPDF from './startup/project/business-app/competitors/CompetitorsPDF';
+// import PDFDocument from './startup/PDFDocument';
+// import CashFlowPDF from './startup/project/business-app/cash-flow/CashFlowPDF';
+// import CompetitorsPDF from './startup/project/business-app/competitors/CompetitorsPDF';
 // Theme
 import { useTheme } from 'next-themes';
 // Mobile friendly
@@ -201,9 +201,9 @@ const MobileNavbar = ({ children }) => {
           {/* PDF Section */}
           <div id="pdfSection" className="w-full justify-start items-center mt-4">
             <p>Save as PDF:</p>
-            {Router.pathname.includes('business-plan') && <PDFDocument />}
+            {/* {Router.pathname.includes('business-plan') && <PDFDocument />}
             {Router.pathname.includes('cash-flow') && <CashFlowPDF />}
-            {Router.pathname.includes('competitors') && <CompetitorsPDF />}
+            {Router.pathname.includes('competitors') && <CompetitorsPDF />} */}
           </div>
           {/* Share link section */}
           <div id="linkSection" className="w-full justify-start items-center mt-4">
