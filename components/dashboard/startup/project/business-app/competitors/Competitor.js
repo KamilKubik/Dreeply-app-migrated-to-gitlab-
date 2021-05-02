@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Router from 'next/router';
 import { db, storage } from '../../../../../../lib/firebase';
 import debounce from '../../../../../../utils/helpers';
-import Image from 'next/image';
+// import Image from 'next/image';
 import gsap, { Linear } from 'gsap';
 import { isMobile } from 'react-device-detect';
 
@@ -140,6 +140,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
 
   const [dropdownHelper, setDropdownHelper] = useState(false);
 
+  const initialContainer = document.getElementById(index);
   // Elements
   const descriptionTitle = document.getElementById(`descriptionTitle${index}`);
   const placeholderTitle = document.getElementById(`placeholderTitle${index}`);
@@ -160,17 +161,20 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
   const dataElement = document.getElementById(`data${index}`);
 
   useEffect(() => {
+    gsap.set(dropDownElement, { rotation: '-90_cw' });
     if (!isMobile) {
       const containerElement = document.getElementById(`container${index}`);
       const competitorManager = document.getElementById(`manager${index}`);
       containerElement.addEventListener('mouseenter', () => {
-        gsap.to(competitorManager, { height: 40, duration: 0.5, ease: Linear.easeIn });
+        gsap.to(competitorManager, { height: 18, marignBottom: 16, duration: 0.5, ease: Linear.easeIn });
+        gsap.to(initialContainer, { marginTop: 16, duration: 0.5, ease: Linear.easeIn });
       });
       containerElement.addEventListener('mouseleave', () => {
-        gsap.to(competitorManager, { height: 0, duration: 0.5, ease: Linear.easeOut });
+        gsap.to(competitorManager, { height: 0, marginBottom: 0, duration: 0.5, ease: Linear.easeOut });
+        gsap.to(initialContainer, { marginTop: 0, duration: 0.5, ease: Linear.easeIn });
       });
     }
-  }, []);
+  }, [dropDownElement]);
 
   const onSectionDropdown = () => {
     const sectionHeight =
@@ -212,9 +216,9 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
       className="w-full bg-background rounded-2xl p-4 ssmContainer:p-6 shadow-md overflow-hidden mt-8 smContainer:mt-8"
     >
       <div
-        style={{ height: `${isMobile ? 40 : 0}`, top: `${isMobile ? '-6px' : '-12px'}` }}
+        style={{ height: `${isMobile ? 40 : 0}`, top: `${isMobile ? '-6px' : '-6px'}` }}
         id={`manager${index}`}
-        className="flex justify-between relative -top-3"
+        className="flex justify-between relative"
       >
         <img
           className="cursor-pointer"
@@ -222,17 +226,17 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
           onClick={onSectionDropdown}
           id={`dropdown${index}`}
           src="/competitors/dropdown.svg"
-          height={20}
-          width={20}
+          height={18}
+          width={18}
         />
         <div className="flex">
-          <img className="cursor-pointer mr-2" src="/competitors/drag.svg" height={20} width={20} />
-          <Image
+          <img className="cursor-pointer mr-2" src="/competitors/drag.svg" height={18} width={18} />
+          <img
             className="cursor-pointer"
             onClick={() => onCompetitorRemove(data.index)}
             src="/competitors/remove.svg"
-            height={20}
-            width={20}
+            height={18}
+            width={18}
           />
         </div>
       </div>
@@ -254,7 +258,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
                 htmlFor={`upload-image${index}`}
                 className="w-20 h-20 cursor-pointer rounded-full bg-primary flex justify-center items-center"
               >
-                <Image src="/competitors/empty-image.svg" height={65} width={65} />
+                <img src="/competitors/empty-image.svg" height={65} width={65} />
               </label>
             </div>
           )}
@@ -298,7 +302,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
       {/* Company description */}
       <div id={`data${index}`} className="w-full h-0 invisible">
         <div id={`descriptionTitle${index}`} className="flex justify-start items-center">
-          <Image src="/competitors/description.svg" height={22} width={22} />
+          <img src="/competitors/description.svg" height={22} width={22} />
           <p className="text-primarydark ml-2">Company description</p>
         </div>
         <textarea
@@ -310,7 +314,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
         />
         {/* Title end */}
         <div id={`descriptionModel${index}`} className="flex justify-start items-center mt-6">
-          <Image src="/competitors/model.svg" height={22} width={22} />
+          <img src="/competitors/model.svg" height={22} width={22} />
           <p className="text-primarydark ml-2">Business model</p>
         </div>
         <textarea
@@ -322,7 +326,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
         />
         {/* Model end */}
         <div id={`descriptionProduct${index}`} className="flex justify-start items-center mt-6">
-          <Image src="/competitors/product1.svg" height={22} width={22} />
+          <img src="/competitors/product1.svg" height={22} width={22} />
           <p className="text-primarydark ml-2">Product overview</p>
         </div>
         <textarea
@@ -334,7 +338,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
         />
         {/* Product end */}
         <div id={`descriptionPromotion${index}`} className="flex justify-start items-center mt-6">
-          <Image src="/competitors/promotion.svg" height={22} width={22} />
+          <img src="/competitors/promotion.svg" height={22} width={22} />
           <p className="text-primarydark ml-2">Promotion strategy</p>
         </div>
         <textarea
@@ -346,7 +350,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
         />
         {/* Promotion end */}
         <div id={`descriptionStrengths${index}`} className="flex justify-start items-center mt-6">
-          <Image src="/competitors/strengths.svg" height={22} width={22} />
+          <img src="/competitors/strengths.svg" height={22} width={22} />
           <p className="text-primarydark ml-2">Company strengths</p>
         </div>
         <textarea
@@ -358,7 +362,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
         />
         {/* Strengths end */}
         <div id={`descriptionWeaknesses${index}`} className="flex justify-start items-center mt-6">
-          <Image src="/competitors/weaknesses.svg" height={22} width={22} />
+          <img src="/competitors/weaknesses.svg" height={22} width={22} />
           <p className="text-primarydark ml-2">Company Weaknesses</p>
         </div>
         <textarea
@@ -370,7 +374,7 @@ const Competitor = ({ data, projectId, documentId, competitors, index, setCompet
         />
         {/* Weaknesses end */}
         <div id={`descriptionOpportunities${index}`} className="flex justify-start items-center mt-6">
-          <Image src="/competitors/opportunities2.svg" height={22} width={22} />
+          <img src="/competitors/opportunities2.svg" height={22} width={22} />
           <p className="text-primarydark ml-2">Opportunities</p>
         </div>
         <textarea

@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import gsap, { Linear } from 'gsap';
 import { db } from '../../../../../../lib/firebase';
 import NavbarTemplate from '../../../../NavbarTemplate';
 import CashFlowPDF from '../cash-flow/CashFlowPDF';
@@ -87,8 +89,29 @@ const CompetitorsPage = () => {
       .update({ competitorsArray: wholeCompetitorsArray });
   };
 
+  const exitImage = useRef();
+
+  useEffect(() => {
+    if (!isMobile) {
+      exitImage.current.addEventListener('mouseenter', () => {
+        gsap.to(exitImage.current, { rotation: '360_cw', duration: 0.5, ease: Linear.easeIn });
+      });
+      exitImage.current.addEventListener('mouseleave', () => {
+        gsap.to(exitImage.current, { rotation: '0_cw', duration: 0.5, ease: Linear.easeIn });
+      });
+    }
+  }, []);
+
   return (
-    <NavbarTemplate>
+    <>
+      <img
+        ref={exitImage}
+        onClick={() => Router.push(`/dashboard/projects/${Router.query.project}`)}
+        src="/business-model/back4.svg"
+        height={28}
+        width={28}
+        className="absolute left-6 top-3 cursor-pointer z-50"
+      />
       <div className="min-h-screen w-full relative flex flex-col items-center text-primarydark">
         {/* <div className="w-full xlContainer:max-w-xlContainerBreak xxlContainer:max-w-xxlContainerBreak relative mt-16"> */}
         <div className="w-full max-w-full relative mt-8 mdContainer:mt-16 mb-16 px-8 mdContainer:px-16 lgContainer:px-32 bigContainer:px-48 big2Container:px-64 big3Container:px-80 QHD:max-w-QHD">
@@ -138,7 +161,7 @@ const CompetitorsPage = () => {
           </div>
         </div>
       </div>
-    </NavbarTemplate>
+    </>
   );
 };
 

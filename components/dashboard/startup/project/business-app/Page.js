@@ -265,7 +265,7 @@ class BusinessPlanApp extends Component {
       selectedSectionIndex: null,
       selectedSection: null,
       sections: null,
-      projectId: null
+      projectId: null,
       // routerPath: useRouter().query.project
     };
     this.addNewElement = React.createRef();
@@ -288,76 +288,77 @@ class BusinessPlanApp extends Component {
     const userUid = await Cookies.get('uid');
     // console.log(Router.query.project);
     if (userUid) {
-      await db.collection('projects')
-      .where('uid', '==', userUid)
-      .where('projectName', '==', Router.query.project)
-      .get()
-      .then((querySnapshot) => {
-        console.log(querySnapshot);
-        const querySnap = querySnapshot.forEach((doc) => {
-          console.log(doc.data());
-          return this.setState({ projectId: doc.data().projectId })
+      await db
+        .collection('projects')
+        .where('uid', '==', userUid)
+        .where('projectName', '==', Router.query.project)
+        .get()
+        .then((querySnapshot) => {
+          console.log(querySnapshot);
+          const querySnap = querySnapshot.forEach((doc) => {
+            console.log(doc.data());
+            return this.setState({ projectId: doc.data().projectId });
+          });
+          console.log(querySnap);
+          return querySnap;
         });
-        console.log(querySnap);
-        return querySnap;
-      })
       console.log(this.state.projectId);
 
-      await db.collection('projects')
-      .doc(this.state.projectId)
-      .collection('businessPlan')
-      .doc(Router.query.project)
-      .collection('inputs')
-      .onSnapshot((serverUpdate) => {
-        const sections = serverUpdate.docs.map((_doc) => {
-          const data = _doc.data();
-          data['id'] = _doc.id;
-          return data;
-        });
-        console.log(sections);
-        // sections.sort((a, b) => b.createdAt - a.createdAt);
-        sections.sort((a, b) => a.position - b.position);
-        this.setState({ sections: sections });
+      await db
+        .collection('projects')
+        .doc(this.state.projectId)
+        .collection('businessPlan')
+        .doc(Router.query.project)
+        .collection('inputs')
+        .onSnapshot((serverUpdate) => {
+          const sections = serverUpdate.docs.map((_doc) => {
+            const data = _doc.data();
+            data['id'] = _doc.id;
+            return data;
+          });
+          console.log(sections);
+          // sections.sort((a, b) => b.createdAt - a.createdAt);
+          sections.sort((a, b) => a.position - b.position);
+          this.setState({ sections: sections });
 
-        // Initial section
-        if (sections && sections.length !== 0 && !this.state.selectedSection) {
-          this.setState({ selectedSection: sections[0] })
-        }
-      });
+          // Initial section
+          if (sections && sections.length !== 0 && !this.state.selectedSection) {
+            this.setState({ selectedSection: sections[0] });
+          }
+        });
     }
 
-      // await db.collection('projects')
-      // .doc(this.state.projectId)
-      // .collection('businessPlan')
-      // .where('pathName', '==', Router.query.project)
-      // .where('projectId', '==', this.state.projectId)
-      // .onSnapshot((serverUpdate) => {
-      //   const sections = serverUpdate.docs.map((doc) => {
-      //    const data = doc.data();
-      //    data['id'] = doc.id;
-      //    return data.sections;
-      //   })
-      //   const sectionsArray = sections[0];
-      //   console.log(sectionsArray);
-      // })
+    // await db.collection('projects')
+    // .doc(this.state.projectId)
+    // .collection('businessPlan')
+    // .where('pathName', '==', Router.query.project)
+    // .where('projectId', '==', this.state.projectId)
+    // .onSnapshot((serverUpdate) => {
+    //   const sections = serverUpdate.docs.map((doc) => {
+    //    const data = doc.data();
+    //    data['id'] = doc.id;
+    //    return data.sections;
+    //   })
+    //   const sectionsArray = sections[0];
+    //   console.log(sectionsArray);
+    // })
 
-      //   db.collection('currentBusinessPlan')
-      // .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-      // .collection('inputs')
-      // .onSnapshot((serverUpdate) => {
-      //   const sections = serverUpdate.docs.map((_doc) => {
-      //     const data = _doc.data();
-      //     data['id'] = _doc.id;
-      //     return data;
-      //   });
-      //   console.log(sections);
-      //   sections.sort((a, b) => b.createdAt - a.createdAt);
-      //   this.setState({ sections: sections });
-      // });
+    //   db.collection('currentBusinessPlan')
+    // .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+    // .collection('inputs')
+    // .onSnapshot((serverUpdate) => {
+    //   const sections = serverUpdate.docs.map((_doc) => {
+    //     const data = _doc.data();
+    //     data['id'] = _doc.id;
+    //     return data;
+    //   });
+    //   console.log(sections);
+    //   sections.sort((a, b) => b.createdAt - a.createdAt);
+    //   this.setState({ sections: sections });
+    // });
   };
 
-  selectSectionPage = (section, index) =>
-    this.setState({ selectedSectionIndex: index, selectedSection: section });
+  selectSectionPage = (section, index) => this.setState({ selectedSectionIndex: index, selectedSection: section });
 
   sectionTitleUpdate = async (title) => {
     let newSectionsArray = [...this.state.sections];
@@ -366,32 +367,32 @@ class BusinessPlanApp extends Component {
       fields: this.state.selectedSection.fields,
       timestamp: this.state.selectedSection.timestamp,
       title: title,
-      position: this.state.selectedSection.position
+      position: this.state.selectedSection.position,
     };
 
     await this.setState({ sections: newSectionsArray });
 
     db.collection('projects')
-    .doc(this.state.projectId)
-    .collection('businessPlan')
-    .doc(Router.query.project)
-    .collection('inputs')
-    .doc(this.state.selectedSection.id)
-    .update({ title: title })
-  }
+      .doc(this.state.projectId)
+      .collection('businessPlan')
+      .doc(Router.query.project)
+      .collection('inputs')
+      .doc(this.state.selectedSection.id)
+      .update({ title: title });
+  };
 
   reorderElements = async (elements) => {
     console.log(elements);
     console.log(this.state.selectedSection.id);
 
     db.collection('projects')
-    .doc(this.state.projectId)
-    .collection('businessPlan')
-    .doc(Router.query.project)
-    .collection('inputs')
-    .doc(this.state.selectedSection.id)
-    .update({ fields: elements })
-  }
+      .doc(this.state.projectId)
+      .collection('businessPlan')
+      .doc(Router.query.project)
+      .collection('inputs')
+      .doc(this.state.selectedSection.id)
+      .update({ fields: elements });
+  };
 
   // sectionUpdate = (id, sectionObj) => {
   //   if (sectionObj.title && sectionObj.body) {
@@ -412,13 +413,13 @@ class BusinessPlanApp extends Component {
 
     await sections.forEach((section, index) => {
       db.collection('projects')
-      .doc(this.state.projectId)
-      .collection('businessPlan')
-      .doc(Router.query.project)
-      .collection('inputs')
-      .doc(section.id)
-      .update({ position: index })
-    })
+        .doc(this.state.projectId)
+        .collection('businessPlan')
+        .doc(Router.query.project)
+        .collection('inputs')
+        .doc(section.id)
+        .update({ position: index });
+    });
 
     // await db.collection('projects')
     // .doc(this.state.projectId)
@@ -426,7 +427,7 @@ class BusinessPlanApp extends Component {
     // .doc(Router.query.project)
     // .collection('inputs')
     // .add({ sections })
-  }
+  };
 
   deleteParticularField = async (index) => {
     console.log(index);
@@ -435,9 +436,7 @@ class BusinessPlanApp extends Component {
     // this.setState({ selectedSection: this.state.selectedSection.fields.filter((field) => index == field.index)})
 
     // console.log(this.state.selectedSection.fields.filter((field) => index !== field.index));
-    const newFields = this.state.selectedSection.fields.filter(
-      (field) => index !== field.index
-    );
+    const newFields = this.state.selectedSection.fields.filter((field) => index !== field.index);
     console.log(this.state.selectedSection);
     const newSelectedSection = {
       createdAt: this.state.selectedSection.createdAt,
@@ -447,7 +446,8 @@ class BusinessPlanApp extends Component {
       id: selectedSection.id,
     };
 
-    await db.collection('projects')
+    await db
+      .collection('projects')
       .doc(this.state.projectId)
       .collection('businessPlan')
       .doc(Router.query.project)
@@ -471,11 +471,12 @@ class BusinessPlanApp extends Component {
       type: 'text',
     };
 
-    await db.collection('projects')
-        .doc(this.state.projectId)
-        .collection('businessPlan')
-        .doc(Router.query.project)
-        .collection('inputs')
+    await db
+      .collection('projects')
+      .doc(this.state.projectId)
+      .collection('businessPlan')
+      .doc(Router.query.project)
+      .collection('inputs')
       // .collection('currentBusinessPlan')
       // .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
       // .collection('inputs')
@@ -499,22 +500,23 @@ class BusinessPlanApp extends Component {
       // title: this.state.selectedSection.title,
       index: uuidv4(),
       type: 'spacing',
-      spacingId: uuidv4()
+      spacingId: uuidv4(),
     };
 
-    await db.collection('projects')
-    .doc(this.state.projectId)
-    .collection('businessPlan')
-    .doc(Router.query.project)
-    .collection('inputs')
-    .doc(this.state.selectedSection.id)
-    .update({
-      fields: firebase.firestore.FieldValue.arrayUnion(newArrayItem),
-    });
+    await db
+      .collection('projects')
+      .doc(this.state.projectId)
+      .collection('businessPlan')
+      .doc(Router.query.project)
+      .collection('inputs')
+      .doc(this.state.selectedSection.id)
+      .update({
+        fields: firebase.firestore.FieldValue.arrayUnion(newArrayItem),
+      });
 
     await this.state.selectedSection.fields.push(newArrayItem);
     await this.setState({ selectedSection: this.state.selectedSection });
-  }
+  };
 
   addNewChart = async (setCurrentIndex) => {
     const newArrayItem = {
@@ -536,10 +538,11 @@ class BusinessPlanApp extends Component {
       dataset4: [],
       dataset5: [],
       dataset6: [],
-      chartId: uuidv4()
+      chartId: uuidv4(),
     };
 
-    await db.collection('projects')
+    await db
+      .collection('projects')
       .doc(this.state.projectId)
       .collection('businessPlan')
       .doc(Router.query.project)
@@ -569,7 +572,8 @@ class BusinessPlanApp extends Component {
       type: 'header',
     };
 
-    await db.collection('projects')
+    await db
+      .collection('projects')
       .doc(this.state.projectId)
       .collection('businessPlan')
       .doc(Router.query.project)
@@ -604,7 +608,7 @@ class BusinessPlanApp extends Component {
       createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
-      position: this.state.selectedSection.position
+      position: this.state.selectedSection.position,
     };
 
     await this.setState({ selectedSection: newSection });
@@ -615,14 +619,14 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
       });
-  }
+  };
 
   fieldUpdate = async (fieldObj, index, currentIndex) => {
     console.log(fieldObj);
@@ -631,51 +635,52 @@ class BusinessPlanApp extends Component {
       // title: fieldObj.title,
       body: fieldObj.body,
       index: fieldObj.index,
-      type: 'text'
+      type: 'text',
     };
     // console.log('SELECTED SECTION --> ', this.state.selectedSection);
     // console.log('FILEOBJ --> ', fieldObj);
 
     // if (index !== -1) {
-      let newFieldsArray = [...this.state.selectedSection.fields];
-      console.log(newFieldsArray);
-      newFieldsArray[currentIndex] = objToUpdate;
-      // TO JEST OFICJALNA TABLICA INPUTS, KTÓRĄ TRZEBA WRZUCIĆ DO FIREBASE'A !!!
-      console.log(newFieldsArray);
-      const testSection = {
-        title: this.state.selectedSection.title,
-        createdAt: this.state.selectedSection.createdAt,
+    let newFieldsArray = [...this.state.selectedSection.fields];
+    console.log(newFieldsArray);
+    newFieldsArray[currentIndex] = objToUpdate;
+    // TO JEST OFICJALNA TABLICA INPUTS, KTÓRĄ TRZEBA WRZUCIĆ DO FIREBASE'A !!!
+    console.log(newFieldsArray);
+    const testSection = {
+      title: this.state.selectedSection.title,
+      createdAt: this.state.selectedSection.createdAt,
+      fields: newFieldsArray,
+      // id: id,
+      id: this.state.selectedSection.id,
+    };
+
+    console.log('TEST SECTION --> ', testSection);
+    console.log('SELECTED SECTION --> ', this.state.selectedSection);
+
+    this.setState({ selectedSection: testSection });
+
+    // console.log(this.state.selectedSection.fields[index].body == fieldObj.body);
+
+    // Chodzi o to, że jakby po wybraniu nowego inputu (czyli po zmianie indexu), ten index zanim się zmieni, dalej pozostaje taki sam (zobacz że w linijce 298 i 299 są jakby zupełnie inne wartości)
+    // Nie patrz na to u góry !!! Jakby nie działało, to spróbuj odpalić to sprawdzenie pod spodem (na wypadek zbyt późnego wczytania się obecnego indexu)
+    // if (this.state.selectedSection.fields[index].body == fieldObj.body) {
+    await db
+      .collection('projects')
+      .doc(this.state.projectId)
+      .collection('businessPlan')
+      .doc(Router.query.project)
+      .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
+      .doc(this.state.selectedSection.id)
+      .update({
         fields: newFieldsArray,
-        // id: id,
-        id: this.state.selectedSection.id,
-      };
+      });
+    // }
 
-      console.log('TEST SECTION --> ', testSection);
-      console.log('SELECTED SECTION --> ', this.state.selectedSection);
-
-      this.setState({ selectedSection: testSection });
-
-      // console.log(this.state.selectedSection.fields[index].body == fieldObj.body);
-
-      // Chodzi o to, że jakby po wybraniu nowego inputu (czyli po zmianie indexu), ten index zanim się zmieni, dalej pozostaje taki sam (zobacz że w linijce 298 i 299 są jakby zupełnie inne wartości)
-      // Nie patrz na to u góry !!! Jakby nie działało, to spróbuj odpalić to sprawdzenie pod spodem (na wypadek zbyt późnego wczytania się obecnego indexu)
-      // if (this.state.selectedSection.fields[index].body == fieldObj.body) {
-        await db.collection('projects')
-        .doc(this.state.projectId)
-        .collection('businessPlan')
-        .doc(Router.query.project)
-        .collection('inputs')
-        // .collection('currentBusinessPlan')
-        //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-        //   .collection('inputs')
-          .doc(this.state.selectedSection.id)
-          .update({
-            fields: newFieldsArray,
-          });
-      // }
-
-      // CHYBA DZIAŁA, WSZYSTKO ZALEŻY OD TEGO RESETU
-      // setCurrentIndex(null);
+    // CHYBA DZIAŁA, WSZYSTKO ZALEŻY OD TEGO RESETU
+    // setCurrentIndex(null);
     // }
 
     // if (fieldObj.title && fieldObj.body) {
@@ -695,7 +700,6 @@ class BusinessPlanApp extends Component {
   };
 
   addNewTable = async () => {
-
     const newArrayItem = {
       // title: this.state.selectedSection.title,
       index: uuidv4(),
@@ -704,18 +708,19 @@ class BusinessPlanApp extends Component {
       headRows: ['Name', 'Surname', 'Age'],
       rows: [
         {
-          row: ['Kamil', 'Kubik', '32']
+          row: ['Kamil', 'Kubik', '32'],
         },
         {
-          row: ['Szymon', 'Kubik', '43']
+          row: ['Szymon', 'Kubik', '43'],
         },
         {
-          row: ['John', 'Kubik', '51']
-        }
-      ]
+          row: ['John', 'Kubik', '51'],
+        },
+      ],
     };
 
-    await db.collection('projects')
+    await db
+      .collection('projects')
       .doc(this.state.projectId)
       .collection('businessPlan')
       .doc(Router.query.project)
@@ -730,96 +735,91 @@ class BusinessPlanApp extends Component {
 
     await this.state.selectedSection.fields.push(newArrayItem);
     await this.setState({ selectedSection: this.state.selectedSection });
-  }
+  };
 
   tableUpdate = async (newArray, fieldIndex, tableId, index) => {
     console.log(newArray);
 
     let newFieldsArray = [...this.state.selectedSection.fields];
-        newFieldsArray[fieldIndex] = newArray;
-    
-        const newSection = {
-          title: this.state.selectedSection.title,
-          createdAt: this.state.selectedSection.createdAt,
-          fields: newFieldsArray,
-          id: this.state.selectedSection.id,
-        };
-    
-        await this.setState({ selectedSection: newSection });
-    
-        // Update database
-        db.collection('projects')
-          .doc(this.state.projectId)
-          .collection('businessPlan')
-          .doc(Router.query.project)
-          .collection('inputs')
-        // .collection('currentBusinessPlan')
-        //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-        //   .collection('inputs')
-          .doc(this.state.selectedSection.id)
-          .update({
-            fields: newFieldsArray,
-          });
-  }
+    newFieldsArray[fieldIndex] = newArray;
+
+    const newSection = {
+      title: this.state.selectedSection.title,
+      createdAt: this.state.selectedSection.createdAt,
+      fields: newFieldsArray,
+      id: this.state.selectedSection.id,
+    };
+
+    await this.setState({ selectedSection: newSection });
+
+    // Update database
+    db.collection('projects')
+      .doc(this.state.projectId)
+      .collection('businessPlan')
+      .doc(Router.query.project)
+      .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
+      .doc(this.state.selectedSection.id)
+      .update({
+        fields: newFieldsArray,
+      });
+  };
 
   addChart = async (chart, currentSectionIndex, index, selectedSection) => {
-    console.log(currentSectionIndex)
-        // Take current array copy
-        let newFieldsArray = [...this.state.selectedSection.fields];
-        newFieldsArray[currentSectionIndex] = {
-          chartId: selectedSection.chartId,
-          chart: chart,
-          index,
-          type: 'chart',
-          chartType: selectedSection.fields[currentSectionIndex].chartType,
-          stacked: selectedSection.fields[currentSectionIndex].stacked,
-          labels: selectedSection.fields[currentSectionIndex].labels,
-          dataset1: selectedSection.fields[currentSectionIndex].dataset1,
-          dataset2: selectedSection.fields[currentSectionIndex].dataset2,
-          dataset3: selectedSection.fields[currentSectionIndex].dataset3,
-          dataset4: selectedSection.fields[currentSectionIndex].dataset4,
-          dataset5: selectedSection.fields[currentSectionIndex].dataset5,
-          dataset6: selectedSection.fields[currentSectionIndex].dataset6,
-          // Dataset labels
-          dataset1Label: selectedSection.fields[currentSectionIndex].dataset1Label,
-          dataset2Label: selectedSection.fields[currentSectionIndex].dataset2Label,
-          dataset3Label: selectedSection.fields[currentSectionIndex].dataset3Label,
-          dataset4Label: selectedSection.fields[currentSectionIndex].dataset4Label,
-          dataset5Label: selectedSection.fields[currentSectionIndex].dataset5Label,
-          dataset6Label: selectedSection.fields[currentSectionIndex].dataset6Label,
-        };
-    
-        const newSection = {
-          title: this.state.selectedSection.title,
-          createdAt: this.state.selectedSection.createdAt,
-          fields: newFieldsArray,
-          id: this.state.selectedSection.id,
-        };
-    
-        await this.setState({ selectedSection: newSection });
-    
-        // Update database
-        db.collection('projects')
-          .doc(this.state.projectId)
-          .collection('businessPlan')
-          .doc(Router.query.project)
-          .collection('inputs')
-        // .collection('currentBusinessPlan')
-        //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-        //   .collection('inputs')
-          .doc(this.state.selectedSection.id)
-          .update({
-            fields: newFieldsArray,
-          });
-  }
+    console.log(currentSectionIndex);
+    // Take current array copy
+    let newFieldsArray = [...this.state.selectedSection.fields];
+    newFieldsArray[currentSectionIndex] = {
+      chartId: selectedSection.chartId,
+      chart: chart,
+      index,
+      type: 'chart',
+      chartType: selectedSection.fields[currentSectionIndex].chartType,
+      stacked: selectedSection.fields[currentSectionIndex].stacked,
+      labels: selectedSection.fields[currentSectionIndex].labels,
+      dataset1: selectedSection.fields[currentSectionIndex].dataset1,
+      dataset2: selectedSection.fields[currentSectionIndex].dataset2,
+      dataset3: selectedSection.fields[currentSectionIndex].dataset3,
+      dataset4: selectedSection.fields[currentSectionIndex].dataset4,
+      dataset5: selectedSection.fields[currentSectionIndex].dataset5,
+      dataset6: selectedSection.fields[currentSectionIndex].dataset6,
+      // Dataset labels
+      dataset1Label: selectedSection.fields[currentSectionIndex].dataset1Label,
+      dataset2Label: selectedSection.fields[currentSectionIndex].dataset2Label,
+      dataset3Label: selectedSection.fields[currentSectionIndex].dataset3Label,
+      dataset4Label: selectedSection.fields[currentSectionIndex].dataset4Label,
+      dataset5Label: selectedSection.fields[currentSectionIndex].dataset5Label,
+      dataset6Label: selectedSection.fields[currentSectionIndex].dataset6Label,
+    };
+
+    const newSection = {
+      title: this.state.selectedSection.title,
+      createdAt: this.state.selectedSection.createdAt,
+      fields: newFieldsArray,
+      id: this.state.selectedSection.id,
+    };
+
+    await this.setState({ selectedSection: newSection });
+
+    // Update database
+    db.collection('projects')
+      .doc(this.state.projectId)
+      .collection('businessPlan')
+      .doc(Router.query.project)
+      .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
+      .doc(this.state.selectedSection.id)
+      .update({
+        fields: newFieldsArray,
+      });
+  };
 
   // ------------------------------------------- CHART LABELS UPDATE -------------------------------------------
-  chartLabelsUpdate = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  chartLabelsUpdate = async (data, index, currentSectionIndex, selectedSection) => {
     console.log(selectedSection);
 
     const newArrayObj = [];
@@ -1055,13 +1055,13 @@ class BusinessPlanApp extends Component {
 
     // Update database
     db.collection('projects')
-    .doc(this.state.projectId)
-    .collection('businessPlan')
-    .doc(Router.query.project)
-    .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      .doc(this.state.projectId)
+      .collection('businessPlan')
+      .doc(Router.query.project)
+      .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -1069,12 +1069,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset 1
-  onDataset1Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDataset1Update = async (data, index, currentSectionIndex, selectedSection) => {
     const newArrayObj = [];
     console.log('IMPORTANT --> ', data.dataset1ValueOne);
 
@@ -1279,7 +1274,7 @@ class BusinessPlanApp extends Component {
       }
     });
 
-    const newArr = filteredArrayObj.filter((element) => element !== '');;
+    const newArr = filteredArrayObj.filter((element) => element !== '');
 
     // Take current array copy
     let newFieldsArray = [...this.state.selectedSection.fields];
@@ -1321,9 +1316,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -1331,12 +1326,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset 2
-  onDataset2Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDataset2Update = async (data, index, currentSectionIndex, selectedSection) => {
     const newArrayObj = [];
     console.log('DATA --> ', selectedSection);
 
@@ -1584,9 +1574,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -1594,12 +1584,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset 3
-  onDataset3Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDataset3Update = async (data, index, currentSectionIndex, selectedSection) => {
     const newArrayObj = [];
 
     if (data.dataset3ValueOne) {
@@ -1844,9 +1829,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -1854,12 +1839,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset 4
-  onDataset4Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDataset4Update = async (data, index, currentSectionIndex, selectedSection) => {
     const newArrayObj = [];
 
     if (data.dataset4ValueOne) {
@@ -2104,9 +2084,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2114,12 +2094,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset 5
-  onDataset5Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDataset5Update = async (data, index, currentSectionIndex, selectedSection) => {
     const newArrayObj = [];
 
     if (data.dataset5ValueOne) {
@@ -2364,9 +2339,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2374,12 +2349,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset 6
-  onDataset6Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDataset6Update = async (data, index, currentSectionIndex, selectedSection) => {
     const newArrayObj = [];
 
     if (data.dataset6ValueOne) {
@@ -2624,9 +2594,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2634,12 +2604,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset label1
-  onDatasetLabel1Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDatasetLabel1Update = async (data, index, currentSectionIndex, selectedSection) => {
     // Take current array copy
     let newFieldsArray = [...this.state.selectedSection.fields];
     newFieldsArray[currentSectionIndex] = {
@@ -2678,9 +2643,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2688,12 +2653,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset label2
-  onDatasetLabel2Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDatasetLabel2Update = async (data, index, currentSectionIndex, selectedSection) => {
     // Take current array copy
     let newFieldsArray = [...this.state.selectedSection.fields];
     newFieldsArray[currentSectionIndex] = {
@@ -2732,9 +2692,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2742,12 +2702,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset label3
-  onDatasetLabel3Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDatasetLabel3Update = async (data, index, currentSectionIndex, selectedSection) => {
     // Take current array copy
     let newFieldsArray = [...this.state.selectedSection.fields];
     newFieldsArray[currentSectionIndex] = {
@@ -2786,9 +2741,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2796,12 +2751,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset label4
-  onDatasetLabel4Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDatasetLabel4Update = async (data, index, currentSectionIndex, selectedSection) => {
     // Take current array copy
     let newFieldsArray = [...this.state.selectedSection.fields];
     newFieldsArray[currentSectionIndex] = {
@@ -2840,9 +2790,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2850,12 +2800,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset label5
-  onDatasetLabel5Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDatasetLabel5Update = async (data, index, currentSectionIndex, selectedSection) => {
     // Take current array copy
     let newFieldsArray = [...this.state.selectedSection.fields];
     newFieldsArray[currentSectionIndex] = {
@@ -2894,9 +2839,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2904,12 +2849,7 @@ class BusinessPlanApp extends Component {
   };
 
   // Dataset label6
-  onDatasetLabel6Update = async (
-    data,
-    index,
-    currentSectionIndex,
-    selectedSection
-  ) => {
+  onDatasetLabel6Update = async (data, index, currentSectionIndex, selectedSection) => {
     // Take current array copy
     let newFieldsArray = [...this.state.selectedSection.fields];
     newFieldsArray[currentSectionIndex] = {
@@ -2948,9 +2888,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2965,18 +2905,10 @@ class BusinessPlanApp extends Component {
     if (value.name) {
       console.log(value.name);
     }
-    const name = value.name
-      ? value.name
-      : this.state.selectedSection.fields[currentSectionIndex].data.name;
-    const type = value.type
-      ? value.type
-      : this.state.selectedSection.fields[currentSectionIndex].data.type;
-    const valuev = value.value
-      ? value.value
-      : this.state.selectedSection.fields[currentSectionIndex].data.value;
-    const color = value.color
-      ? value.color
-      : this.state.selectedSection.fields[currentSectionIndex].data.color;
+    const name = value.name ? value.name : this.state.selectedSection.fields[currentSectionIndex].data.name;
+    const type = value.type ? value.type : this.state.selectedSection.fields[currentSectionIndex].data.type;
+    const valuev = value.value ? value.value : this.state.selectedSection.fields[currentSectionIndex].data.value;
+    const color = value.color ? value.color : this.state.selectedSection.fields[currentSectionIndex].data.color;
     const newObj = {
       name,
       type,
@@ -3006,9 +2938,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(this.state.selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -3037,9 +2969,7 @@ class BusinessPlanApp extends Component {
       });
     const newID = newFromDB.id;
     // await this.setState({ sections: [...this.state.sections, section] });
-    const newSectionIndex = this.state.sections.indexOf(
-      this.state.sections.filter((_section) => _section.id === newID)[0]
-    );
+    const newSectionIndex = this.state.sections.indexOf(this.state.sections.filter((_section) => _section.id === newID)[0]);
     this.setState({
       selectedSection: this.state.sections[newSectionIndex],
       selectedSectionIndex: newSectionIndex,
@@ -3059,14 +2989,8 @@ class BusinessPlanApp extends Component {
       // this.setState({ selectedSectionIndex: null, selectedSection: null });
       if (this.state.sections.length >= 1) {
         this.state.selectedSectionIndex < sectionIndex
-          ? this.selectSectionPage(
-              this.state.sections[this.state.selectedSectionIndex],
-              this.state.selectedSectionIndex
-            )
-          : this.selectSectionPage(
-              this.state.sections[this.state.selectedSectionIndex - 1],
-              this.state.selectedSectionIndex - 1
-            );
+          ? this.selectSectionPage(this.state.sections[this.state.selectedSectionIndex], this.state.selectedSectionIndex)
+          : this.selectSectionPage(this.state.sections[this.state.selectedSectionIndex - 1], this.state.selectedSectionIndex - 1);
       } else {
         this.setState({ selectedNote: null, selectedNote: null }); // DO POPRAWY
       }
@@ -3077,9 +3001,9 @@ class BusinessPlanApp extends Component {
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(section.id)
       .delete();
   };
@@ -3102,7 +3026,6 @@ class BusinessPlanApp extends Component {
     // gsap.to(document.getElementById('left-element2'), { scale: 0, duration: 1, ease: Linear });
     // gsap.to(document.getElementById('left-bar'), {width: 0, transformOrigin: 'left', duration: 1, ease: Linear, delay: 1 });
 
-
     // --- VERSION 2 ---
     // CONTAINERS
     gsap.to(document.getElementById('container'), { autoAlpha: 0, delay: 1 });
@@ -3111,22 +3034,22 @@ class BusinessPlanApp extends Component {
     gsap.to(document.getElementById('container3'), { autoAlpha: 0, delay: 1 });
     gsap.to(document.getElementById('container4'), { autoAlpha: 0, delay: 1 });
     // LEFT BAR
-    gsap.to(document.getElementById('left-bar'), {height: 0, transformOrigin: 'top', duration: 2.5, ease: Linear });
+    gsap.to(document.getElementById('left-bar'), { height: 0, transformOrigin: 'top', duration: 2.5, ease: Linear });
     // EXIT
     gsap.to(document.getElementById('exit'), { autoAlpha: 0, duration: 2, ease: Linear });
     // TEXTS
-    gsap.to(document.getElementById('left-text4'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear});
-    gsap.to(document.getElementById('left-text3'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: .2 });
-    gsap.to(document.getElementById('left-text2'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: .4 });
-    gsap.to(document.getElementById('left-text1'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: .6 });
-    gsap.to(document.getElementById('left-text'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: .8 });
+    gsap.to(document.getElementById('left-text4'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear });
+    gsap.to(document.getElementById('left-text3'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.2 });
+    gsap.to(document.getElementById('left-text2'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.4 });
+    gsap.to(document.getElementById('left-text1'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.6 });
+    gsap.to(document.getElementById('left-text'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.8 });
     // IMAGES
-    gsap.to(document.getElementById('left-element4'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear});
-    gsap.to(document.getElementById('left-element3'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: .2 });
-    gsap.to(document.getElementById('left-element2'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: .4 });
-    gsap.to(document.getElementById('left-element1'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: .6 });
-    gsap.to(document.getElementById('left-element'), {scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: .8 });
-  }
+    gsap.to(document.getElementById('left-element4'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear });
+    gsap.to(document.getElementById('left-element3'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.2 });
+    gsap.to(document.getElementById('left-element2'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.4 });
+    gsap.to(document.getElementById('left-element1'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.6 });
+    gsap.to(document.getElementById('left-element'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.8 });
+  };
 
   pdfChartsCreate = async (sections) => {
     // console.log(sections);
@@ -3138,203 +3061,203 @@ class BusinessPlanApp extends Component {
           console.log(field);
 
           const colors =
-          field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
-            ? [
-                'rgba(205,220,57,1)',
-                'rgba(255,235,59,1)',
-                'rgba(255,193,7,1)',
-                'rgba(255,152,0,1)',
-                'rgba(255,87,34,1)',
-                'rgba(244,67,54,1)',
-                'rgba(233,30,99,1)',
-                'rgba(156,39,176,1)',
-                'rgba(103,58,183,1)',
-                'rgba(63,81,181,1)',
-                'rgba(96,125,139,1)',
-                'rgba(121,85,72,1)',
-              ]
-            : field.chartType == 'Line chart' || field.chartType == 'Area chart'
-            ? 'rgba(255,185,0 ,1 )'
-            : [
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-                'rgba(255,185,0 ,1 )',
-              ];
-      
-        const colors1 =
-          field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
-            ? [
-                'rgba(205,220,57,1)',
-                'rgba(255,235,59,1)',
-                'rgba(255,193,7,1)',
-                'rgba(255,152,0,1)',
-                'rgba(255,87,34,1)',
-                'rgba(244,67,54,1)',
-                'rgba(233,30,99,1)',
-                'rgba(156,39,176,1)',
-                'rgba(103,58,183,1)',
-                'rgba(63,81,181,1)',
-                'rgba(96,125,139,1)',
-                'rgba(121,85,72,1)',
-              ]
-            : field.chartType == 'Line chart' || field.chartType == 'Area chart'
-            ? 'rgba(0,204,106 ,1 )'
-            : [
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-                'rgba(0,204,106 ,1 )',
-              ];
-      
-        const colors2 =
-          field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
-            ? [
-                'rgba(205,220,57,1)',
-                'rgba(255,235,59,1)',
-                'rgba(255,193,7,1)',
-                'rgba(255,152,0,1)',
-                'rgba(255,87,34,1)',
-                'rgba(244,67,54,1)',
-                'rgba(233,30,99,1)',
-                'rgba(156,39,176,1)',
-                'rgba(103,58,183,1)',
-                'rgba(63,81,181,1)',
-                'rgba(96,125,139,1)',
-                'rgba(121,85,72,1)',
-              ]
-            : field.chartType == 'Line chart' || field.chartType == 'Area chart'
-            ? 'rgba(0,120,215 ,1 )'
-            : [
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-                'rgba(0,120,215 ,1 )',
-              ];
-      
-        const colors3 =
-          field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
-            ? [
-                'rgba(205,220,57,1)',
-                'rgba(255,235,59,1)',
-                'rgba(255,193,7,1)',
-                'rgba(255,152,0,1)',
-                'rgba(255,87,34,1)',
-                'rgba(244,67,54,1)',
-                'rgba(233,30,99,1)',
-                'rgba(156,39,176,1)',
-                'rgba(103,58,183,1)',
-                'rgba(63,81,181,1)',
-                'rgba(96,125,139,1)',
-                'rgba(121,85,72,1)',
-              ]
-            : field.chartType == 'Line chart' || field.chartType == 'Area chart'
-            ? 'rgba(231,72,86 ,1 )'
-            : [
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-                'rgba(231,72,86 ,1 )',
-              ];
-      
-        const colors4 =
-          field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
-            ? [
-                'rgba(205,220,57,1)',
-                'rgba(255,235,59,1)',
-                'rgba(255,193,7,1)',
-                'rgba(255,152,0,1)',
-                'rgba(255,87,34,1)',
-                'rgba(244,67,54,1)',
-                'rgba(233,30,99,1)',
-                'rgba(156,39,176,1)',
-                'rgba(103,58,183,1)',
-                'rgba(63,81,181,1)',
-                'rgba(96,125,139,1)',
-                'rgba(121,85,72,1)',
-              ]
-            : field.chartType == 'Line chart' || field.chartType == 'Area chart'
-            ? 'rgba(126,115,95 ,1 )'
-            : [
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-                'rgba(126,115,95 ,1 )',
-              ];
-      
-        const colors5 =
-          field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
-            ? [
-                'rgba(205,220,57,1)',
-                'rgba(255,235,59,1)',
-                'rgba(255,193,7,1)',
-                'rgba(255,152,0,1)',
-                'rgba(255,87,34,1)',
-                'rgba(244,67,54,1)',
-                'rgba(233,30,99,1)',
-                'rgba(156,39,176,1)',
-                'rgba(103,58,183,1)',
-                'rgba(63,81,181,1)',
-                'rgba(96,125,139,1)',
-                'rgba(121,85,72,1)',
-              ]
-            : field.chartType == 'Line chart' || field.chartType == 'Area chart'
-            ? 'rgba(177,70,194 ,1 )'
-            : [
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-                'rgba(177,70,194 ,1 )',
-              ];
-    
+            field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
+              ? [
+                  'rgba(205,220,57,1)',
+                  'rgba(255,235,59,1)',
+                  'rgba(255,193,7,1)',
+                  'rgba(255,152,0,1)',
+                  'rgba(255,87,34,1)',
+                  'rgba(244,67,54,1)',
+                  'rgba(233,30,99,1)',
+                  'rgba(156,39,176,1)',
+                  'rgba(103,58,183,1)',
+                  'rgba(63,81,181,1)',
+                  'rgba(96,125,139,1)',
+                  'rgba(121,85,72,1)',
+                ]
+              : field.chartType == 'Line chart' || field.chartType == 'Area chart'
+              ? 'rgba(255,185,0 ,1 )'
+              : [
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                  'rgba(255,185,0 ,1 )',
+                ];
+
+          const colors1 =
+            field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
+              ? [
+                  'rgba(205,220,57,1)',
+                  'rgba(255,235,59,1)',
+                  'rgba(255,193,7,1)',
+                  'rgba(255,152,0,1)',
+                  'rgba(255,87,34,1)',
+                  'rgba(244,67,54,1)',
+                  'rgba(233,30,99,1)',
+                  'rgba(156,39,176,1)',
+                  'rgba(103,58,183,1)',
+                  'rgba(63,81,181,1)',
+                  'rgba(96,125,139,1)',
+                  'rgba(121,85,72,1)',
+                ]
+              : field.chartType == 'Line chart' || field.chartType == 'Area chart'
+              ? 'rgba(0,204,106 ,1 )'
+              : [
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                  'rgba(0,204,106 ,1 )',
+                ];
+
+          const colors2 =
+            field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
+              ? [
+                  'rgba(205,220,57,1)',
+                  'rgba(255,235,59,1)',
+                  'rgba(255,193,7,1)',
+                  'rgba(255,152,0,1)',
+                  'rgba(255,87,34,1)',
+                  'rgba(244,67,54,1)',
+                  'rgba(233,30,99,1)',
+                  'rgba(156,39,176,1)',
+                  'rgba(103,58,183,1)',
+                  'rgba(63,81,181,1)',
+                  'rgba(96,125,139,1)',
+                  'rgba(121,85,72,1)',
+                ]
+              : field.chartType == 'Line chart' || field.chartType == 'Area chart'
+              ? 'rgba(0,120,215 ,1 )'
+              : [
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                  'rgba(0,120,215 ,1 )',
+                ];
+
+          const colors3 =
+            field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
+              ? [
+                  'rgba(205,220,57,1)',
+                  'rgba(255,235,59,1)',
+                  'rgba(255,193,7,1)',
+                  'rgba(255,152,0,1)',
+                  'rgba(255,87,34,1)',
+                  'rgba(244,67,54,1)',
+                  'rgba(233,30,99,1)',
+                  'rgba(156,39,176,1)',
+                  'rgba(103,58,183,1)',
+                  'rgba(63,81,181,1)',
+                  'rgba(96,125,139,1)',
+                  'rgba(121,85,72,1)',
+                ]
+              : field.chartType == 'Line chart' || field.chartType == 'Area chart'
+              ? 'rgba(231,72,86 ,1 )'
+              : [
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                  'rgba(231,72,86 ,1 )',
+                ];
+
+          const colors4 =
+            field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
+              ? [
+                  'rgba(205,220,57,1)',
+                  'rgba(255,235,59,1)',
+                  'rgba(255,193,7,1)',
+                  'rgba(255,152,0,1)',
+                  'rgba(255,87,34,1)',
+                  'rgba(244,67,54,1)',
+                  'rgba(233,30,99,1)',
+                  'rgba(156,39,176,1)',
+                  'rgba(103,58,183,1)',
+                  'rgba(63,81,181,1)',
+                  'rgba(96,125,139,1)',
+                  'rgba(121,85,72,1)',
+                ]
+              : field.chartType == 'Line chart' || field.chartType == 'Area chart'
+              ? 'rgba(126,115,95 ,1 )'
+              : [
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                  'rgba(126,115,95 ,1 )',
+                ];
+
+          const colors5 =
+            field.chartType == 'Pie chart' || field.chartType == 'Doughnut chart'
+              ? [
+                  'rgba(205,220,57,1)',
+                  'rgba(255,235,59,1)',
+                  'rgba(255,193,7,1)',
+                  'rgba(255,152,0,1)',
+                  'rgba(255,87,34,1)',
+                  'rgba(244,67,54,1)',
+                  'rgba(233,30,99,1)',
+                  'rgba(156,39,176,1)',
+                  'rgba(103,58,183,1)',
+                  'rgba(63,81,181,1)',
+                  'rgba(96,125,139,1)',
+                  'rgba(121,85,72,1)',
+                ]
+              : field.chartType == 'Line chart' || field.chartType == 'Area chart'
+              ? 'rgba(177,70,194 ,1 )'
+              : [
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                  'rgba(177,70,194 ,1 )',
+                ];
+
           const data = {
             labels: field.labels && [
               ...field.labels.map((label) => {
@@ -3349,7 +3272,8 @@ class BusinessPlanApp extends Component {
               // Dataset1
               {
                 label: field.dataset1Label && field.dataset1Label,
-                data: field.dataset1 && 
+                data:
+                  field.dataset1 &&
                   field.dataset1.map((data) => {
                     if (data !== '') {
                       return data;
@@ -3357,15 +3281,13 @@ class BusinessPlanApp extends Component {
                   }),
                 backgroundColor: colors,
                 borderWidth:
-                  field.chartType == 'Area chart'
-                    ? 0
-                    : field.chartType == 'Pie chart' ||
-                      (field.chartType == 'Doughnut chart' && 2),
+                  field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
               },
               // Dataset2
               {
                 label: field.dataset2Label && field.dataset2Label,
-                data: field.dataset2 && 
+                data:
+                  field.dataset2 &&
                   field.dataset2.map((data) => {
                     if (data !== '') {
                       return data;
@@ -3373,15 +3295,13 @@ class BusinessPlanApp extends Component {
                   }),
                 backgroundColor: colors1,
                 borderWidth:
-                  field.chartType == 'Area chart'
-                    ? 0
-                    : field.chartType == 'Pie chart' ||
-                      (field.chartType == 'Doughnut chart' && 2),
+                  field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
               },
               // Dataset3
               {
                 label: field.dataset3Label && field.dataset3Label,
-                data: field.dataset3 && 
+                data:
+                  field.dataset3 &&
                   field.dataset3.map((data) => {
                     if (data !== '') {
                       return data;
@@ -3389,15 +3309,13 @@ class BusinessPlanApp extends Component {
                   }),
                 backgroundColor: colors2,
                 borderWidth:
-                  field.chartType == 'Area chart'
-                    ? 0
-                    : field.chartType == 'Pie chart' ||
-                      (field.chartType == 'Doughnut chart' && 2),
+                  field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
               },
               // Dataset4
               {
                 label: field.dataset4Label && field.dataset4Label,
-                data: field.dataset4 && 
+                data:
+                  field.dataset4 &&
                   field.dataset4.map((data) => {
                     if (data !== '') {
                       return data;
@@ -3405,15 +3323,13 @@ class BusinessPlanApp extends Component {
                   }),
                 backgroundColor: colors3,
                 borderWidth:
-                  field.chartType == 'Area chart'
-                    ? 0
-                    : field.chartType == 'Pie chart' ||
-                      (field.chartType == 'Doughnut chart' && 2),
+                  field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
               },
               // Dataset5
               {
                 label: field.dataset5Label && field.dataset5Label,
-                data: field.dataset5 &&
+                data:
+                  field.dataset5 &&
                   field.dataset5.map((data) => {
                     if (data !== '') {
                       return data;
@@ -3421,15 +3337,13 @@ class BusinessPlanApp extends Component {
                   }),
                 backgroundColor: colors4,
                 borderWidth:
-                  field.chartType == 'Area chart'
-                    ? 0
-                    : field.chartType == 'Pie chart' ||
-                      (field.chartType == 'Doughnut chart' && 2),
+                  field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
               },
               // Dataset6
               {
                 label: field.dataset6Label && field.dataset6Label,
-                data: field.dataset6 &&
+                data:
+                  field.dataset6 &&
                   field.dataset6.map((data) => {
                     if (data !== '') {
                       return data;
@@ -3437,14 +3351,11 @@ class BusinessPlanApp extends Component {
                   }),
                 backgroundColor: colors5,
                 borderWidth:
-                  field.chartType == 'Area chart'
-                    ? 0
-                    : field.chartType == 'Pie chart' ||
-                      (field.chartType == 'Doughnut chart' && 2),
+                  field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
               },
             ],
           };
-    
+
           const toSaveChart = new ChartJsImage();
           toSaveChart.setConfig({
             type: 'bar',
@@ -3471,186 +3382,224 @@ class BusinessPlanApp extends Component {
           imageUrl.then((data) => {
             if (data) {
               db.collection('projects')
-              .doc(this.state.projectId)
-              .collection('businessPlan')
-              .doc(Router.query.project)
-              .collection('inputs')
-            // .collection('currentBusinessPlan')
-            //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-            //   .collection('inputs')
-              .doc('chartImages')
-              .add({
-                index: field.index,
-                imageUrl: data
-              })
+                .doc(this.state.projectId)
+                .collection('businessPlan')
+                .doc(Router.query.project)
+                .collection('inputs')
+                // .collection('currentBusinessPlan')
+                //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+                //   .collection('inputs')
+                .doc('chartImages')
+                .add({
+                  index: field.index,
+                  imageUrl: data,
+                });
             }
-          })
+          });
         }
-      })
-    })
+      });
+    });
 
     console.log(images);
-  }
+  };
 
   render() {
     return (
       <>
-        <NavbarTemplate>
-          <div className='min-h-screen w-full relative flex flex-col items-center'>
-            {/* <div className='h-1/5 w-4/5 bg-primarydark fixed bottom-0 z-50'></div> */}
-            {/* ADDING ITEMS LEFT BAR */}
-            <div id='left-bar' className='z-50 h-0 w-40 bg-primary fixed top-0 left-0'>
-              <ul className='circles1' style={{ zIndex: -1 }}>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                {/* 10 */}
-              </ul>
-              <img
-                id='exit'
-                onClick={this.onLeftBarHidden}
-                src='/chart/exit1.svg'
-                width={15}
-                width={15}
-                style={{ position: 'absolute', top: '1%', right: '-15%', visibility: 'hidden', opacity: 0 }}
-              />
-              <div className='h-full w-full grid grid-cols-1frr grid-rows-5fr justify-items-center items-center'>
-                <div onClick={() => this.addNewHeader()} id='container' className='invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer'>
-                  <div id='left-element' className='transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center'>
-                    <Image src='/chart/header.svg' width={55} height={55} />
-                  </div>
-                  <p id='left-text' className='transform scale-0 text-center text-background mt-1 text-sm cursor-default'>
-                    Header
-                  </p>
+        <img
+          onClick={() => Router.push(`/dashboard/projects/${Router.query.project}`)}
+          src="/business-model/back.svg"
+          height={28}
+          width={28}
+          className="absolute left-5 top-3 cursor-pointer z-50"
+        />
+        {/* <NavbarTemplate> */}
+        <div className="min-h-screen w-full relative flex flex-col items-center">
+          {/* <div className='h-1/5 w-4/5 bg-primarydark fixed bottom-0 z-50'></div> */}
+          {/* ADDING ITEMS LEFT BAR */}
+          <div id="left-bar" className="z-50 h-0 w-40 bg-primary fixed top-0 left-0">
+            <ul className="circles1" style={{ zIndex: -1 }}>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              {/* 10 */}
+            </ul>
+            <img
+              id="exit"
+              onClick={this.onLeftBarHidden}
+              src="/chart/exit1.svg"
+              width={15}
+              width={15}
+              style={{ position: 'absolute', top: '1%', right: '-15%', visibility: 'hidden', opacity: 0 }}
+            />
+            <div className="h-full w-full grid grid-cols-1frr grid-rows-5fr justify-items-center items-center">
+              <div
+                onClick={() => this.addNewHeader()}
+                id="container"
+                className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+              >
+                <div
+                  id="left-element"
+                  className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                >
+                  <Image src="/chart/header.svg" width={55} height={55} />
                 </div>
-                <div onClick={() => this.addNewField()} id='container1' className='invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer'>
-                  <div id='left-element1' className='transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center'>
-                    <Image src='/chart/text.svg' width={55} height={55} />
-                  </div>
-                  <p id='left-text1' className='transform scale-0 text-center text-background mt-1 text-sm cursor-default'>
-                    Text
-                  </p>
-                </div>
-                <div onClick={() => this.addNewSpacing()} id='container2' className='invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer'>
-                  <div id='left-element2' className='transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center'>
-                    <Image src='/spacing/spacing.svg' width={55} height={55} />
-                  </div>
-                  <p id='left-text2' className='transform scale-0 text-center text-background mt-1 text-sm cursor-default'>
-                    Spacing
-                  </p>
-                </div>
-                <div onClick={() => this.addNewChart()} id='container3' className='invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer'>
-                  <div id='left-element3' className='transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center'>
-                    <Image src='/chart/chart.svg' width={55} height={55} />
-                  </div>
-                  <p id='left-text3' className='transform scale-0 text-center text-background mt-1 text-sm cursor-default'>
-                    Chart
-                  </p>
-                </div>
-                <div onClick={() => this.addNewTable()} id='container4' className='invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer'>
-                  <div id='left-element4' className='transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center'>
-                    <Image src='/table/table.svg' width={55} height={55} />
-                  </div>
-                  <p id='left-text4' className='transform scale-0 text-center text-background mt-1 text-sm cursor-default'>
-                    Table
-                  </p>
-                </div>
+                <p id="left-text" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  Header
+                </p>
               </div>
-            </div>
-            <div className='w-full max-w-full relative mt-16 px-32'>
-              <div className='grid grid-cols-2 grid-rows-1 grid-flow-col'>
-                <div className='flex items-center'>
-                  <svg
-                    height='30'
-                    width='30'
-                    className='fill-current text-primary dark:text-primarydark'
-                    xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 128 128'
-                  >
-                    <title>Landing Success</title>
-                    <g id='Landing_Success' data-name='Landing Success'>
-                      <path
-                        className='cls-1'
-                        d='M109.3,90.1A46,46,0,0,0,65,36V20.08c1.78-.62,7.21-2.14,12.57.23a19.33,19.33,0,0,0,14.82,0c.87-.38.61.31.61-17.93a1,1,0,0,0-1.43-.93c-.07,0-6.69,2.87-13.18,0A19.41,19.41,0,0,0,65,.93,1,1,0,0,0,63,1V36a45.86,45.86,0,0,0-28.66,10.8C16.18,40.48,4,40,.79,45.51-2.29,50.86,3.94,59.3,10,65.68A11,11,0,0,0,18,83c.81,38.41,46.08,59.2,75.66,34.21,8.53,3,29,9.15,33.55,1.31C130.39,113,123.86,102.65,109.3,90.1ZM77.59,3.31A19.39,19.39,0,0,0,91,3.83V18.68c-1.79.62-7.22,2.13-12.57-.23A19.19,19.19,0,0,0,65,17.93V3.08C66.81,2.46,72.24,1,77.59,3.31ZM65,45v-7c39.69.91,58,50.27,28.21,76.81C71.32,107,46,92.66,27.77,78.64a11,11,0,0,0-3.2-16.13A43.88,43.88,0,0,1,63,38.06V45A1,1,0,0,0,65,45ZM32.55,48.36a46.21,46.21,0,0,0-9.83,13.28,10.93,10.93,0,0,0-11.4,2.47C-8.39,43.23,5.23,39.08,32.55,48.36ZM10,72a9,9,0,1,1,9,9A9,9,0,0,1,10,72Zm10,11a11,11,0,0,0,6.34-2.82c18.45,14.21,43.45,28.35,65.05,36.22C63,139.16,20.83,119.1,20.05,83Zm105.4,34.5c-2.51,4.35-14,3.62-30-1.85a45.61,45.61,0,0,0,13.42-23.21C121.59,103.58,128,113.12,125.45,117.47Z'
-                      />
-                    </g>
-                  </svg>
-                  <p className='text-primarydark text-2xl mt-2 pl-2 dark:text-background'>
-                    Business plan
-                  </p>
+              <div
+                onClick={() => this.addNewField()}
+                id="container1"
+                className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+              >
+                <div
+                  id="left-element1"
+                  className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                >
+                  <Image src="/chart/text.svg" width={55} height={55} />
                 </div>
-                <PDFDocument allData={this.state.sections} pdfChartsCreate={this.pdfChartsCreate} projectId={this.state.projectId} />
+                <p id="left-text1" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  Text
+                </p>
               </div>
-              <div>
-                <h1 className='text-secondary text-md text-gray'>
-                  Create your business plan any way you want
-                </h1>
-              </div>
-              {/* SECTIONS */}
-              <div className='grid grid-cols-8fr grid-flow-col'>
-                <div className='col-start-1 col-end-7 w-full h-maxcontent mt-12 pb-20'>
-                  {this.state.selectedSection ? (
-                    (console.log('selected --> ', this.state.selectedSection),
-                    (
-                      <EditorInputElement
-                        // sectionUpdate={sectionUpdate}
-                        // sectionUpdate={sectionUpdate}
-                        sectionTitleUpdate={this.sectionTitleUpdate}
-                        tableUpdate={this.tableUpdate}
-                        headerUpdate={this.headerUpdate}
-                        reorderElements={this.reorderElements}
-                        projectId={this.state.projectId}
-                        addChart={this.addChart}
-                        addNewHeader={this.addNewHeader}
-                        chartTypeUpdate={this.chartTypeUpdate}
-                        onDatasetLabel6Update={this.onDatasetLabel6Update}
-                        onDatasetLabel5Update={this.onDatasetLabel5Update}
-                        onDatasetLabel4Update={this.onDatasetLabel4Update}
-                        onDatasetLabel3Update={this.onDatasetLabel3Update}
-                        onDatasetLabel2Update={this.onDatasetLabel2Update}
-                        onDatasetLabel1Update={this.onDatasetLabel1Update}
-                        onDataset6Update={this.onDataset6Update}
-                        onDataset5Update={this.onDataset5Update}
-                        onDataset4Update={this.onDataset4Update}
-                        onDataset3Update={this.onDataset3Update}
-                        onDataset2Update={this.onDataset2Update}
-                        onDataset1Update={this.onDataset1Update}
-                        chartLabelsUpdate={this.chartLabelsUpdate}
-                        chartValueUpdate={this.chartValueUpdate}
-                        addNewChart={this.addNewChart}
-                        deleteParticularField={this.deleteParticularField}
-                        addNewField={this.addNewField}
-                        fieldUpdate={this.fieldUpdate}
-                        sectionUpdate={this.sectionUpdate}
-                        selectedSection={this.state.selectedSection}
-                        selectedSectionIndex={this.state.selectedSectionIndex}
-                        sections={this.state.sections}
-                      />
-                    ))
-                  ) : (
-                    <div>Text section or chart???</div>
-                  )}
+              <div
+                onClick={() => this.addNewSpacing()}
+                id="container2"
+                className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+              >
+                <div
+                  id="left-element2"
+                  className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                >
+                  <Image src="/spacing/spacing.svg" width={55} height={55} />
                 </div>
-                <SectionManager
-                  selectedSection={this.state.selectedSection}
-                  reorderSections={this.reorderSections}
-                  sections={this.state.sections}
-                  selectedSectionIndex={this.state.selectedSectionIndex}
-                  selectSectionPage={this.selectSectionPage}
-                  newSectionPage={this.newSectionPage}
-                  deleteSectionPage={this.deleteSectionPage}
-                />
+                <p id="left-text2" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  Spacing
+                </p>
+              </div>
+              <div
+                onClick={() => this.addNewChart()}
+                id="container3"
+                className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+              >
+                <div
+                  id="left-element3"
+                  className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                >
+                  <Image src="/chart/chart.svg" width={55} height={55} />
+                </div>
+                <p id="left-text3" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  Chart
+                </p>
+              </div>
+              <div
+                onClick={() => this.addNewTable()}
+                id="container4"
+                className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+              >
+                <div
+                  id="left-element4"
+                  className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                >
+                  <Image src="/table/table.svg" width={55} height={55} />
+                </div>
+                <p id="left-text4" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  Table
+                </p>
               </div>
             </div>
           </div>
-        </NavbarTemplate>
+          <div className="w-full max-w-full relative mt-16 px-32">
+            <div className="grid grid-cols-2 grid-rows-1 grid-flow-col">
+              <div className="flex items-center">
+                <svg
+                  height="30"
+                  width="30"
+                  className="fill-current text-primary dark:text-primarydark"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 128 128"
+                >
+                  <title>Landing Success</title>
+                  <g id="Landing_Success" data-name="Landing Success">
+                    <path
+                      className="cls-1"
+                      d="M109.3,90.1A46,46,0,0,0,65,36V20.08c1.78-.62,7.21-2.14,12.57.23a19.33,19.33,0,0,0,14.82,0c.87-.38.61.31.61-17.93a1,1,0,0,0-1.43-.93c-.07,0-6.69,2.87-13.18,0A19.41,19.41,0,0,0,65,.93,1,1,0,0,0,63,1V36a45.86,45.86,0,0,0-28.66,10.8C16.18,40.48,4,40,.79,45.51-2.29,50.86,3.94,59.3,10,65.68A11,11,0,0,0,18,83c.81,38.41,46.08,59.2,75.66,34.21,8.53,3,29,9.15,33.55,1.31C130.39,113,123.86,102.65,109.3,90.1ZM77.59,3.31A19.39,19.39,0,0,0,91,3.83V18.68c-1.79.62-7.22,2.13-12.57-.23A19.19,19.19,0,0,0,65,17.93V3.08C66.81,2.46,72.24,1,77.59,3.31ZM65,45v-7c39.69.91,58,50.27,28.21,76.81C71.32,107,46,92.66,27.77,78.64a11,11,0,0,0-3.2-16.13A43.88,43.88,0,0,1,63,38.06V45A1,1,0,0,0,65,45ZM32.55,48.36a46.21,46.21,0,0,0-9.83,13.28,10.93,10.93,0,0,0-11.4,2.47C-8.39,43.23,5.23,39.08,32.55,48.36ZM10,72a9,9,0,1,1,9,9A9,9,0,0,1,10,72Zm10,11a11,11,0,0,0,6.34-2.82c18.45,14.21,43.45,28.35,65.05,36.22C63,139.16,20.83,119.1,20.05,83Zm105.4,34.5c-2.51,4.35-14,3.62-30-1.85a45.61,45.61,0,0,0,13.42-23.21C121.59,103.58,128,113.12,125.45,117.47Z"
+                    />
+                  </g>
+                </svg>
+                <p className="text-primarydark text-2xl mt-2 pl-2 dark:text-background">Business plan</p>
+              </div>
+              <PDFDocument allData={this.state.sections} pdfChartsCreate={this.pdfChartsCreate} projectId={this.state.projectId} />
+            </div>
+            <div>
+              <h1 className="text-secondary text-md text-gray">Create your business plan any way you want</h1>
+            </div>
+            {/* SECTIONS */}
+            <div className="grid grid-cols-business grid-flow-col gap-x-8">
+              <div className="w-full h-maxcontent mt-12 pb-20">
+                {this.state.selectedSection ? (
+                  (console.log('selected --> ', this.state.selectedSection),
+                  (
+                    <EditorInputElement
+                      // sectionUpdate={sectionUpdate}
+                      // sectionUpdate={sectionUpdate}
+                      sectionTitleUpdate={this.sectionTitleUpdate}
+                      tableUpdate={this.tableUpdate}
+                      headerUpdate={this.headerUpdate}
+                      reorderElements={this.reorderElements}
+                      projectId={this.state.projectId}
+                      addChart={this.addChart}
+                      addNewHeader={this.addNewHeader}
+                      chartTypeUpdate={this.chartTypeUpdate}
+                      onDatasetLabel6Update={this.onDatasetLabel6Update}
+                      onDatasetLabel5Update={this.onDatasetLabel5Update}
+                      onDatasetLabel4Update={this.onDatasetLabel4Update}
+                      onDatasetLabel3Update={this.onDatasetLabel3Update}
+                      onDatasetLabel2Update={this.onDatasetLabel2Update}
+                      onDatasetLabel1Update={this.onDatasetLabel1Update}
+                      onDataset6Update={this.onDataset6Update}
+                      onDataset5Update={this.onDataset5Update}
+                      onDataset4Update={this.onDataset4Update}
+                      onDataset3Update={this.onDataset3Update}
+                      onDataset2Update={this.onDataset2Update}
+                      onDataset1Update={this.onDataset1Update}
+                      chartLabelsUpdate={this.chartLabelsUpdate}
+                      chartValueUpdate={this.chartValueUpdate}
+                      addNewChart={this.addNewChart}
+                      deleteParticularField={this.deleteParticularField}
+                      addNewField={this.addNewField}
+                      fieldUpdate={this.fieldUpdate}
+                      sectionUpdate={this.sectionUpdate}
+                      selectedSection={this.state.selectedSection}
+                      selectedSectionIndex={this.state.selectedSectionIndex}
+                      sections={this.state.sections}
+                    />
+                  ))
+                ) : (
+                  <div>Text section or chart???</div>
+                )}
+              </div>
+              <SectionManager
+                selectedSection={this.state.selectedSection}
+                reorderSections={this.reorderSections}
+                sections={this.state.sections}
+                selectedSectionIndex={this.state.selectedSectionIndex}
+                selectSectionPage={this.selectSectionPage}
+                newSectionPage={this.newSectionPage}
+                deleteSectionPage={this.deleteSectionPage}
+              />
+            </div>
+          </div>
+        </div>
+        {/* </NavbarTemplate> */}
       </>
     );
   }

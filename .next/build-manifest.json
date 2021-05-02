@@ -28,16 +28,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/dashboard/projects/[project].js"
-    ],
-    "/dashboard/projects/[project]/cash-flow": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/dashboard/projects/[project]/cash-flow.js"
-    ],
-    "/dashboard/projects/new-startup": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/dashboard/projects/new-startup.js"
     ]
   },
   "ampFirstPages": []

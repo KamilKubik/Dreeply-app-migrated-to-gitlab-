@@ -55,6 +55,7 @@ module.exports = {
       '7fr': '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
       '8fr': '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
       '12fr': '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+      business: '1fr 280px',
     },
     gridTemplateRows: {
       '1fr': '1fr',

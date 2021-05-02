@@ -246,23 +246,112 @@ const DesktopNavbar = ({ children }) => {
           </g>
         </svg>
       </div>
-      <div className="h-full w-full overflow-hidden bg-background dark:bg-secondary">
-        <div
-          ref={navRef}
-          onMouseEnter={mouseEnterNav}
-          onMouseLeave={mouseLeaveNav}
-          className="h-screen w-20 bg-background dark:bg-secondary fixed z-0 overflow-hidden"
-        >
-          <div className="mt-6 w-52 grid grid-cols-80px items-center hover:opacity-100">
-            <Link href="/dashboard/welcome">
+      {router.pathname.includes('/business-plan') || router.pathname.includes('/cash-flow') || router.pathname.includes('/competitors') ? (
+        // <div className="h-full w-full overflow-hidden bg-background dark:bg-secondary">
+        //   {' '}
+        //   <div className="h-screen w-20 bg-background dark:bg-secondary fixed z-0 overflow-hidden"></div>
+        // </div>
+        <></>
+      ) : (
+        <div className="h-full w-full overflow-hidden bg-background dark:bg-secondary">
+          <div
+            ref={navRef}
+            onMouseEnter={mouseEnterNav}
+            onMouseLeave={mouseLeaveNav}
+            className="h-screen w-20 bg-background dark:bg-secondary fixed z-0 overflow-hidden"
+          >
+            <div className="mt-6 w-52 grid grid-cols-80px items-center hover:opacity-100">
+              <Link href="/dashboard/welcome">
+                <svg
+                  onClick={activeClassFn1}
+                  onMouseEnter={() => setActiveHover1(true)}
+                  onMouseLeave={() => setActiveHover1(false)}
+                  height="45"
+                  width="45"
+                  className={`fill-current text-primarydark dark:text-background block m-auto opacity-50 hover:opacity-100 cursor-pointer ${
+                    activeClass1 ? 'opacity-100' : 'opacity-50'
+                  }`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 128 128"
+                >
+                  <defs>
+                    <style></style>
+                  </defs>
+                  <title>See You Soon</title>
+                  <g id="See_You_Soon" data-name="See You Soon">
+                    <path
+                      className="cls-1"
+                      d="M84.87,77.27l-7-41.18a6.6,6.6,0,0,0-13.1,1.58l1.83,24.6L56.93,36a6.73,6.73,0,0,0-12.78,4.17L51.82,67,40.57,48a6.45,6.45,0,0,0-11.41,6l8.33,18.24-4.57-6.45a6.48,6.48,0,0,0-10.9,7l21.25,36.71c.32.59,8,14.54,23.14,14.54,20.07,0,29.74-15.17,32.11-29.36,2.22-13.34,4.59-22,7.68-28.22C111.74,55.36,96.37,44.67,84.87,77.27Zm19.5-11.74c-3.18,6.36-5.61,15.24-7.87,28.79C94.28,107.69,85.2,122,66.41,122c-13.86,0-21.27-13.34-21.36-13.5L23.79,71.75A4.44,4.44,0,0,1,31.26,67L42.1,82.27a1,1,0,0,0,1.76-1L31,53.14a4.41,4.41,0,0,1,7.8-4.08L54.1,74.84A1,1,0,0,0,56,74L46.12,39.6A4.68,4.68,0,0,1,55,36.69L67.22,69.78a1,1,0,0,0,2-.43L66.84,37.52a4.56,4.56,0,0,1,9-1.09L83.55,81.7a1,1,0,0,0,2,.11c0-.17,5.17-17.84,12.54-22.75C104.93,54.49,106.48,61.32,104.37,65.53Z"
+                    />
+                    <path className="cls-1" d="M127,67h-8a1,1,0,0,0,0,2h8A1,1,0,0,0,127,67Z" />
+                    <path className="cls-1" d="M9,67H1a1,1,0,0,0,0,2H9A1,1,0,0,0,9,67Z" />
+                    <path className="cls-1" d="M65,13V5a1,1,0,0,0-2,0v8A1,1,0,0,0,65,13Z" />
+                    <path className="cls-1" d="M111.63,41.52c.39,0-.09.21,7.44-4.14a1,1,0,0,0-1-1.76l-6.93,4A1,1,0,0,0,111.63,41.52Z" />
+                    <path className="cls-1" d="M15.86,94.62l-6.93,4a1,1,0,0,0,1,1.76l6.93-4A1,1,0,0,0,15.86,94.62Z" />
+                    <path className="cls-1" d="M16.88,39.62l-6.93-4a1,1,0,0,0-1,1.76l6.93,4A1,1,0,0,0,16.88,39.62Z" />
+                    <path className="cls-1" d="M119.07,98.62l-6.93-4a1,1,0,0,0-1,1.76l6.93,4A1,1,0,0,0,119.07,98.62Z" />
+                    <path className="cls-1" d="M35.62,20.88a1,1,0,0,0,1.76-1l-4-6.93a1,1,0,0,0-1.76,1Z" />
+                    <path className="cls-1" d="M92.38,20.88l4-6.93a1,1,0,0,0-1.76-1l-4,6.93A1,1,0,0,0,92.38,20.88Z" />
+                  </g>
+                </svg>
+              </Link>
+              <Link href="/dashboard/welcome">
+                <p
+                  onClick={activeClassFn1}
+                  className={`text-primarydark dark:text-background ml-1 cursor-pointer opacity-50 ${
+                    activeHover1 ? 'opacity-100' : 'opacity-50'
+                  } ${activeClass1 ? 'opacity-100' : 'opacity-50'}`}
+                >
+                  Welcome
+                </p>
+              </Link>
+            </div>
+            <div className="mt-6 w-52 grid grid-cols-80px items-center">
+              <Link href="/dashboard/startup">
+                <svg
+                  onClick={activeClassFn2}
+                  onMouseEnter={() => setActiveHover2(true)}
+                  onMouseLeave={() => setActiveHover2(false)}
+                  height="45"
+                  width="45"
+                  className={`fill-current text-primarydark dark:text-background block m-auto opacity-50 hover:opacity-100 cursor-pointer ${
+                    activeClass2 ? 'opacity-100' : 'opacity-50'
+                  }`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 128 128"
+                >
+                  <defs>
+                    <style></style>
+                  </defs>
+                  <title>Landing Success</title>
+                  <g id="Landing_Success" data-name="Landing Success">
+                    <path
+                      className="cls-1"
+                      d="M109.3,90.1A46,46,0,0,0,65,36V20.08c1.78-.62,7.21-2.14,12.57.23a19.33,19.33,0,0,0,14.82,0c.87-.38.61.31.61-17.93a1,1,0,0,0-1.43-.93c-.07,0-6.69,2.87-13.18,0A19.41,19.41,0,0,0,65,.93,1,1,0,0,0,63,1V36a45.86,45.86,0,0,0-28.66,10.8C16.18,40.48,4,40,.79,45.51-2.29,50.86,3.94,59.3,10,65.68A11,11,0,0,0,18,83c.81,38.41,46.08,59.2,75.66,34.21,8.53,3,29,9.15,33.55,1.31C130.39,113,123.86,102.65,109.3,90.1ZM77.59,3.31A19.39,19.39,0,0,0,91,3.83V18.68c-1.79.62-7.22,2.13-12.57-.23A19.19,19.19,0,0,0,65,17.93V3.08C66.81,2.46,72.24,1,77.59,3.31ZM65,45v-7c39.69.91,58,50.27,28.21,76.81C71.32,107,46,92.66,27.77,78.64a11,11,0,0,0-3.2-16.13A43.88,43.88,0,0,1,63,38.06V45A1,1,0,0,0,65,45ZM32.55,48.36a46.21,46.21,0,0,0-9.83,13.28,10.93,10.93,0,0,0-11.4,2.47C-8.39,43.23,5.23,39.08,32.55,48.36ZM10,72a9,9,0,1,1,9,9A9,9,0,0,1,10,72Zm10,11a11,11,0,0,0,6.34-2.82c18.45,14.21,43.45,28.35,65.05,36.22C63,139.16,20.83,119.1,20.05,83Zm105.4,34.5c-2.51,4.35-14,3.62-30-1.85a45.61,45.61,0,0,0,13.42-23.21C121.59,103.58,128,113.12,125.45,117.47Z"
+                    />
+                  </g>
+                </svg>
+              </Link>
+              <Link href="/dashboard/startup">
+                <p
+                  onClick={activeClassFn2}
+                  className={`text-primarydark dark:text-background ml-1 cursor-pointer opacity-50 ${
+                    activeHover2 ? 'opacity-100' : 'opacity-50'
+                  } ${activeClass2 ? 'opacity-100' : 'opacity-50'}`}
+                >
+                  Startup idea
+                </p>
+              </Link>
+            </div>
+            <div className="mt-6 w-52 grid grid-cols-80px items-center">
               <svg
-                onClick={activeClassFn1}
-                onMouseEnter={() => setActiveHover1(true)}
-                onMouseLeave={() => setActiveHover1(false)}
+                onClick={activeClassFn3}
+                onMouseEnter={() => setActiveHover3(true)}
+                onMouseLeave={() => setActiveHover3(false)}
                 height="45"
                 width="45"
                 className={`fill-current text-primarydark dark:text-background block m-auto opacity-50 hover:opacity-100 cursor-pointer ${
-                  activeClass1 ? 'opacity-100' : 'opacity-50'
+                  activeClass3 ? 'opacity-100' : 'opacity-50'
                 }`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 128 128"
@@ -270,45 +359,79 @@ const DesktopNavbar = ({ children }) => {
                 <defs>
                   <style></style>
                 </defs>
-                <title>See You Soon</title>
-                <g id="See_You_Soon" data-name="See You Soon">
+                <title>Searching</title>
+                <g id="Searching">
                   <path
                     className="cls-1"
-                    d="M84.87,77.27l-7-41.18a6.6,6.6,0,0,0-13.1,1.58l1.83,24.6L56.93,36a6.73,6.73,0,0,0-12.78,4.17L51.82,67,40.57,48a6.45,6.45,0,0,0-11.41,6l8.33,18.24-4.57-6.45a6.48,6.48,0,0,0-10.9,7l21.25,36.71c.32.59,8,14.54,23.14,14.54,20.07,0,29.74-15.17,32.11-29.36,2.22-13.34,4.59-22,7.68-28.22C111.74,55.36,96.37,44.67,84.87,77.27Zm19.5-11.74c-3.18,6.36-5.61,15.24-7.87,28.79C94.28,107.69,85.2,122,66.41,122c-13.86,0-21.27-13.34-21.36-13.5L23.79,71.75A4.44,4.44,0,0,1,31.26,67L42.1,82.27a1,1,0,0,0,1.76-1L31,53.14a4.41,4.41,0,0,1,7.8-4.08L54.1,74.84A1,1,0,0,0,56,74L46.12,39.6A4.68,4.68,0,0,1,55,36.69L67.22,69.78a1,1,0,0,0,2-.43L66.84,37.52a4.56,4.56,0,0,1,9-1.09L83.55,81.7a1,1,0,0,0,2,.11c0-.17,5.17-17.84,12.54-22.75C104.93,54.49,106.48,61.32,104.37,65.53Z"
+                    d="M79.57,36.43a22,22,0,1,0,0,31.14A22,22,0,0,0,79.57,36.43Zm-1.44,29.7a20,20,0,1,1,0-28.26A20,20,0,0,1,78.13,66.13Z"
                   />
-                  <path className="cls-1" d="M127,67h-8a1,1,0,0,0,0,2h8A1,1,0,0,0,127,67Z" />
-                  <path className="cls-1" d="M9,67H1a1,1,0,0,0,0,2H9A1,1,0,0,0,9,67Z" />
-                  <path className="cls-1" d="M65,13V5a1,1,0,0,0-2,0v8A1,1,0,0,0,65,13Z" />
-                  <path className="cls-1" d="M111.63,41.52c.39,0-.09.21,7.44-4.14a1,1,0,0,0-1-1.76l-6.93,4A1,1,0,0,0,111.63,41.52Z" />
-                  <path className="cls-1" d="M15.86,94.62l-6.93,4a1,1,0,0,0,1,1.76l6.93-4A1,1,0,0,0,15.86,94.62Z" />
-                  <path className="cls-1" d="M16.88,39.62l-6.93-4a1,1,0,0,0-1,1.76l6.93,4A1,1,0,0,0,16.88,39.62Z" />
-                  <path className="cls-1" d="M119.07,98.62l-6.93-4a1,1,0,0,0-1,1.76l6.93,4A1,1,0,0,0,119.07,98.62Z" />
-                  <path className="cls-1" d="M35.62,20.88a1,1,0,0,0,1.76-1l-4-6.93a1,1,0,0,0-1.76,1Z" />
-                  <path className="cls-1" d="M92.38,20.88l4-6.93a1,1,0,0,0-1.76-1l-4,6.93A1,1,0,0,0,92.38,20.88Z" />
+                  <path
+                    className="cls-1"
+                    d="M117,0H31A11,11,0,0,0,20,11v97H1a1,1,0,0,0-1,1v8a11,11,0,0,0,11,11H97a11,11,0,0,0,11-11V104a3.42,3.42,0,0,0,2.41-1c4.71-4.71,5.59-5.13,5.59-7s-.66-2.08-8-9.42V20h19a1,1,0,0,0,1-1V11A11,11,0,0,0,117,0ZM90.62,126H11a9,9,0,0,1-9-9v-7H86C86,116.29,85,122,90.62,126ZM114,96c0,.79,0,.61-5,5.57a1.43,1.43,0,0,1-2,0L86.43,81a1.38,1.38,0,0,1,0-2c5.07-5.07,4.8-5,5.57-5s-.17-.75,14.28,13.7C113.87,95.31,114,95.11,114,96ZM82.37,70.37a26,26,0,1,1,0-36.74A26,26,0,0,1,82.37,70.37Zm2.79,0,3.52,3.52-2.8,2.8-3.52-3.52A26.44,26.44,0,0,0,85.16,70.36ZM94.43,73a3.53,3.53,0,0,0-4.23-.47l-3.75-3.75C100.27,50.28,87,24,64,24A28,28,0,0,0,36,52c0,23.37,26.71,36,44.79,22.45l3.73,3.74A3.41,3.41,0,0,0,85,82.43c22.22,22.23,20.57,20.61,21,20.92V117a9,9,0,0,1-18,0v-8a1,1,0,0,0-1-1H22V11a9,9,0,0,1,9-9c85.6,0,79.74-.08,79.41.17a11,11,0,0,0-4.14,6.32c-.41,1.77-.29-4.19-.29,76ZM126,18H108V11a9,9,0,0,1,18,0Z"
+                  />
                 </g>
               </svg>
-            </Link>
-            <Link href="/dashboard/welcome">
               <p
-                onClick={activeClassFn1}
+                onClick={activeClassFn3}
                 className={`text-primarydark dark:text-background ml-1 cursor-pointer opacity-50 ${
-                  activeHover1 ? 'opacity-100' : 'opacity-50'
-                } ${activeClass1 ? 'opacity-100' : 'opacity-50'}`}
+                  activeHover3 ? 'opacity-100' : 'opacity-50'
+                } ${activeClass3 ? 'opacity-100' : 'opacity-50'}`}
               >
-                Welcome
+                Business plan
               </p>
-            </Link>
-          </div>
-          <div className="mt-6 w-52 grid grid-cols-80px items-center">
-            <Link href="/dashboard/startup">
+            </div>
+            <div className="mt-6 w-52 grid grid-cols-80px items-center">
+              {/* <Link href='/dashboard/account'> */}
               <svg
-                onClick={activeClassFn2}
-                onMouseEnter={() => setActiveHover2(true)}
-                onMouseLeave={() => setActiveHover2(false)}
+                onClick={activeClassFn4}
+                onMouseEnter={() => setActiveHover4(true)}
+                onMouseLeave={() => setActiveHover4(false)}
                 height="45"
                 width="45"
                 className={`fill-current text-primarydark dark:text-background block m-auto opacity-50 hover:opacity-100 cursor-pointer ${
-                  activeClass2 ? 'opacity-100' : 'opacity-50'
+                  activeClass4 ? 'opacity-100' : 'opacity-50'
+                }`}
+                id="Data_User"
+                data-name="Data User"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 128 128"
+              >
+                <defs>
+                  <style></style>
+                </defs>
+                <title>Data User</title>
+                <path
+                  className="cls-1"
+                  d="M109,0H23a9,9,0,0,0-9,9c0,118,0,110,0,110.64A9.22,9.22,0,0,0,23.31,128H109a5,5,0,0,0,5-5V5A5,5,0,0,0,109,0Zm3,5V107a3,3,0,0,1-3,3H26V2h83A3,3,0,0,1,112,5ZM16,9a7,7,0,0,1,7-7h1V110H23a9,9,0,0,0-6.94,3.26C16,113.34,16,118.28,16,9Zm96,114a3,3,0,0,1-3,3H23.31c-6.13,0-9.56-6.94-5.68-11.43A6.91,6.91,0,0,1,23,112c90.91,0,87.06.44,89-1Z"
+                />
+                <path
+                  className="cls-1"
+                  d="M56.15,75.81A33,33,0,1,0,35,45,33.05,33.05,0,0,0,56.15,75.81Zm-7.53-6.68c5.89-22.82,32.86-22.83,38.76,0A30.88,30.88,0,0,1,48.62,69.13ZM68,14c28.07,0,41.61,34.51,21.09,53.65C86.56,59,80.82,52.83,73.57,50.75a13,13,0,1,0-11.14,0c-7.25,2.08-13,8.24-15.52,16.92C26.45,48.69,39.8,14,68,14Zm0,36A11,11,0,1,1,79,39,11,11,0,0,1,68,50Z"
+                />
+                <path className="cls-1" d="M96.5,87h-56a1,1,0,0,0,0,2h56A1,1,0,0,0,96.5,87Z" />
+                <path className="cls-1" d="M96.5,99h-56a1,1,0,0,0,0,2h56A1,1,0,0,0,96.5,99Z" />
+              </svg>
+              {/* </Link> */}
+              {/* <Link href='/dashboard/account'> */}
+              <p
+                onClick={activeClassFn4}
+                className={`text-primarydark dark:text-background ml-1 cursor-pointer opacity-50 ${
+                  activeHover4 ? 'opacity-100' : 'opacity-50'
+                } ${activeClass4 ? 'opacity-100' : 'opacity-50'}`}
+              >
+                Account
+              </p>
+              {/* </Link> */}
+            </div>
+            <div className="mt-6 w-52 grid grid-cols-80px items-center absolute bottom-4">
+              <svg
+                onClick={activeClassFn5}
+                onMouseEnter={() => setActiveHover5(true)}
+                onMouseLeave={() => setActiveHover5(false)}
+                height="45"
+                width="45"
+                className={`fill-current text-primarydark dark:text-background block m-auto opacity-50 hover:opacity-100 cursor-pointer ${
+                  activeClass5 ? 'opacity-100' : 'opacity-50'
                 }`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 128 128"
@@ -316,142 +439,27 @@ const DesktopNavbar = ({ children }) => {
                 <defs>
                   <style></style>
                 </defs>
-                <title>Landing Success</title>
-                <g id="Landing_Success" data-name="Landing Success">
+                <title>Log Out</title>
+                <g id="Log_Out" data-name="Log Out">
+                  <path className="cls-1" d="M44,61v6a1,1,0,0,0,2,0V61A1,1,0,0,0,44,61Z" />
                   <path
                     className="cls-1"
-                    d="M109.3,90.1A46,46,0,0,0,65,36V20.08c1.78-.62,7.21-2.14,12.57.23a19.33,19.33,0,0,0,14.82,0c.87-.38.61.31.61-17.93a1,1,0,0,0-1.43-.93c-.07,0-6.69,2.87-13.18,0A19.41,19.41,0,0,0,65,.93,1,1,0,0,0,63,1V36a45.86,45.86,0,0,0-28.66,10.8C16.18,40.48,4,40,.79,45.51-2.29,50.86,3.94,59.3,10,65.68A11,11,0,0,0,18,83c.81,38.41,46.08,59.2,75.66,34.21,8.53,3,29,9.15,33.55,1.31C130.39,113,123.86,102.65,109.3,90.1ZM77.59,3.31A19.39,19.39,0,0,0,91,3.83V18.68c-1.79.62-7.22,2.13-12.57-.23A19.19,19.19,0,0,0,65,17.93V3.08C66.81,2.46,72.24,1,77.59,3.31ZM65,45v-7c39.69.91,58,50.27,28.21,76.81C71.32,107,46,92.66,27.77,78.64a11,11,0,0,0-3.2-16.13A43.88,43.88,0,0,1,63,38.06V45A1,1,0,0,0,65,45ZM32.55,48.36a46.21,46.21,0,0,0-9.83,13.28,10.93,10.93,0,0,0-11.4,2.47C-8.39,43.23,5.23,39.08,32.55,48.36ZM10,72a9,9,0,1,1,9,9A9,9,0,0,1,10,72Zm10,11a11,11,0,0,0,6.34-2.82c18.45,14.21,43.45,28.35,65.05,36.22C63,139.16,20.83,119.1,20.05,83Zm105.4,34.5c-2.51,4.35-14,3.62-30-1.85a45.61,45.61,0,0,0,13.42-23.21C121.59,103.58,128,113.12,125.45,117.47Z"
+                    d="M113,113H86V75h6v9a1,1,0,0,0,1,1c.64,0-.83,1.26,20.72-20.3a1,1,0,0,0,0-1.44l-20-20A1,1,0,0,0,92,44v9H86V14a1,1,0,0,0-1-1H54V1a1,1,0,0,0-1.35-1l-38,13A1,1,0,0,0,14,14c0,106.58-.38,100.6.69,101C55.34,128.88,52.74,128,53,128a1,1,0,0,0,1-1V115h59A1,1,0,0,0,113,113ZM93,55a1,1,0,0,0,1-1V46.46L111.56,64,94,81.54V74a1,1,0,0,0-1-1H54V55ZM54,21H77V53H54Zm30-6V53H79V20a1,1,0,0,0-1-1H54V15ZM52,125.57l-36-12.3V14.73L52,2.43ZM54,75H77v38H54Zm25,38V75h5v38Z"
                   />
                 </g>
               </svg>
-            </Link>
-            <Link href="/dashboard/startup">
               <p
-                onClick={activeClassFn2}
+                onClick={activeClassFn5}
                 className={`text-primarydark dark:text-background ml-1 cursor-pointer opacity-50 ${
-                  activeHover2 ? 'opacity-100' : 'opacity-50'
-                } ${activeClass2 ? 'opacity-100' : 'opacity-50'}`}
+                  activeHover5 ? 'opacity-100' : 'opacity-50'
+                } ${activeClass5 ? 'opacity-100' : 'opacity-50'}`}
               >
-                Startup idea
+                Log out
               </p>
-            </Link>
-          </div>
-          <div className="mt-6 w-52 grid grid-cols-80px items-center">
-            <svg
-              onClick={activeClassFn3}
-              onMouseEnter={() => setActiveHover3(true)}
-              onMouseLeave={() => setActiveHover3(false)}
-              height="45"
-              width="45"
-              className={`fill-current text-primarydark dark:text-background block m-auto opacity-50 hover:opacity-100 cursor-pointer ${
-                activeClass3 ? 'opacity-100' : 'opacity-50'
-              }`}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 128"
-            >
-              <defs>
-                <style></style>
-              </defs>
-              <title>Searching</title>
-              <g id="Searching">
-                <path
-                  className="cls-1"
-                  d="M79.57,36.43a22,22,0,1,0,0,31.14A22,22,0,0,0,79.57,36.43Zm-1.44,29.7a20,20,0,1,1,0-28.26A20,20,0,0,1,78.13,66.13Z"
-                />
-                <path
-                  className="cls-1"
-                  d="M117,0H31A11,11,0,0,0,20,11v97H1a1,1,0,0,0-1,1v8a11,11,0,0,0,11,11H97a11,11,0,0,0,11-11V104a3.42,3.42,0,0,0,2.41-1c4.71-4.71,5.59-5.13,5.59-7s-.66-2.08-8-9.42V20h19a1,1,0,0,0,1-1V11A11,11,0,0,0,117,0ZM90.62,126H11a9,9,0,0,1-9-9v-7H86C86,116.29,85,122,90.62,126ZM114,96c0,.79,0,.61-5,5.57a1.43,1.43,0,0,1-2,0L86.43,81a1.38,1.38,0,0,1,0-2c5.07-5.07,4.8-5,5.57-5s-.17-.75,14.28,13.7C113.87,95.31,114,95.11,114,96ZM82.37,70.37a26,26,0,1,1,0-36.74A26,26,0,0,1,82.37,70.37Zm2.79,0,3.52,3.52-2.8,2.8-3.52-3.52A26.44,26.44,0,0,0,85.16,70.36ZM94.43,73a3.53,3.53,0,0,0-4.23-.47l-3.75-3.75C100.27,50.28,87,24,64,24A28,28,0,0,0,36,52c0,23.37,26.71,36,44.79,22.45l3.73,3.74A3.41,3.41,0,0,0,85,82.43c22.22,22.23,20.57,20.61,21,20.92V117a9,9,0,0,1-18,0v-8a1,1,0,0,0-1-1H22V11a9,9,0,0,1,9-9c85.6,0,79.74-.08,79.41.17a11,11,0,0,0-4.14,6.32c-.41,1.77-.29-4.19-.29,76ZM126,18H108V11a9,9,0,0,1,18,0Z"
-                />
-              </g>
-            </svg>
-            <p
-              onClick={activeClassFn3}
-              className={`text-primarydark dark:text-background ml-1 cursor-pointer opacity-50 ${
-                activeHover3 ? 'opacity-100' : 'opacity-50'
-              } ${activeClass3 ? 'opacity-100' : 'opacity-50'}`}
-            >
-              Business plan
-            </p>
-          </div>
-          <div className="mt-6 w-52 grid grid-cols-80px items-center">
-            {/* <Link href='/dashboard/account'> */}
-            <svg
-              onClick={activeClassFn4}
-              onMouseEnter={() => setActiveHover4(true)}
-              onMouseLeave={() => setActiveHover4(false)}
-              height="45"
-              width="45"
-              className={`fill-current text-primarydark dark:text-background block m-auto opacity-50 hover:opacity-100 cursor-pointer ${
-                activeClass4 ? 'opacity-100' : 'opacity-50'
-              }`}
-              id="Data_User"
-              data-name="Data User"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 128"
-            >
-              <defs>
-                <style></style>
-              </defs>
-              <title>Data User</title>
-              <path
-                className="cls-1"
-                d="M109,0H23a9,9,0,0,0-9,9c0,118,0,110,0,110.64A9.22,9.22,0,0,0,23.31,128H109a5,5,0,0,0,5-5V5A5,5,0,0,0,109,0Zm3,5V107a3,3,0,0,1-3,3H26V2h83A3,3,0,0,1,112,5ZM16,9a7,7,0,0,1,7-7h1V110H23a9,9,0,0,0-6.94,3.26C16,113.34,16,118.28,16,9Zm96,114a3,3,0,0,1-3,3H23.31c-6.13,0-9.56-6.94-5.68-11.43A6.91,6.91,0,0,1,23,112c90.91,0,87.06.44,89-1Z"
-              />
-              <path
-                className="cls-1"
-                d="M56.15,75.81A33,33,0,1,0,35,45,33.05,33.05,0,0,0,56.15,75.81Zm-7.53-6.68c5.89-22.82,32.86-22.83,38.76,0A30.88,30.88,0,0,1,48.62,69.13ZM68,14c28.07,0,41.61,34.51,21.09,53.65C86.56,59,80.82,52.83,73.57,50.75a13,13,0,1,0-11.14,0c-7.25,2.08-13,8.24-15.52,16.92C26.45,48.69,39.8,14,68,14Zm0,36A11,11,0,1,1,79,39,11,11,0,0,1,68,50Z"
-              />
-              <path className="cls-1" d="M96.5,87h-56a1,1,0,0,0,0,2h56A1,1,0,0,0,96.5,87Z" />
-              <path className="cls-1" d="M96.5,99h-56a1,1,0,0,0,0,2h56A1,1,0,0,0,96.5,99Z" />
-            </svg>
-            {/* </Link> */}
-            {/* <Link href='/dashboard/account'> */}
-            <p
-              onClick={activeClassFn4}
-              className={`text-primarydark dark:text-background ml-1 cursor-pointer opacity-50 ${
-                activeHover4 ? 'opacity-100' : 'opacity-50'
-              } ${activeClass4 ? 'opacity-100' : 'opacity-50'}`}
-            >
-              Account
-            </p>
-            {/* </Link> */}
-          </div>
-          <div className="mt-6 w-52 grid grid-cols-80px items-center absolute bottom-4">
-            <svg
-              onClick={activeClassFn5}
-              onMouseEnter={() => setActiveHover5(true)}
-              onMouseLeave={() => setActiveHover5(false)}
-              height="45"
-              width="45"
-              className={`fill-current text-primarydark dark:text-background block m-auto opacity-50 hover:opacity-100 cursor-pointer ${
-                activeClass5 ? 'opacity-100' : 'opacity-50'
-              }`}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 128 128"
-            >
-              <defs>
-                <style></style>
-              </defs>
-              <title>Log Out</title>
-              <g id="Log_Out" data-name="Log Out">
-                <path className="cls-1" d="M44,61v6a1,1,0,0,0,2,0V61A1,1,0,0,0,44,61Z" />
-                <path
-                  className="cls-1"
-                  d="M113,113H86V75h6v9a1,1,0,0,0,1,1c.64,0-.83,1.26,20.72-20.3a1,1,0,0,0,0-1.44l-20-20A1,1,0,0,0,92,44v9H86V14a1,1,0,0,0-1-1H54V1a1,1,0,0,0-1.35-1l-38,13A1,1,0,0,0,14,14c0,106.58-.38,100.6.69,101C55.34,128.88,52.74,128,53,128a1,1,0,0,0,1-1V115h59A1,1,0,0,0,113,113ZM93,55a1,1,0,0,0,1-1V46.46L111.56,64,94,81.54V74a1,1,0,0,0-1-1H54V55ZM54,21H77V53H54Zm30-6V53H79V20a1,1,0,0,0-1-1H54V15ZM52,125.57l-36-12.3V14.73L52,2.43ZM54,75H77v38H54Zm25,38V75h5v38Z"
-                />
-              </g>
-            </svg>
-            <p
-              onClick={activeClassFn5}
-              className={`text-primarydark dark:text-background ml-1 cursor-pointer opacity-50 ${
-                activeHover5 ? 'opacity-100' : 'opacity-50'
-              } ${activeClass5 ? 'opacity-100' : 'opacity-50'}`}
-            >
-              Log out
-            </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {children}
     </IsActiveContext.Provider>
   );

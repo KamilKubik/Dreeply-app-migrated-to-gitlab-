@@ -79,7 +79,7 @@ const StartupEdit = () => {
     };
     await db.collection('projects').doc(projectId).update(newProject);
     await db.collection('currentProject').doc(currentUser.uid).update(newProject);
-    router.push(`/dashboard/startup/${projectName}`);
+    router.push(`/dashboard/projects/${projectName}`);
   };
 
   const onFileChange = async (e) => {
@@ -109,7 +109,7 @@ const StartupEdit = () => {
           <div className="z-10 p-10 h-auto grid grid-cols-1 grid-rows-3 w-auto max-w-nameContainer w-full bg-white rounded-3xl">
             <div className="row-span-1 text-center">
               <div className="text-2xl font-medium flex items-center justify-center">
-                <Image src="/project-create/rocket.svg" height={36} width={36} className="inline-block relative bottom-2" />
+                <img src="/project-create/rocket.svg" height={36} width={36} className="inline-block relative bottom-1" />
                 <p className="ml-2 text-primarydark">Let's create your startup!</p>
               </div>
               <div className="text-base text-gray px-4">Oops, one more tiny step and we will get down to business.</div>
@@ -186,7 +186,7 @@ const StartupEdit = () => {
                         className="cursor-pointer"
                       />
                     ) : (
-                      <Image
+                      <img
                         onClick={() => setImagesModal(true)}
                         src={`/modal/${imageName}.svg`}
                         height={200}
@@ -196,7 +196,7 @@ const StartupEdit = () => {
                       />
                     )
                   ) : (
-                    <Image
+                    <img
                       onClick={() => browseImageOpen()}
                       src="/edit-photo.svg"
                       height={200}
@@ -208,7 +208,7 @@ const StartupEdit = () => {
                 </div>
                 <hr style={{ width: '100%', color: '#6C63FF' }} />
                 <div className="flex items-center justify-between mt-8">
-                  <p onClick={() => router.push(`/dashboard/startup/${projectName}`)} className="text-primarydark cursor-pointer">
+                  <p onClick={() => router.push(`/dashboard/projects/${projectName}`)} className="text-primarydark cursor-pointer">
                     Back
                   </p>
                   <button

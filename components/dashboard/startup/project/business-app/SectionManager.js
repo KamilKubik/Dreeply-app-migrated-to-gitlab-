@@ -2,7 +2,16 @@ import React, { Component, useEffect, useState, useMemo } from 'react';
 import SectionManagerItem from './SectionManagerItem';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const SectionManager = ({ selectedSection, reorderSections, field, selectSectionPage, deleteSectionPage, newSectionPage, sections, selectedSectionIndex }) => {
+const SectionManager = ({
+  selectedSection,
+  reorderSections,
+  field,
+  selectSectionPage,
+  deleteSectionPage,
+  newSectionPage,
+  sections,
+  selectedSectionIndex,
+}) => {
   const [title, setTitle] = useState(null);
   const [addingSection, setAddingSection] = useState(false);
 
@@ -40,7 +49,7 @@ const SectionManager = ({ selectedSection, reorderSections, field, selectSection
       setSectionsArray(sections);
       return;
     }
-  }, [sections])
+  }, [sections]);
 
   useEffect(() => {
     if (sections && sectionsArray) {
@@ -53,7 +62,7 @@ const SectionManager = ({ selectedSection, reorderSections, field, selectSection
         console.log(sections);
       }
     }
-  }, [sections])
+  }, [sections]);
 
   const [sectionsArray, setSectionsArray] = useState();
 
@@ -66,64 +75,64 @@ const SectionManager = ({ selectedSection, reorderSections, field, selectSection
     console.log(result);
     setSectionsArray(items);
     reorderSections(items);
-  }
+  };
 
   return (
-    <div className='col-start-7 col-end-9 mt-12'>
+    <div className="mt-12">
       {/* <h1 className='ml-4 text-primarydark text-base dark:text-background'>
         Manage your sections
       </h1> */}
-      <div className='w-full ml-4 mt-1 bg-white flex flex-col py-5 px-4 rounded-2xl'>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId='sections'>
-          {(provided) => (
-            <div className='sections' {...provided.droppableProps} ref={provided.innerRef}>
-              {sectionsArray &&
-                sectionsArray.map((_section, _index) => {
-                  console.log(_section);
-                  return (
-                    <Draggable key={_section.id} draggableId={_section.id} index={_index}>
-                      {(provided) => (
-                        <SectionManagerItem
-                          provided={provided}
-                          key={_index}
-                          _section={_section}
-                          _index={_index}
-                          selectedSectionIndex={selectedSectionIndex}
-                          selectSection={selectSection}
-                          deleteSection={deleteSection}
-                        />
-                      )}
-                    </Draggable>
-                  );
-              })}
-            {provided.placeholder}
-            </div>
-          )}
+      <div className="w-full mt-1 bg-white flex flex-col py-5 px-4 rounded-2xl">
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="sections">
+            {(provided) => (
+              <div className="sections" {...provided.droppableProps} ref={provided.innerRef}>
+                {sectionsArray &&
+                  sectionsArray.map((_section, _index) => {
+                    console.log(_section);
+                    return (
+                      <Draggable key={_section.id} draggableId={_section.id} index={_index}>
+                        {(provided) => (
+                          <SectionManagerItem
+                            provided={provided}
+                            key={_index}
+                            _section={_section}
+                            _index={_index}
+                            selectedSectionIndex={selectedSectionIndex}
+                            selectSection={selectSection}
+                            deleteSection={deleteSection}
+                          />
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                {provided.placeholder}
+              </div>
+            )}
           </Droppable>
-          </DragDropContext>
-        <div className='h-10 rounded-2xl flex justify-around items-center'>
+        </DragDropContext>
+        <div className="h-10 rounded-2xl flex justify-around items-center">
           <button
             onClick={onNewSectionAdd}
-            className='hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl'
+            className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
           >
             {addingSection ? '...whoops, cancel' : 'Add new section'}
           </button>
         </div>
-        <div className='flex flex-col justify-center items-center place-content-center place-items-center'>
+        <div className="flex flex-col justify-center items-center place-content-center place-items-center">
           {addingSection ? (
-            <div className='flex flex-col justify-center items-center place-content-center place-items-center'>
+            <div className="flex flex-col justify-center items-center place-content-center place-items-center">
               <input
-                autoComplete='off'
-                type='text'
-                placeholder='Enter section title'
+                autoComplete="off"
+                type="text"
+                placeholder="Enter section title"
                 onKeyUp={(e) => updateTitle(e.target.value)}
-                id='section-placeholder'
-                className='focus:outline-none text-primarydark bg-white pb-4 pt-4'
+                id="section-placeholder"
+                className="focus:outline-none text-primarydark bg-white pb-4 pt-4"
               ></input>
               <button
                 onClick={onParticularSectionAdd}
-                className='hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl'
+                className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
               >
                 Add new section
               </button>
@@ -157,14 +166,14 @@ export default SectionManager;
 //             onClick={this.newNoteBtnClick}
 //             className={classes.newNoteBtn}>{this.state.addingNote ? 'Cancel' : 'New Note'}</Button>
 //             {
-//               this.state.addingNote ? 
+//               this.state.addingNote ?
 //               <div>
 //                 <input type='text'
 //                   className={classes.newNoteInput}
 //                   placeholder='Enter note title'
 //                   onKeyUp={(e) => this.updateTitle(e.target.value)}>
 //                 </input>
-//                 <Button 
+//                 <Button
 //                   className={classes.newNoteSubmitBtn}
 //                   onClick={this.newNote}>Submit Note</Button>
 //               </div> :

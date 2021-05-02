@@ -10,6 +10,7 @@ import { useAuth } from '../../lib/newAuth';
 import { useWindowSize } from '../../utils/useWindowSize';
 import MobileNavbar from './MobileNavbar';
 import DesktopNavbar from './DesktopNavbar';
+import { isMobile } from 'react-device-detect';
 
 const Navbar = ({ children }) => {
   // Mobile friendly
@@ -17,7 +18,7 @@ const Navbar = ({ children }) => {
   const size = { width: window.innerWidth };
   console.log(size);
 
-  return <>{size.width < 860 ? <MobileNavbar children={children} /> : <DesktopNavbar children={children} />}</>;
+  return <>{isMobile ? <MobileNavbar children={children} /> : <DesktopNavbar children={children} />}</>;
 };
 
 export default Navbar;
