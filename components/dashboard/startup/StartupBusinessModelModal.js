@@ -280,112 +280,110 @@ const StartupProductModal = () => {
         contentText="It used to be that pirates had to work out their plunder plans in great details. Their future depended on the success of their mission "
         contentText1=" In this section, introduce your startup's operating model and tell the world why it is your startup that will be successful "
       />
-      <NavbarTemplate>
-        <div ref={contentRef} className="h-full w-full relative flex flex-col items-center justify-center">
-          <div className="w-full max-w-mdStarter lg:max-w-lgContainer 2xl:max-w-xlContainer relative pl-6 pr-6 mt-16 pb-24">
-            <p className="text-primarydark text-2xl normal:text-3xl mt-2 pl-2 dark:text-background text-center">
-              It is a high time to get into the numbers
-            </p>
-            <p className="text-primarydark text-base normal:text-lg mt-2 pl-2 dark:text-background text-center">
-              Startup idea creator will help you create the initial mockup of your future startup
-              <img src="/gifs/rocket.gif" height={35} width={35} className="inline-block relative bottom-0.5" />
-              {/* <img
+      <div ref={contentRef} className="h-full w-full relative flex flex-col items-center justify-center">
+        <div className="w-full max-w-mdStarter lg:max-w-lgContainer 2xl:max-w-xlContainer relative pl-6 pr-6 mt-16 pb-24">
+          <p className="text-primarydark text-2xl normal:text-3xl mt-2 pl-2 dark:text-background text-center">
+            It is a high time to get into the numbers
+          </p>
+          <p className="text-gray text-base normal:text-lg pl-2 dark:text-background text-center">
+            Startup idea creator will help you create the initial mockup of your future startup
+            <img src="/gifs/rocket.gif" height={35} width={35} className="inline-block relative bottom-0.5" />
+            {/* <img
                 src='/emojis/palm.svg'
                 height={35}
                 width={35}
                 className='inline-block relative bottom-2'
               /> */}
-            </p>
-            <ProgressBar onLoadOpacity4={onLoadOpacity4} />
-            <div>
-              <h1 className="text-primarydark text-lg mt-10 -mb-6 dark:text-background">Business model</h1>
-            </div>
-            <div className="w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white mt-8 dark:bg-background">
-              <div className="relative flex flex-col h-full w-full flex px-8 pt-8 pb-4">
-                <div>
-                  <label className="block text-sm font-medium flex justify-between items-end" htmlFor="businessModelOverview">
-                    Overview of your startup business model.
-                    <TippyGuide
-                      contentClass="w-80 shadow-lg rounded-2xl bg-primary"
-                      contentText={
-                        ' Questions that can guide you:\n- How does your business model look like?\n- What will be the legal structure of your startup?\n- How will your startup generate income?'
-                      }
-                    />
-                  </label>
-                  <textarea
-                    autoComplete="none"
-                    id="businessModelOverview"
-                    onChange={(e) => setBusinessModelOverviewSection(e.target.value)}
-                    value={businessModelOverviewSection == 'blank' ? '' : businessModelOverviewSection}
-                    className="pb-24 shadow appearance-none rounded w-full py-3 px-4 text-primarydark leading-tight focus:outline-none focus:shadow-outline text-sm bg-white rounded-2xl mt-2"
-                    type="textarea"
-                    placeholder={'“I never dreamed about success, I worked for it.”\n\n~ Estee Lauder'}
+          </p>
+          <ProgressBar onLoadOpacity4={onLoadOpacity4} />
+          <div>
+            <h1 className="text-primarydark text-lg mt-10 -mb-6 dark:text-background">Business model</h1>
+          </div>
+          <div className="w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white mt-8 dark:bg-background">
+            <div className="relative flex flex-col h-full w-full flex px-8 pt-8 pb-4">
+              <div>
+                <label className="block text-sm font-medium flex justify-between items-end" htmlFor="businessModelOverview">
+                  Overview of your startup business model.
+                  <TippyGuide
+                    contentClass="w-80 shadow-lg rounded-2xl bg-primary"
+                    contentText={
+                      ' Questions that can guide you:\n- How does your business model look like?\n- What will be the legal structure of your startup?\n- How will your startup generate income?'
+                    }
                   />
-                </div>
-                <div className="mt-12">
-                  <label className="block text-sm font-medium flex justify-between items-end" htmlFor="businessGrow">
-                    Predictions and milestones about the growth of your startup.
-                    <TippyGuide
-                      contentClass="w-80 shadow-lg rounded-2xl bg-primary"
-                      contentText={
-                        " Questions that can guide you:\n- How do you predict your startup grow?\n- How are you going to achieve the projected growth of your startup?\n- What are the milestones for each stage of your startup's development?"
-                      }
-                    />
-                  </label>
-                  <textarea
-                    autoComplete="none"
-                    id="businessGrow"
-                    onChange={(e) => setBusinessGrowSection(e.target.value)}
-                    value={businessGrowSection == 'blank' ? '' : businessGrowSection}
-                    className="pb-24 px-3 shadow appearance-none rounded w-full py-3 px-4 text-primarydark leading-tight focus:outline-none focus:shadow-outline text-sm bg-white rounded-2xl mt-2"
-                    type="textarea"
-                    placeholder={'“See things in the present, even if they are in the future.”\n\n~ Larry Ellison'}
-                  />
-                </div>
-                <div className="mt-12 pb-8">
-                  <label className="block text-sm font-medium flex justify-between items-end" htmlFor="success">
-                    Why is it your idea that will be successful?
-                    <TippyGuide
-                      angry
-                      contentClass="w-80 shadow-lg rounded-2xl bg-primary"
-                      contentText={
-                        ' What else are you waiting for? Get it off your chest and tell the whole world, how strong your motivation is to build a new startup!'
-                      }
-                    />
-                  </label>
-                  <textarea
-                    autoComplete="none"
-                    id="success"
-                    onChange={(e) => setWhySuccessSection(e.target.value)}
-                    value={whySuccessSection == 'blank' ? '' : whySuccessSection}
-                    className="pb-24 px-3 shadow appearance-none rounded w-full py-3 px-4 text-primarydark leading-tight focus:outline-none focus:shadow-outline text-sm bg-white rounded-2xl mt-2"
-                    type="textarea"
-                    placeholder={'“Whether you think you can, or think you can’t – you’re right.”\n\n~ Henry Ford'}
-                  />
-                </div>
+                </label>
+                <textarea
+                  autoComplete="none"
+                  id="businessModelOverview"
+                  onChange={(e) => setBusinessModelOverviewSection(e.target.value)}
+                  value={businessModelOverviewSection == 'blank' ? '' : businessModelOverviewSection}
+                  className="pb-24 shadow appearance-none rounded w-full py-3 px-4 text-primarydark leading-tight focus:outline-none focus:shadow-outline text-sm bg-white rounded-2xl mt-2"
+                  type="textarea"
+                  placeholder={'“I never dreamed about success, I worked for it.”\n\n~ Estee Lauder'}
+                />
               </div>
-              <hr style={{ width: '90%', color: '#a0aec0' }} />
-              <div className="w-full grid grid-cols-3fr grid-flow-column px-8 py-4">
-                <div className="flex items-center mt-1 text-primarydark text-sm">
-                  <button onClick={onProjectLeave}>Back</button>
-                </div>
-                <div className="flex items-center mt-1 justify-self-center">
-                  <p className="text-sm text-gray">Step 5 of 5</p>
-                </div>
-                <div className="flex justify-end items-center">
-                  <button
-                    disabled={tippyMonster}
-                    onClick={onSubmit}
-                    className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark"
-                  >
-                    Next
-                  </button>
-                </div>
+              <div className="mt-12">
+                <label className="block text-sm font-medium flex justify-between items-end" htmlFor="businessGrow">
+                  Predictions and milestones about the growth of your startup.
+                  <TippyGuide
+                    contentClass="w-80 shadow-lg rounded-2xl bg-primary"
+                    contentText={
+                      " Questions that can guide you:\n- How do you predict your startup grow?\n- How are you going to achieve the projected growth of your startup?\n- What are the milestones for each stage of your startup's development?"
+                    }
+                  />
+                </label>
+                <textarea
+                  autoComplete="none"
+                  id="businessGrow"
+                  onChange={(e) => setBusinessGrowSection(e.target.value)}
+                  value={businessGrowSection == 'blank' ? '' : businessGrowSection}
+                  className="pb-24 px-3 shadow appearance-none rounded w-full py-3 px-4 text-primarydark leading-tight focus:outline-none focus:shadow-outline text-sm bg-white rounded-2xl mt-2"
+                  type="textarea"
+                  placeholder={'“See things in the present, even if they are in the future.”\n\n~ Larry Ellison'}
+                />
+              </div>
+              <div className="mt-12 pb-8">
+                <label className="block text-sm font-medium flex justify-between items-end" htmlFor="success">
+                  Why is it your idea that will be successful?
+                  <TippyGuide
+                    angry
+                    contentClass="w-80 shadow-lg rounded-2xl bg-primary"
+                    contentText={
+                      ' What else are you waiting for? Get it off your chest and tell the whole world, how strong your motivation is to build a new startup!'
+                    }
+                  />
+                </label>
+                <textarea
+                  autoComplete="none"
+                  id="success"
+                  onChange={(e) => setWhySuccessSection(e.target.value)}
+                  value={whySuccessSection == 'blank' ? '' : whySuccessSection}
+                  className="pb-24 px-3 shadow appearance-none rounded w-full py-3 px-4 text-primarydark leading-tight focus:outline-none focus:shadow-outline text-sm bg-white rounded-2xl mt-2"
+                  type="textarea"
+                  placeholder={'“Whether you think you can, or think you can’t – you’re right.”\n\n~ Henry Ford'}
+                />
+              </div>
+            </div>
+            <hr style={{ width: '90%', color: '#a0aec0' }} />
+            <div className="w-full grid grid-cols-3fr grid-flow-column px-8 py-4">
+              <div className="flex items-center mt-1 text-primarydark text-sm">
+                <button onClick={onProjectLeave}>Back</button>
+              </div>
+              <div className="flex items-center mt-1 justify-self-center">
+                <p className="text-sm text-gray">Step 5 of 5</p>
+              </div>
+              <div className="flex justify-end items-center">
+                <button
+                  disabled={tippyMonster}
+                  onClick={onSubmit}
+                  className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark"
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </NavbarTemplate>
+      </div>
     </>
   );
 };

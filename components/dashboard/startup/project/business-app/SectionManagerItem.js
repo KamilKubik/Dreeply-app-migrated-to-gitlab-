@@ -32,9 +32,9 @@ const SectionManagerItem = ({ provided, _section, _index, selectedSectionIndex, 
         <img
           {...provided.dragHandleProps}
           className="z-50"
-          src="/business-model/hand.svg"
-          height={(size.width < 960 && 16) || (size.width > 960 && size.width < 1220 && 18) || (size.width > 1220 && 20)}
-          width={(size.width < 960 && 16) || (size.width > 960 && size.width < 1220 && 18) || (size.width > 1220 && 20)}
+          src="/business-model/drag.png"
+          height={(size.width < 960 && 19) || (size.width > 960 && size.width < 1220 && 21) || (size.width > 1220 && 23)}
+          width={(size.width < 960 && 19) || (size.width > 960 && size.width < 1220 && 21) || (size.width > 1220 && 23)}
         />
         <img
           className="z-50"

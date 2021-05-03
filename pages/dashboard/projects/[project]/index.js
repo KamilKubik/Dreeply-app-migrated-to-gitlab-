@@ -158,7 +158,12 @@ const ProjectPage = ({ projects }) => {
     //   )}
     // </div>
     <>
-      <TippyMonster />
+      <TippyMonster
+        projectManager
+        contentClass="h-40 w-80 shadow-lg rounded-2xl bg-primary flex justify-center items-center"
+        contentText="We are in a space where you can manage your startup in various possible ways "
+        contentText1=' For a good start, begin with "Startup idea" that will guide you through the entire process of creating a plan for your startup! '
+      />
       <NavbarTemplate>
         {selectedProject ? (
           <div ref={containerRef} className="min-h-screen w-full relative flex flex-col items-center">
@@ -208,9 +213,10 @@ const ProjectPage = ({ projects }) => {
                     className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/launch-maker.svg" />
-                    <h1 className="text-base text-gray text-center px-4 py-4">
-                      Startup idea will guide you through the process of creating your business plan. 🐍
-                    </h1>
+                    <p className="text-base text-gray text-center px-4 py-4 inline-block">
+                      Startup idea will guide you through the process of creating your business plan
+                      {/* <img src="/project-manager/bulb.svg" height={18} width={18} className="ml-1 inline-block relative bottom-0.5" /> */}
+                    </p>
                     <button
                       onClick={onStartupIdeaCreate}
                       className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
@@ -227,9 +233,15 @@ const ProjectPage = ({ projects }) => {
                     className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/business-plan.svg" />
-                    <h1 className="text-base text-gray text-center px-4 py-4">
-                      Let's create your business plan, which will be the core of your startup presentation. 🐳
-                    </h1>
+                    <p className="text-base text-gray text-center px-4 py-4">
+                      Let's create your business plan, which will be the core of your startup presentation
+                      {/* <img
+                        src="/project-manager/business-plan.svg"
+                        height={18}
+                        width={18}
+                        className="ml-1 inline-block relative bottom-0.5"
+                      /> */}
+                    </p>
                     <button
                       onClick={onBusinessPlanCreate}
                       className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
@@ -247,7 +259,7 @@ const ProjectPage = ({ projects }) => {
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/cash-flow2.svg" />
                     <h1 className=" text-base text-gray text-center px-4 py-4">
-                      Cash flow analysis will allow you to analyze the liquidity of your startup. 🐘
+                      Cash flow analysis will allow you to analyze the liquidity of your startup
                     </h1>
                     <button
                       onClick={onCashFlowAnalysisCreate}
@@ -266,7 +278,7 @@ const ProjectPage = ({ projects }) => {
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/competitors.svg" />
                     <h1 className="text-base text-gray text-center px-4 py-4">
-                      Competitor analysis will help you better prepare to enter a given market. 🦩
+                      Competitor analysis will help you better prepare to enter a given market
                     </h1>
                     <button
                       onClick={onCompetitorsAnalysisCreate}
@@ -287,7 +299,7 @@ const ProjectPage = ({ projects }) => {
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/members1.svg" />
                     <h1 className="text-base text-gray text-center px-4 py-4">
-                      Identify the roles of your team and the people who will have access to this project. 🦥
+                      Identify the roles of your team and the people who will have access to this project
                     </h1>
                     <button
                       onClick={onCompetitorsAnalysisCreate}

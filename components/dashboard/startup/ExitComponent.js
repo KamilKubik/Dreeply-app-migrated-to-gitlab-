@@ -22,7 +22,7 @@ const ExitComponent = () => {
       src="/business-model/back4.svg"
       height={28}
       width={28}
-      className="absolute left-6 top-3 cursor-pointer z-50"
+      className="fixed left-6 top-3 cursor-pointer z-50"
     />
   );
 };

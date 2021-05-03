@@ -23,6 +23,8 @@ import CashFlowPDF from './CashFlowPDF';
 // Mobile friendly
 import { isMobile } from 'react-device-detect';
 import { useWindowSize } from '../../../../../../utils/useWindowSize';
+import TippyMonster from '../../../../Tippy';
+import ExitComponent from '../../../ExitComponent';
 
 const CashFlowPage = () => {
   // const size = useWindowSize();
@@ -646,10 +648,17 @@ const CashFlowPage = () => {
 
   const size = { width: window.innerWidth };
   console.log((size.width > 860 && 30) || (size.width < 860 && size.width > 680 && 26) || (size.width < 680 && 22));
+
   return (
-    <NavbarTemplate>
+    <>
+      <TippyMonster
+        cashFlow
+        contentClass="h-40 w-80 shadow-lg rounded-2xl bg-primary flex justify-center items-center"
+        contentText="I'm glad you made it all the way here! Analyzing your startup's liquidity is one of the most important parts of planning your entire business. If you need any help, please feel free to contact our team! "
+      />
+      <ExitComponent />
       <div className="min-h-screen w-full relative flex flex-col items-center">
-        <div className="w-full max-w-full relative mt-8 lg1Container:mt-16 mb-16 px-4 smContainer:px-16 lg1Container:px-32">
+        <div className="w-full max-w-full relative mt-12 lg1Container:mt-16 mb-16 px-32">
           <div className="relative grid grid-cols-2 grid-rows-1 grid-flow-col">
             <div className="flex items-center">
               <svg
@@ -683,7 +692,7 @@ const CashFlowPage = () => {
               className="w-full bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md grid grid-cols-2fr items-center text-xs mdContainer:text-sm lgContainer:text-base"
             >
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/calendar.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -716,7 +725,7 @@ const CashFlowPage = () => {
               className="w-full bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md grid grid-cols-2fr items-center text-xs mdContainer:text-sm lgContainer:text-base"
             >
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/hourglass1.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -757,7 +766,7 @@ const CashFlowPage = () => {
               className="place-self-center bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md grid grid-cols-2fr items-center text-xs mdContainer:text-sm lgContainer:text-base"
             >
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/tax.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -781,7 +790,7 @@ const CashFlowPage = () => {
           <div className="w-full grid grid-cols-2fr grid-rows-3fr lg1Container:grid-cols-3fr lg1Container:grid-rows-2fr gap-x-6 smContainer:gap-x-12 gap-y-8 mt-12">
             <div className="w-full bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md flex justify-between items-center text-xs mdContainer:text-sm lgContainer:text-base">
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/revenue.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -792,7 +801,7 @@ const CashFlowPage = () => {
             </div>
             <div className="w-full bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md flex justify-between items-center text-xs mdContainer:text-sm lgContainer:text-base">
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/monthly.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -803,7 +812,7 @@ const CashFlowPage = () => {
             </div>
             <div className="w-full bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md flex justify-between items-center text-xs mdContainer:text-sm lgContainer:text-base">
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/costs.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -814,7 +823,7 @@ const CashFlowPage = () => {
             </div>
             <div className="w-full bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md flex justify-between items-center text-xs mdContainer:text-sm lgContainer:text-base">
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/monthly-costs.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -825,7 +834,7 @@ const CashFlowPage = () => {
             </div>
             <div className="w-full bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md flex justify-between items-center text-xs mdContainer:text-sm lgContainer:text-base">
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/megaphone.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -836,7 +845,7 @@ const CashFlowPage = () => {
             </div>
             <div className="w-full bg-white rounded-2xl py-3 px-3 mdContainer:py-3 mdContainer:px-4 lgContainer:px-6 lgContainer:py-4 shadow-md flex justify-between items-center text-xs mdContainer:text-sm lgContainer:text-base">
               <div className="flex items-center">
-                <Image
+                <img
                   src="/cash-flow/net-worth.svg"
                   height={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
                   width={(size.width > 860 && 25) || (size.width < 860 && size.width > 680 && 22) || (size.width < 680 && 18)}
@@ -846,6 +855,7 @@ const CashFlowPage = () => {
               <p>${netProfit}</p>
             </div>
           </div>
+          {/* Revenue */}
           <div
             ref={revenueRef}
             style={{ height: 55 }}
@@ -856,7 +866,7 @@ const CashFlowPage = () => {
                 <p className="text-sm lgContainer:text-base">Revenue</p>
               </div>
               <div className="lgContainer:mr-2 flex flex-nowrap items-center">
-                <Image
+                <img
                   onClick={onRevenueElementAdd}
                   className="cursor-pointer"
                   src="/cash-flow/add.svg"
@@ -875,7 +885,11 @@ const CashFlowPage = () => {
             </div>
             <div
               ref={innerContainerRevenueRef}
-              className="w-full text-sm mdContainer:text-base lg1Container:mx-8 lg1Container:mb-6 mt-4  bg-background rounded-2xl px-4 mdContainer:px-6 py-4"
+              className={`w-full ${
+                size.width < 1120
+                  ? 'text-sm mdContainer:text-base lg1Container:mx-8 lg1Container:mb-6 mt-4  bg-background rounded-2xl px-4 mdContainer:px-6 py-4'
+                  : 'w-full mx-8 mb-6 mt-4  bg-background rounded-2xl px-4 mdContainer:px-6 py-4'
+              }`}
             >
               {/* <hr className="text-primary w-full" /> */}
               <div
@@ -934,7 +948,7 @@ const CashFlowPage = () => {
                 <p className="text-sm lgContainer:text-base">Costs</p>
               </div>
               <div className="lgContainer:mr-2 flex flex-nowrap items-center">
-                <Image
+                <img
                   onClick={onCostsElementAdd}
                   className="cursor-pointer"
                   src="/cash-flow/add.svg"
@@ -951,7 +965,14 @@ const CashFlowPage = () => {
                 />
               </div>
             </div>
-            <div ref={innerContainerCostsRef} className="w-full mx-8 mb-6 mt-4  bg-background rounded-2xl px-4 mdContainer:px-6 py-4">
+            <div
+              ref={innerContainerCostsRef}
+              className={`w-full ${
+                size.width < 1120
+                  ? 'text-sm mdContainer:text-base lg1Container:mx-8 lg1Container:mb-6 mt-4  bg-background rounded-2xl px-4 mdContainer:px-6 py-4'
+                  : 'w-full mx-8 mb-6 mt-4  bg-background rounded-2xl px-4 mdContainer:px-6 py-4'
+              }`}
+            >
               {/* <hr className="text-primary w-full" /> */}
               <div className="w-full grid grid-cols-6fr items-center">
                 <div>name</div>
@@ -997,7 +1018,7 @@ const CashFlowPage = () => {
           </div>
         </div>
       </div>
-    </NavbarTemplate>
+    </>
   );
 };
 

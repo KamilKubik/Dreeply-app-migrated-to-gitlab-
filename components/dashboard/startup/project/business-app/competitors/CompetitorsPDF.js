@@ -6,8 +6,10 @@ import { db } from '../../../../../../lib/firebase';
 // import font from '../../../../../../public/fonts/comfortaa.ttf';
 import gsap, { Linear } from 'gsap';
 import { useWindowSize } from '../../../../../../utils/useWindowSize';
+import { useRouter } from 'next/router';
 
 import { Font, pdf, Page, Text, View, Image, Document, StyleSheet, PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
+import Link from 'next/link';
 
 // Font.register({ src: '/fonts/poppins.ttf', family: 'Poppins', format: 'truetype' });
 Font.register({ src: '/fonts/comfortaa.ttf', family: 'Comfortaa' });
@@ -251,7 +253,10 @@ const MyDocument = ({ competitors }) => {
 };
 
 const CompetitorsPDF = () => {
-  const [competitors, setCompetitors] = useState();
+  const [competitors, setCompetitors] = useState(null);
+  const [projectId, setProjectId] = useState('');
+  const [projectName, setProjectName] = useState('');
+  const router = useRouter();
   const size = useWindowSize();
   useEffect(async () => {
     const userUid = await Cookies.get('uid');
@@ -264,6 +269,10 @@ const CompetitorsPDF = () => {
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach(async (doc1) => {
+            const projectId = doc1.data().projectId;
+            const projectName = doc1.data().projectName;
+            setProjectId(projectId);
+            setProjectName(projectName);
             db.collection('projects')
               .doc(doc1.data().projectId)
               .collection('competitors')
@@ -279,6 +288,7 @@ const CompetitorsPDF = () => {
         });
     }
   }, []);
+  console.log(projectId);
 
   const saveContainer = useRef();
   const [saveContainerHelper, setSaveContainerHelper] = useState(false);
@@ -366,8 +376,15 @@ const CompetitorsPDF = () => {
               <div className="w-full justify-start items-center mt-4">
                 <p>Share your competitors analysis with this public link:</p>
                 <div className="w-full flex mt-2">
-                  <input value="www.project.com" className="bg-linkBackground text-sm px-2 py-1 dark:text-primarydark" />
-                  <img src="/mobile-navbar/foreign.svg" height={28} width={28} />
+                  <input
+                    value={`http://localhost:3000/dashboard/projects/${projectName}/competitors/${projectId}`}
+                    className="w-full bg-linkBackground text-sm px-2 py-1 dark:text-primarydark focus:outline-none"
+                  />
+                  <Link href={`/dashboard/projects/${projectName}/competitors/${projectId}`} passHref>
+                    <a target="_blank" rel="noreferrer">
+                      <img className="cursor-pointer" src="/mobile-navbar/foreign.svg" height={28} width={28} className="h-full" />
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

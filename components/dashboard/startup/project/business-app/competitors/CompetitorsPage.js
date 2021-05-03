@@ -13,6 +13,8 @@ import CompetitorsPDF from './CompetitorsPDF';
 // Drag & drop
 // Mobile friendly
 import { useWindowSize } from '../../../../../../utils/useWindowSize';
+import ExitComponent from '../../../ExitComponent';
+import TippyMonster from '../../../../Tippy';
 
 const CompetitorsPage = () => {
   const [projectId, setProjectId] = useState('');
@@ -89,29 +91,15 @@ const CompetitorsPage = () => {
       .update({ competitorsArray: wholeCompetitorsArray });
   };
 
-  const exitImage = useRef();
-
-  useEffect(() => {
-    if (!isMobile) {
-      exitImage.current.addEventListener('mouseenter', () => {
-        gsap.to(exitImage.current, { rotation: '180_cw', duration: 0.5, ease: Linear.easeIn });
-      });
-      exitImage.current.addEventListener('mouseleave', () => {
-        gsap.to(exitImage.current, { rotation: '0_cw', duration: 0.5, ease: Linear.easeIn });
-      });
-    }
-  }, []);
-
   return (
     <>
-      <img
-        ref={exitImage}
-        onClick={() => Router.push(`/dashboard/projects/${Router.query.project}`)}
-        src="/business-model/back4.svg"
-        height={28}
-        width={28}
-        className="absolute left-6 top-3 cursor-pointer z-50"
+      <TippyMonster
+        projectManager
+        contentClass="h-40 w-80 shadow-lg rounded-2xl bg-primary flex justify-center items-center"
+        contentText="We are in a space where you can manage your startup in various possible ways "
+        contentText1=' For a good start, begin with "Startup idea" that will guide you through the entire process of creating a plan for your startup! '
       />
+      <ExitComponent />
       <div className="min-h-screen w-full relative flex flex-col items-center text-primarydark">
         {/* <div className="w-full xlContainer:max-w-xlContainerBreak xxlContainer:max-w-xxlContainerBreak relative mt-16"> */}
         <div className="w-full max-w-full relative mt-8 mdContainer:mt-16 mb-16 px-8 mdContainer:px-16 lgContainer:px-32 bigContainer:px-48 big2Container:px-64 big3Container:px-80 QHD:max-w-QHD">
@@ -142,7 +130,7 @@ const CompetitorsPage = () => {
           <div className="w-full bg-white rounded-2xl mt-12 p-8">
             <div className="flex justify-between items-center">
               <p className="text-primarydark text-md ssmContainer:text-lg">Competitors</p>
-              <Image className="cursor-pointer" onClick={onNewCompetitorAdd} src="/competitors/add1.svg" height={32} width={32} />
+              <img className="cursor-pointer" onClick={onNewCompetitorAdd} src="/competitors/add1.svg" height={32} width={32} />
             </div>
             <div className="grid grid-cols-1frr normalContainer:grid-cols-2fr gap-x-12">
               {competitors &&

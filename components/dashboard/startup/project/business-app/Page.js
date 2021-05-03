@@ -15,6 +15,8 @@ import Cookies from 'js-cookie';
 import Router from 'next/router';
 import ChartJsImage from 'chartjs-to-image';
 import { isMobile } from 'react-device-detect';
+import TippyMonster from '../../../Tippy';
+import ExitComponent from '../../ExitComponent';
 
 // import { useAsyncCallback } from 'react-async-hook';
 
@@ -270,32 +272,10 @@ class BusinessPlanApp extends Component {
       // routerPath: useRouter().query.project
     };
     this.addNewElement = React.createRef();
-    this.exitImage = React.createRef();
   }
 
   componentDidMount = async () => {
-    if (!isMobile) {
-      this.exitImage.current.addEventListener('mouseenter', () => {
-        gsap.to(this.exitImage.current, { rotation: '180_cw', duration: 0.5, ease: Linear.easeIn });
-      });
-      this.exitImage.current.addEventListener('mouseleave', () => {
-        gsap.to(this.exitImage.current, { rotation: '0_cw', duration: 0.5, ease: Linear.easeIn });
-      });
-    }
-    // db.collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
-    //   .onSnapshot((serverUpdate) => {
-    //     const sections = serverUpdate.docs.map((_doc) => {
-    //       const data = _doc.data();
-    //       data['id'] = _doc.id;
-    //       return data;
-    //     });
-    //     console.log(sections);
-    //     sections.sort((a, b) => b.createdAt - a.createdAt);
-    //     this.setState({ sections: sections });
-    //   });
-    const userUid = await Cookies.get('uid');
+    const userUid = Cookies.get('uid');
     // console.log(Router.query.project);
     if (userUid && Router.query.project) {
       await db
@@ -3416,14 +3396,12 @@ class BusinessPlanApp extends Component {
   render() {
     return (
       <>
-        <img
-          ref={this.exitImage}
-          onClick={() => Router.push(`/dashboard/projects/${Router.query.project}`)}
-          src="/business-model/back4.svg"
-          height={28}
-          width={28}
-          className="absolute left-6 top-3 cursor-pointer z-50"
+        <TippyMonster
+          businessPlan
+          contentClass="h-32 w-80 shadow-lg rounded-2xl bg-primary flex justify-center items-center"
+          contentText="In this place, you can create a business plan that will be completely customized to your needs, so this time, I won't guide you through the process of creating one. "
         />
+        <ExitComponent />
         <NavbarTemplate>
           {/* <NavbarTemplate> */}
           <div className="min-h-screen w-full relative flex flex-col items-center">

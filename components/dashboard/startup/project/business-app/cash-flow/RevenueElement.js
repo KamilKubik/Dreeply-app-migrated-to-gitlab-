@@ -314,15 +314,15 @@ const RevenueElement = ({ provided, setRevenueElements, mainDocument, projectId,
       <div
         ref={provided.innerRef}
         {...provided.draggableProps}
-        style={{
-          fontSize:
-            (size.width > 680 && '0.75rem') ||
-            (size.width < 680 && size.width > 580 && '0.65rem') ||
-            (size.width < 580 && size.width > 460 && '0.5rem') ||
-            (size.width < 460 && size.width > 380 && '0.45rem') ||
-            (size.width < 380 && '0.4rem'),
-        }}
-        className="w-full grid grid-cols-6fr py-3 items-start text-xs lg1Container:text-sm"
+        // style={{
+        //   fontSize:
+        //     (size.width > 680 && '0.75rem') ||
+        //     (size.width < 680 && size.width > 580 && '0.65rem') ||
+        //     (size.width < 580 && size.width > 460 && '0.5rem') ||
+        //     (size.width < 460 && size.width > 380 && '0.45rem') ||
+        //     (size.width < 380 && '0.4rem'),
+        // }}
+        className="w-full grid grid-cols-6fr py-3 items-start text-sm"
       >
         <input
           placeholder="name"
@@ -337,18 +337,20 @@ const RevenueElement = ({ provided, setRevenueElements, mainDocument, projectId,
               onClick={onTypeShow}
               className="ml-1 smContainer:ml-2 cursor-pointer"
               src="/cash-flow/down-arrow.svg"
-              height={
-                (size.width > 680 && 14) ||
-                (size.width < 680 && size.width > 580 && 10) ||
-                (size.width < 580 && size.width > 460 && 8) ||
-                (size.width < 460 && 6)
-              }
-              width={
-                (size.width > 680 && 14) ||
-                (size.width < 680 && size.width > 580 && 10) ||
-                (size.width < 580 && size.width > 460 && 8) ||
-                (size.width < 460 && 6)
-              }
+              height={14}
+              width={14}
+              // height={
+              //   (size.width > 680 && 14) ||
+              //   (size.width < 680 && size.width > 580 && 10) ||
+              //   (size.width < 580 && size.width > 460 && 8) ||
+              //   (size.width < 460 && 6)
+              // }
+              // width={
+              //   (size.width > 680 && 14) ||
+              //   (size.width < 680 && size.width > 580 && 10) ||
+              //   (size.width < 580 && size.width > 460 && 8) ||
+              //   (size.width < 460 && 6)
+              // }
             />
           </div>
           {
@@ -403,18 +405,20 @@ const RevenueElement = ({ provided, setRevenueElements, mainDocument, projectId,
               onClick={onCirclePickerClick}
               style={{
                 backgroundColor: `${boxColor}`,
-                height:
-                  (size.width > 1280 && 16) ||
-                  (size.width < 1280 && size.width > 680 && 14) ||
-                  (size.width < 680 && size.width > 580 && 12) ||
-                  (size.width < 580 && size.width > 460 && 10) ||
-                  (size.width < 460 && 8),
-                width:
-                  (size.width > 1280 && 16) ||
-                  (size.width < 1280 && size.width > 680 && 14) ||
-                  (size.width < 680 && size.width > 580 && 12) ||
-                  (size.width < 580 && size.width > 460 && 10) ||
-                  (size.width < 460 && 8),
+                height: '16px',
+                width: '16px',
+                // height:
+                //   (size.width > 1280 && 16) ||
+                //   (size.width < 1280 && size.width > 680 && 14) ||
+                //   (size.width < 680 && size.width > 580 && 12) ||
+                //   (size.width < 580 && size.width > 460 && 10) ||
+                //   (size.width < 460 && 8),
+                // width:
+                //   (size.width > 1280 && 16) ||
+                //   (size.width < 1280 && size.width > 680 && 14) ||
+                //   (size.width < 680 && size.width > 580 && 12) ||
+                //   (size.width < 580 && size.width > 460 && 10) ||
+                //   (size.width < 460 && 8),
               }}
               className="rounded-3xl"
             >
@@ -609,39 +613,43 @@ const RevenueElement = ({ provided, setRevenueElements, mainDocument, projectId,
               {...provided.dragHandleProps}
               className="ml-2 mdContainer:ml-4"
               src="/cash-flow/drag.svg"
-              height={
-                (size.width > 1280 && 18) ||
-                (size.width < 1280 && size.width > 680 && 16) ||
-                (size.width < 680 && size.width > 580 && 14) ||
-                (size.width < 580 && size.width > 460 && 12) ||
-                (size.width < 460 && 10)
-              }
-              width={
-                (size.width > 1280 && 18) ||
-                (size.width < 1280 && size.width > 680 && 16) ||
-                (size.width < 680 && size.width > 580 && 14) ||
-                (size.width < 580 && size.width > 460 && 12) ||
-                (size.width < 460 && 10)
-              }
+              height={18}
+              width={18}
+              // height={
+              //   (size.width > 1280 && 18) ||
+              //   (size.width < 1280 && size.width > 680 && 16) ||
+              //   (size.width < 680 && size.width > 580 && 14) ||
+              //   (size.width < 580 && size.width > 460 && 12) ||
+              //   (size.width < 460 && 10)
+              // }
+              // width={
+              //   (size.width > 1280 && 18) ||
+              //   (size.width < 1280 && size.width > 680 && 16) ||
+              //   (size.width < 680 && size.width > 580 && 14) ||
+              //   (size.width < 580 && size.width > 460 && 12) ||
+              //   (size.width < 460 && 10)
+              // }
             />
             <img
               onClick={() => onElementDelete(element.index)}
               className="ml-2 mdContainer:ml-4 cursor-pointer"
               src="/cash-flow/remove.svg"
-              height={
-                (size.width > 1280 && 18) ||
-                (size.width < 1280 && size.width > 680 && 16) ||
-                (size.width < 680 && size.width > 580 && 14) ||
-                (size.width < 580 && size.width > 460 && 12) ||
-                (size.width < 460 && 10)
-              }
-              width={
-                (size.width > 1280 && 18) ||
-                (size.width < 1280 && size.width > 680 && 16) ||
-                (size.width < 680 && size.width > 580 && 14) ||
-                (size.width < 580 && size.width > 460 && 12) ||
-                (size.width < 460 && 10)
-              }
+              height={18}
+              width={18}
+              // height={
+              //   (size.width > 1280 && 18) ||
+              //   (size.width < 1280 && size.width > 680 && 16) ||
+              //   (size.width < 680 && size.width > 580 && 14) ||
+              //   (size.width < 580 && size.width > 460 && 12) ||
+              //   (size.width < 460 && 10)
+              // }
+              // width={
+              //   (size.width > 1280 && 18) ||
+              //   (size.width < 1280 && size.width > 680 && 16) ||
+              //   (size.width < 680 && size.width > 580 && 14) ||
+              //   (size.width < 580 && size.width > 460 && 12) ||
+              //   (size.width < 460 && 10)
+              // }
             />
           </div>
         </div>

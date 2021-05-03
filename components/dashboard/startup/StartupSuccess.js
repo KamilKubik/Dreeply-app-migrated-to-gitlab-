@@ -633,7 +633,7 @@ const StartupSuccess = () => {
               <img src="/gifs/popper.gif" height={60} width={60} className="inline-block relative bottom-4 left-3" />
               Congratulations!
             </p>
-            <p className="text-primarydark text-base normal:text-lg pl-2 dark:text-background text-center">
+            <p className="text-gray text-base normal:text-lg pl-2 dark:text-background text-center">
               Now you can save your idea and set off to conquer the world
             </p>
             <img src="/success.svg" height={200} width={200} className="mt-4" />
