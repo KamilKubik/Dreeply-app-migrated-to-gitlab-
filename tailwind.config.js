@@ -55,7 +55,9 @@ module.exports = {
       '7fr': '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
       '8fr': '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
       '12fr': '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
-      business: '1fr 280px',
+      businessSmall: '1fr 220px',
+      business: '1fr 240px',
+      businessMedium: '1fr 280px',
     },
     gridTemplateRows: {
       '1fr': '1fr',
@@ -71,9 +73,9 @@ module.exports = {
       loginContainer: '490px',
       mdContainer: '520px',
       lgContainer: '760px',
-      xlContainer: '820px',
-      xxlContainer: '960px',
-      normalContainer: '1180px',
+      xlContainer: '920px',
+      xxlContainer: '1060px',
+      normalContainer: '1220px',
       normalModalContainer: '850px',
       // starter modal
       mdStarter: '680px',
@@ -102,6 +104,10 @@ module.exports = {
       big3Container: '1900px',
       QHD: '2550px',
       // '4k': '3800px',
+      mobileEnd: '960px',
+      screenSmall: '1120px',
+      screenMedium: '1480px',
+      screenLarge: '1720px',
     },
     extend: {
       height: (theme) => ({

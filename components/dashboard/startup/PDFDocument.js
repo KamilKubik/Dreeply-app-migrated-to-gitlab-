@@ -1,22 +1,12 @@
 import { saveAs } from 'file-saver';
 
-import {
-  Font,
-  pdf,
-  Page,
-  Text,
-  View,
-  Image,
-  Document,
-  StyleSheet,
-  PDFViewer,
-  PDFDownloadLink,
-} from '@react-pdf/renderer';
+import { Font, pdf, Page, Text, View, Image, Document, StyleSheet, PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 
 // const image = avatarExists != 'blank' ? avatarExists : imageNameExists;
 // console.log(image);
 
 const MyDocument1 = ({ data }) => {
+  console.log('data --> ', data);
   Font.register({ src: '/fonts/poppins.ttf', family: 'Poppins' });
   Font.register({ src: '/fonts/comfortaa.ttf', family: 'Comfortaa' });
 
@@ -287,27 +277,17 @@ const MyDocument1 = ({ data }) => {
   //     whySuccessSection,
   //   };
 
-  const image =
-    data.avatarExists != 'blank'
-      ? data.avatarExists
-      : `/png/${data.imageNameExists}.png`;
+  const image = data.avatarExists != null ? data.avatarExists : `/png/${data.imageNameExists}.png`;
   console.log('data - ', data);
   console.log('dataMarketProblem - ', data.marketProblemSection);
 
   return (
     <Document>
-      <Page size='A4' style={styles.homePage}>
+      <Page size="A4" style={styles.homePage}>
         <View style={styles.homePageTitleSection}>
           <Text style={styles.homePageTitle}>Startup idea plan</Text>
-          <Text style={styles.homePageDesc}>
-            {data.ideaName}
-          </Text>
-          <Image
-            src={image}
-            style={styles.image}
-            height='250px'
-            width='250px'
-          />
+          <Text style={styles.homePageDesc}>{data.ideaName}</Text>
+          <Image src={image} style={styles.image} height="250px" width="250px" />
           <View style={styles.leftDescBlock}>
             <Text style={styles.leftDescBlockText}>{data.ideaDesc}</Text>
           </View>
@@ -338,54 +318,30 @@ const MyDocument1 = ({ data }) => {
           <View style={styles.contentsBarFive}></View>
         </View>
         <View style={styles.contentsRightBar}>
-          <Text style={styles.contentsRightTextOne}>
-            01. This section will help you better understand the startup vision
-          </Text>
-          <Text style={styles.contentsRightTextTwo}>
-            02. This section will introduce you to the vision of the product
-          </Text>
-          <Text style={styles.contentsRightTextThree}>
-            03. This section will reveal all the cards of the market
-          </Text>
-          <Text style={styles.contentsRightTextFour}>
-            04. Discover the costs of implementing our idea
-          </Text>
-          <Text style={styles.contentsRightTextFive}>
-            05. In the final section, you will discover the startup's business
-            model
-          </Text>
+          <Text style={styles.contentsRightTextOne}>01. This section will help you better understand the startup vision</Text>
+          <Text style={styles.contentsRightTextTwo}>02. This section will introduce you to the vision of the product</Text>
+          <Text style={styles.contentsRightTextThree}>03. This section will reveal all the cards of the market</Text>
+          <Text style={styles.contentsRightTextFour}>04. Discover the costs of implementing our idea</Text>
+          <Text style={styles.contentsRightTextFive}>05. In the final section, you will discover the startup's business model</Text>
         </View>
       </Page>
       {/* OVERVIEW SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/idea.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/idea.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Startup overview</Text>
-          <Text style={styles.overviewSubtitle}>
-            This section will help you better understand the startup vision
-          </Text>
+          <Text style={styles.overviewSubtitle}>This section will help you better understand the startup vision</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              Market problem that needs to be solved.
-            </Text>
+            <Text style={styles.sectionHeadingOne}>Market problem that needs to be solved.</Text>
             <Text style={styles.sectionText}>{data.marketProblemSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              Solution that solves this market problem.
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>Solution that solves this market problem.</Text>
             <Text style={styles.sectionText}>{data.marketSolutionSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              Who is behind the foundation of the future company?
-            </Text>
+            <Text style={styles.sectionHeadingThree}>Who is behind the foundation of the future company?</Text>
             <Text style={styles.sectionText}>{data.foundersSection}</Text>
           </View>
         </View>
@@ -393,117 +349,66 @@ const MyDocument1 = ({ data }) => {
       {/* PRODUCT SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/blueprint.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/blueprint.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Product</Text>
-          <Text style={styles.overviewSubtitle}>
-            This section will introduce you to the vision of the product
-          </Text>
+          <Text style={styles.overviewSubtitle}>This section will introduce you to the vision of the product</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              Detailed description of the product vision.
-            </Text>
-            <Text style={styles.sectionText}>
-              {data.productOverviewSection}
-            </Text>
+            <Text style={styles.sectionHeadingOne}>Detailed description of the product vision.</Text>
+            <Text style={styles.sectionText}>{data.productOverviewSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              How will other people find out about the product?
-            </Text>
-            <Text style={styles.sectionText}>
-              {data.productPromotionSection}
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>How will other people find out about the product?</Text>
+            <Text style={styles.sectionText}>{data.productPromotionSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              What benefits will this product brings to customers?
-            </Text>
-            <Text style={styles.sectionText}>
-              {data.productBenefitsSection}
-            </Text>
+            <Text style={styles.sectionHeadingThree}>What benefits will this product brings to customers?</Text>
+            <Text style={styles.sectionText}>{data.productBenefitsSection}</Text>
           </View>
         </View>
       </Page>
       {/* MARKET SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/unicorn.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/unicorn.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Market analysis</Text>
-          <Text style={styles.overviewSubtitle}>
-            This section will reveal all the cards of the market
-          </Text>
+          <Text style={styles.overviewSubtitle}>This section will reveal all the cards of the market</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              General insight into the market.
-            </Text>
+            <Text style={styles.sectionHeadingOne}>General insight into the market.</Text>
             <Text style={styles.sectionText}>{data.marketOverviewSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              Who are the major competitors in the market?
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>Who are the major competitors in the market?</Text>
             <Text style={styles.sectionText}>{data.competitorsSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              What makes this startup stand out from the competition?
-            </Text>
-            <Text style={styles.sectionText}>
-              {data.competitionDistinguishSection}
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>What makes this startup stand out from the competition?</Text>
+            <Text style={styles.sectionText}>{data.competitionDistinguishSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              Target group of startup customers.
-            </Text>
-            <Text style={styles.sectionText}>
-              {data.targetCustomersSection}
-            </Text>
+            <Text style={styles.sectionHeadingThree}>Target group of startup customers.</Text>
+            <Text style={styles.sectionText}>{data.targetCustomersSection}</Text>
           </View>
         </View>
       </Page>
       {/* FINANCES SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/budget.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/budget.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Finances</Text>
-          <Text style={styles.overviewSubtitle}>
-            Discover the costs of implementing our idea
-          </Text>
+          <Text style={styles.overviewSubtitle}>Discover the costs of implementing our idea</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              How much money will it take to launch the startup?
-            </Text>
+            <Text style={styles.sectionHeadingOne}>How much money will it take to launch the startup?</Text>
             <Text style={styles.sectionText}>{data.startupCostsSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              Approximate running costs, based on startup growth.
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>Approximate running costs, based on startup growth.</Text>
             <Text style={styles.sectionText}>{data.runningCostsSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              How does the idea will be fund?
-            </Text>
+            <Text style={styles.sectionHeadingThree}>How does the idea will be fund?</Text>
             <Text style={styles.sectionText}>{data.financingSection}</Text>
           </View>
         </View>
@@ -511,35 +416,20 @@ const MyDocument1 = ({ data }) => {
       {/* BUSINESS MODEL SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/startup.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/startup.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Business model</Text>
-          <Text style={styles.overviewSubtitle}>
-            In the final section, you will discover the startup's business model
-          </Text>
+          <Text style={styles.overviewSubtitle}>In the final section, you will discover the startup's business model</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              Startup business model and legal structure overview.
-            </Text>
-            <Text style={styles.sectionText}>
-              {data.businessModelOverviewSection}
-            </Text>
+            <Text style={styles.sectionHeadingOne}>Startup business model and legal structure overview.</Text>
+            <Text style={styles.sectionText}>{data.businessModelOverviewSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              Predictions for startup growth.
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>Predictions for startup growth.</Text>
             <Text style={styles.sectionText}>{data.businessGrowSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              Why will this particular startup succeed?
-            </Text>
+            <Text style={styles.sectionHeadingThree}>Why will this particular startup succeed?</Text>
             <Text style={styles.sectionText}>{data.whySuccessSection}</Text>
           </View>
         </View>

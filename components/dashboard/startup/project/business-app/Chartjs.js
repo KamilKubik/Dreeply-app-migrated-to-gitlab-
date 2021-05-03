@@ -1,23 +1,8 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ChartJsImage from 'chartjs-to-image';
 // import ChartJSImage from 'chart.js-image';
 import MyDocument1 from './PDFChart';
-import {
-  pdf,
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  BlobProvider,
-  PDFDownloadLink,
-} from '@react-pdf/renderer';
+import { pdf, Page, Text, View, Document, StyleSheet, BlobProvider, PDFDownloadLink } from '@react-pdf/renderer';
 import { v4 as uuidv4 } from 'uuid';
 import debounce from '../../../../../utils/helpers';
 import { db } from '../../../../../lib/firebase';
@@ -119,9 +104,7 @@ const ChartJsComponent = ({
 
   const update = useCallback(
     debounce(async (data) => {
-      const currentSectionIndex = await data.selSection.fields.findIndex(
-        (field) => field.index == data.index
-      );
+      const currentSectionIndex = await data.selSection.fields.findIndex((field) => field.index == data.index);
       chartValueUpdate(data, data.index, currentSectionIndex);
     }, 500),
     []
@@ -172,9 +155,7 @@ const ChartJsComponent = ({
       value,
       color,
     };
-    const currentChartIndex = await selectedSection.fields.findIndex(
-      (field) => field.index == index
-    );
+    const currentChartIndex = await selectedSection.fields.findIndex((field) => field.index == index);
     // let newFieldsArray = [...selectedSection.fields];
     const newSelectedSection = selectedSection;
     newSelectedSection.fields[currentChartIndex].data.push(newData);
@@ -191,9 +172,9 @@ const ChartJsComponent = ({
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(selectedSection.id)
       .update({
         fields: newSelectedSection.fields,
@@ -204,17 +185,15 @@ const ChartJsComponent = ({
   const [chartData, setChartData] = useState();
 
   useEffect(async () => {
-    const currentChartIndex = await selectedSection.fields.findIndex(
-      (field) => field.index == index
-    );
+    const currentChartIndex = await selectedSection.fields.findIndex((field) => field.index == index);
     db.collection('projects')
       .doc(projectId)
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(selectedSection.id)
       .onSnapshot((serverUpdate) => {
         const fields = serverUpdate.data().fields.map((field) => {
@@ -566,98 +545,80 @@ const ChartJsComponent = ({
       // Dataset1
       {
         label: field.dataset1Label && field.dataset1Label,
-        data: field.dataset1 && 
+        data:
+          field.dataset1 &&
           field.dataset1.map((data) => {
             if (data !== '') {
               return data;
             }
           }),
         backgroundColor: colors,
-        borderWidth:
-          field.chartType == 'Area chart'
-            ? 0
-            : field.chartType == 'Pie chart' ||
-              (field.chartType == 'Doughnut chart' && 2),
+        borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset2
       {
         label: field.dataset2Label && field.dataset2Label,
-        data: field.dataset2 && 
+        data:
+          field.dataset2 &&
           field.dataset2.map((data) => {
             if (data !== '') {
               return data;
             }
           }),
         backgroundColor: colors1,
-        borderWidth:
-          field.chartType == 'Area chart'
-            ? 0
-            : field.chartType == 'Pie chart' ||
-              (field.chartType == 'Doughnut chart' && 2),
+        borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset3
       {
         label: field.dataset3Label && field.dataset3Label,
-        data: field.dataset3 && 
+        data:
+          field.dataset3 &&
           field.dataset3.map((data) => {
             if (data !== '') {
               return data;
             }
           }),
         backgroundColor: colors2,
-        borderWidth:
-          field.chartType == 'Area chart'
-            ? 0
-            : field.chartType == 'Pie chart' ||
-              (field.chartType == 'Doughnut chart' && 2),
+        borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset4
       {
         label: field.dataset4Label && field.dataset4Label,
-        data: field.dataset4 && 
+        data:
+          field.dataset4 &&
           field.dataset4.map((data) => {
             if (data !== '') {
               return data;
             }
           }),
         backgroundColor: colors3,
-        borderWidth:
-          field.chartType == 'Area chart'
-            ? 0
-            : field.chartType == 'Pie chart' ||
-              (field.chartType == 'Doughnut chart' && 2),
+        borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset5
       {
         label: field.dataset5Label && field.dataset5Label,
-        data: field.dataset5 &&
+        data:
+          field.dataset5 &&
           field.dataset5.map((data) => {
             if (data !== '') {
               return data;
             }
           }),
         backgroundColor: colors4,
-        borderWidth:
-          field.chartType == 'Area chart'
-            ? 0
-            : field.chartType == 'Pie chart' ||
-              (field.chartType == 'Doughnut chart' && 2),
+        borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset6
       {
         label: field.dataset6Label && field.dataset6Label,
-        data: field.dataset6 &&
+        data:
+          field.dataset6 &&
           field.dataset6.map((data) => {
             if (data !== '') {
               return data;
             }
           }),
         backgroundColor: colors5,
-        borderWidth:
-          field.chartType == 'Area chart'
-            ? 0
-            : field.chartType == 'Pie chart' ||
-              (field.chartType == 'Doughnut chart' && 2),
+        borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
     ],
   };
@@ -677,7 +638,7 @@ const ChartJsComponent = ({
     // const myChartRef = field.chartId;
     document.getElementById(`${field.index}chartContainer`).innerHTML = '&nbsp;';
     document.getElementById(`${field.index}chartContainer`).innerHTML = `<canvas id=${field.index} ref=${chartRef}></canvas>`;
-    const myChartRef = document.getElementById(field.index).getContext("2d");
+    const myChartRef = document.getElementById(field.index).getContext('2d');
 
     // data.datasets.map((dataset) => {
     //   data.labels.map((label) => {
@@ -729,10 +690,7 @@ const ChartJsComponent = ({
         label: data.datasets[0].label,
         data: datas[0],
         backgroundColor: data.datasets[0].backgroundColor,
-        borderColor:
-          field.chartType == 'Line chart'
-            ? 'rgba(255,185,0 ,1 )'
-            : 'rgb(255, 255, 255)',
+        borderColor: field.chartType == 'Line chart' ? 'rgba(255,185,0 ,1 )' : 'rgb(255, 255, 255)',
         borderWidth: data.datasets[0].borderWidth,
         fill: fill,
       },
@@ -740,10 +698,7 @@ const ChartJsComponent = ({
         label: data.datasets[1].label,
         data: datas[1],
         backgroundColor: data.datasets[1].backgroundColor,
-        borderColor:
-          field.chartType == 'Line chart'
-            ? 'rgba(0,204,106 ,1 )'
-            : 'rgb(255, 255, 255)',
+        borderColor: field.chartType == 'Line chart' ? 'rgba(0,204,106 ,1 )' : 'rgb(255, 255, 255)',
         borderWidth: data.datasets[1].borderWidth,
         fill: fill,
       },
@@ -751,10 +706,7 @@ const ChartJsComponent = ({
         label: data.datasets[2].label,
         data: datas[2],
         backgroundColor: data.datasets[2].backgroundColor,
-        borderColor:
-          field.chartType == 'Line chart'
-            ? 'rgba(0,120,215 ,1 )'
-            : 'rgb(255, 255, 255)',
+        borderColor: field.chartType == 'Line chart' ? 'rgba(0,120,215 ,1 )' : 'rgb(255, 255, 255)',
         borderWidth: data.datasets[2].borderWidth,
         fill: fill,
       },
@@ -762,10 +714,7 @@ const ChartJsComponent = ({
         label: data.datasets[3].label,
         data: datas[3],
         backgroundColor: data.datasets[3].backgroundColor,
-        borderColor:
-          field.chartType == 'Line chart'
-            ? 'rgba(231,72,86 ,1 )'
-            : 'rgb(255, 255, 255)',
+        borderColor: field.chartType == 'Line chart' ? 'rgba(231,72,86 ,1 )' : 'rgb(255, 255, 255)',
         borderWidth: data.datasets[3].borderWidth,
         fill: fill,
       },
@@ -773,10 +722,7 @@ const ChartJsComponent = ({
         label: data.datasets[4].label,
         data: datas[4],
         backgroundColor: data.datasets[4].backgroundColor,
-        borderColor:
-          field.chartType == 'Line chart'
-            ? 'rgba(126,115,95 ,1 )'
-            : 'rgb(255, 255, 255)',
+        borderColor: field.chartType == 'Line chart' ? 'rgba(126,115,95 ,1 )' : 'rgb(255, 255, 255)',
         borderWidth: data.datasets[4].borderWidth,
         fill: fill,
       },
@@ -784,10 +730,7 @@ const ChartJsComponent = ({
         label: data.datasets[5].label,
         data: datas[5],
         backgroundColor: data.datasets[5].backgroundColor,
-        borderColor:
-          field.chartType == 'Line chart'
-            ? 'rgba(177,70,194 ,1 )'
-            : 'rgb(255, 255, 255)',
+        borderColor: field.chartType == 'Line chart' ? 'rgba(177,70,194 ,1 )' : 'rgb(255, 255, 255)',
         borderWidth: data.datasets[5].borderWidth,
         fill: fill,
       },
@@ -814,8 +757,8 @@ const ChartJsComponent = ({
         legend: {
           position: 'bottom',
         },
-        defaultFontFamily: (Chart.defaults.global.defaultFontFamily =
-          'Comfortaa'),
+        // defaultFontFamily: (Chart.defaults.global.defaultFontFamily =
+        //   'Comfortaa'),
         scales: {
           yAxes: [
             {
@@ -1932,7 +1875,7 @@ const ChartJsComponent = ({
           ease: Linear,
         });
       });
-      document.getElementById(`${field.index}container`) &&
+    document.getElementById(`${field.index}container`) &&
       document.getElementById(`${field.index}container`).addEventListener('mouseleave', () => {
         gsap.to(document.getElementById(`${field.index}table`), {
           height: '0',
@@ -2007,9 +1950,9 @@ const ChartJsComponent = ({
         .collection('businessPlan')
         .doc(Router.query.project)
         .collection('inputs')
-      // .collection('currentBusinessPlan')
-      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-      //   .collection('inputs')
+        // .collection('currentBusinessPlan')
+        //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+        //   .collection('inputs')
         .doc(selectedSection.id)
         .update({
           fields: newFieldsArray,
@@ -2058,9 +2001,9 @@ const ChartJsComponent = ({
       .collection('businessPlan')
       .doc(Router.query.project)
       .collection('inputs')
-    // .collection('currentBusinessPlan')
-    //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    //   .collection('inputs')
+      // .collection('currentBusinessPlan')
+      //   .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
+      //   .collection('inputs')
       .doc(selectedSection.id)
       .update({
         fields: newFieldsArray,
@@ -2068,18 +2011,17 @@ const ChartJsComponent = ({
   };
 
   return (
+    <div ref={provided.innerRef} {...provided.draggableProps} className="w-full grid grid-cols-12fr justify-items-center items-center mt-6">
       <div
-        ref={provided.innerRef}
-        {...provided.draggableProps}
-        className='w-full grid grid-cols-12fr justify-items-center items-center mt-6'
+        id={`${field.index}container`}
+        className="col-start-2 col-end-12 relative flex flex-col h-full w-full flex px-8 py-8 rounded-2xl bg-white dark:bg-background"
       >
-        <div id={`${field.index}container`} className='col-start-2 col-end-12 relative flex flex-col h-full w-full flex px-8 py-8 rounded-2xl bg-white dark:bg-background'>
-        <div className='w-full h-full'>
+        <div className="w-full h-full">
           <div id={`${field.index}chartContainer`}></div>
           {/* <canvas id={field.index} ref={chartRef} className='mt-4'></canvas> */}
           {/* <hr className='text-primary mt-4' /> */}
-          <div id={`${field.index}table`} ref={tableRef} className='w-full overflow-auto h-0'>
-            <table class='content-table'>
+          <div id={`${field.index}table`} ref={tableRef} className="w-full overflow-auto h-0">
+            <table class="content-table">
               <thead>
                 <tr>
                   <th></th>
@@ -2087,644 +2029,644 @@ const ChartJsComponent = ({
                     <input
                       onChange={(e) => onLabelChange1(e.target.value)}
                       value={label1}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange2(e.target.value)}
                       value={label2}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange3(e.target.value)}
                       value={label3}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange4(e.target.value)}
                       value={label4}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange5(e.target.value)}
                       value={label5}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange6(e.target.value)}
                       value={label6}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange7(e.target.value)}
                       value={label7}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange8(e.target.value)}
                       value={label8}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange9(e.target.value)}
                       value={label9}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange10(e.target.value)}
                       value={label10}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange11(e.target.value)}
                       value={label11}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange12(e.target.value)}
                       value={label12}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     />
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className='left-block'>
+                  <td className="left-block">
                     <input
                       onChange={(e) => onDatasetLabelChange1(e.target.value)}
                       value={dataset1Label}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value1Change(e.target.value)}
                       value={dataset1Value1}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value2Change(e.target.value)}
                       value={dataset1Value2}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value3Change(e.target.value)}
                       value={dataset1Value3}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value4Change(e.target.value)}
                       value={dataset1Value4}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value5Change(e.target.value)}
                       value={dataset1Value5}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value6Change(e.target.value)}
                       value={dataset1Value6}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value7Change(e.target.value)}
                       value={dataset1Value7}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value8Change(e.target.value)}
                       value={dataset1Value8}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value9Change(e.target.value)}
                       value={dataset1Value9}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value10Change(e.target.value)}
                       value={dataset1Value10}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value11Change(e.target.value)}
                       value={dataset1Value11}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset1Value12Change(e.target.value)}
                       value={dataset1Value12}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                 </tr>
                 <tr>
-                  <td className='left-block'>
+                  <td className="left-block">
                     <input
                       onChange={(e) => onDatasetLabelChange2(e.target.value)}
                       value={dataset2Label}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value1Change(e.target.value)}
                       value={dataset2Value1}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value2Change(e.target.value)}
                       value={dataset2Value2}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value3Change(e.target.value)}
                       value={dataset2Value3}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value4Change(e.target.value)}
                       value={dataset2Value4}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value5Change(e.target.value)}
                       value={dataset2Value5}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value6Change(e.target.value)}
                       value={dataset2Value6}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value7Change(e.target.value)}
                       value={dataset2Value7}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value8Change(e.target.value)}
                       value={dataset2Value8}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value9Change(e.target.value)}
                       value={dataset2Value9}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value10Change(e.target.value)}
                       value={dataset2Value10}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value11Change(e.target.value)}
                       value={dataset2Value11}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset2Value12Change(e.target.value)}
                       value={dataset2Value12}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                 </tr>
                 <tr>
-                  <td className='left-block'>
+                  <td className="left-block">
                     <input
                       onChange={(e) => onDatasetLabelChange3(e.target.value)}
                       value={dataset3Label}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value1Change(e.target.value)}
                       value={dataset3Value1}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value2Change(e.target.value)}
                       value={dataset3Value2}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value3Change(e.target.value)}
                       value={dataset3Value3}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value4Change(e.target.value)}
                       value={dataset3Value4}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value5Change(e.target.value)}
                       value={dataset3Value5}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value6Change(e.target.value)}
                       value={dataset3Value6}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value7Change(e.target.value)}
                       value={dataset3Value7}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value8Change(e.target.value)}
                       value={dataset3Value8}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value9Change(e.target.value)}
                       value={dataset3Value9}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value10Change(e.target.value)}
                       value={dataset3Value10}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value11Change(e.target.value)}
                       value={dataset3Value11}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset3Value12Change(e.target.value)}
                       value={dataset3Value12}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                 </tr>
                 <tr>
-                  <td className='left-block'>
+                  <td className="left-block">
                     <input
                       onChange={(e) => onDatasetLabelChange4(e.target.value)}
                       value={dataset4Label}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value1Change(e.target.value)}
                       value={dataset4Value1}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value2Change(e.target.value)}
                       value={dataset4Value2}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value3Change(e.target.value)}
                       value={dataset4Value3}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value4Change(e.target.value)}
                       value={dataset4Value4}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value5Change(e.target.value)}
                       value={dataset4Value5}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value6Change(e.target.value)}
                       value={dataset4Value6}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value7Change(e.target.value)}
                       value={dataset4Value7}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value8Change(e.target.value)}
                       value={dataset4Value8}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value9Change(e.target.value)}
                       value={dataset4Value9}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value10Change(e.target.value)}
                       value={dataset4Value10}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value11Change(e.target.value)}
                       value={dataset4Value11}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset4Value12Change(e.target.value)}
                       value={dataset4Value12}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                 </tr>
                 <tr>
-                  <td className='left-block'>
+                  <td className="left-block">
                     <input
                       onChange={(e) => onDatasetLabelChange5(e.target.value)}
                       value={dataset5Label}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value1Change(e.target.value)}
                       value={dataset5Value1}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value2Change(e.target.value)}
                       value={dataset5Value2}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value3Change(e.target.value)}
                       value={dataset5Value3}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value4Change(e.target.value)}
                       value={dataset5Value4}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value5Change(e.target.value)}
                       value={dataset5Value5}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value6Change(e.target.value)}
                       value={dataset5Value6}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value7Change(e.target.value)}
                       value={dataset5Value7}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value8Change(e.target.value)}
                       value={dataset5Value8}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value9Change(e.target.value)}
                       value={dataset5Value9}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value10Change(e.target.value)}
                       value={dataset5Value10}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value11Change(e.target.value)}
                       value={dataset5Value11}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset5Value12Change(e.target.value)}
                       value={dataset5Value12}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                 </tr>
                 <tr>
-                  <td className='left-block-radius'>
+                  <td className="left-block-radius">
                     <input
                       onChange={(e) => onDatasetLabelChange6(e.target.value)}
                       value={dataset6Label}
-                      className='w-full bg-secondBackground focus:outline-none'
+                      className="w-full bg-secondBackground focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value1Change(e.target.value)}
                       value={dataset6Value1}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value2Change(e.target.value)}
                       value={dataset6Value2}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value3Change(e.target.value)}
                       value={dataset6Value3}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value4Change(e.target.value)}
                       value={dataset6Value4}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value5Change(e.target.value)}
                       value={dataset6Value5}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value6Change(e.target.value)}
                       value={dataset6Value6}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value7Change(e.target.value)}
                       value={dataset6Value7}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value8Change(e.target.value)}
                       value={dataset6Value8}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value9Change(e.target.value)}
                       value={dataset6Value9}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value10Change(e.target.value)}
                       value={dataset6Value10}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value11Change(e.target.value)}
                       value={dataset6Value11}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                   <td>
                     <input
                       onChange={(e) => onDataset6Value12Change(e.target.value)}
                       value={dataset6Value12}
-                      className='w-full bg-white focus:outline-none'
+                      className="w-full bg-white focus:outline-none"
                     ></input>
                   </td>
                 </tr>
@@ -2745,43 +2687,31 @@ const ChartJsComponent = ({
         Save
       </button> */}
         </div>
-        </div>
-        {/* Side manager bar */}
-        <div className='col-start-12 col-end-13 justify-self-center self-start flex flex-col flex-wrap gap-2 overflow-hidden'>
-          <Image
-            onClick={() => deleteField(field.index)}
-            className='cursor-pointer'
-            src={`/plan-bar/exit4.svg`}
-            height={36}
-            width={36}
-          />
-          <Image
-            {...provided.dragHandleProps}
-            className='cursor-pointer'
-            src={`/plan-bar/drag2.svg`}
-            height={36}
-            width={36}
-          />
-          <Image
-            onClick={() => onStackedChange(field.stacked)}
-            className='cursor-pointer'
-            src={`/plan-bar/layers.svg`}
-            height={36}
-            width={36}
-          />
+      </div>
+      {/* Side manager bar */}
+      <div className="col-start-12 col-end-13 justify-self-center self-start flex flex-col flex-wrap gap-2 overflow-hidden">
+        <Image onClick={() => deleteField(field.index)} className="cursor-pointer" src={`/plan-bar/exit4.svg`} height={36} width={36} />
+        <Image {...provided.dragHandleProps} className="cursor-pointer" src={`/plan-bar/drag2.svg`} height={36} width={36} />
+        <Image
+          onClick={() => onStackedChange(field.stacked)}
+          className="cursor-pointer"
+          src={`/plan-bar/layers.svg`}
+          height={36}
+          width={36}
+        />
         <div
           style={{ height: '36px', width: '36px' }}
           ref={chartFormat}
-          className='overflow-hidden bg-background focus:outline-none rounded-lg'
+          className="overflow-hidden bg-background focus:outline-none rounded-lg"
         >
-            <Image
-              onClick={() => onChartChange(false)}
-              className='cursor-pointer'
-              src={`/chart/${field.chartType}.svg`}
-              height={36}
-              width={36}
-            />
-            {/* <div
+          <Image
+            onClick={() => onChartChange(false)}
+            className="cursor-pointer"
+            src={`/chart/${field.chartType}.svg`}
+            height={36}
+            width={36}
+          />
+          {/* <div
               style={{ height: '36px' }}
               onClick={() => onChartChange(false)}
               className='px-2 py-1 text-sm ease-in-out flex items-center justify-between cursor-pointer'
@@ -2790,16 +2720,14 @@ const ChartJsComponent = ({
             </div> */}
           {field.chartType !== 'Bar chart' && (
             <>
-            <Image
-              className='cursor-pointer'
-              onClick={() => onChartChange('Bar chart')}
-              src={`/chart/${
-                field.chartType == 'Bar chart' ? field.chartType : 'Bar chart'
-              }.svg`}
-              height={27}
-              width={27}
-            />
-            {/* <div
+              <Image
+                className="cursor-pointer"
+                onClick={() => onChartChange('Bar chart')}
+                src={`/chart/${field.chartType == 'Bar chart' ? field.chartType : 'Bar chart'}.svg`}
+                height={27}
+                width={27}
+              />
+              {/* <div
               onClick={() => onChartChange('Bar chart')}
               className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
             >
@@ -2809,18 +2737,14 @@ const ChartJsComponent = ({
           )}
           {field.chartType !== 'Reverse chart' && (
             <>
-            <Image
-              className='cursor-pointer'
-              onClick={() => onChartChange('Reverse chart')}
-              src={`/chart/${
-                field.chartType == 'Reverse chart'
-                  ? field.chartType
-                  : 'Reverse chart'
-              }.svg`}
-              height={27}
-              width={27}
-            />
-            {/* <div
+              <Image
+                className="cursor-pointer"
+                onClick={() => onChartChange('Reverse chart')}
+                src={`/chart/${field.chartType == 'Reverse chart' ? field.chartType : 'Reverse chart'}.svg`}
+                height={27}
+                width={27}
+              />
+              {/* <div
               onClick={() => onChartChange('Reverse chart')}
               className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
             >
@@ -2830,18 +2754,14 @@ const ChartJsComponent = ({
           )}
           {field.chartType !== 'Line chart' && (
             <>
-            <Image
-              className='cursor-pointer'
-              onClick={() => onChartChange('Line chart')}
-              src={`/chart/${
-                field.chartType == 'Line chart'
-                  ? field.chartType
-                  : 'Line chart'
-              }.svg`}
-              height={27}
-              width={27}
-            />
-            {/* <div
+              <Image
+                className="cursor-pointer"
+                onClick={() => onChartChange('Line chart')}
+                src={`/chart/${field.chartType == 'Line chart' ? field.chartType : 'Line chart'}.svg`}
+                height={27}
+                width={27}
+              />
+              {/* <div
               onClick={() => onChartChange('Line chart')}
               className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
             >
@@ -2851,16 +2771,14 @@ const ChartJsComponent = ({
           )}
           {field.chartType !== 'Pie chart' && (
             <>
-            <Image
-              className='cursor-pointer'
-              onClick={() => onChartChange('Pie chart')}
-              src={`/chart/${
-                field.chartType == 'Pie chart' ? field.chartType : 'Pie chart'
-              }.svg`}
-              height={27}
-              width={27}
-            />
-            {/* <div
+              <Image
+                className="cursor-pointer"
+                onClick={() => onChartChange('Pie chart')}
+                src={`/chart/${field.chartType == 'Pie chart' ? field.chartType : 'Pie chart'}.svg`}
+                height={27}
+                width={27}
+              />
+              {/* <div
               onClick={() => onChartChange('Pie chart')}
               className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
             >
@@ -2871,17 +2789,13 @@ const ChartJsComponent = ({
           {field.chartType !== 'Doughnut chart' && (
             <>
               <Image
-                className='cursor-pointer'
+                className="cursor-pointer"
                 onClick={() => onChartChange('Doughnut chart')}
-                src={`/chart/${
-                  field.chartType == 'Doughnut chart'
-                    ? field.chartType
-                    : 'Doughnut chart'
-                }.svg`}
+                src={`/chart/${field.chartType == 'Doughnut chart' ? field.chartType : 'Doughnut chart'}.svg`}
                 height={27}
                 width={27}
               />
-            {/* <div
+              {/* <div
               onClick={() => onChartChange('Doughnut chart')}
               className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
             >
@@ -2892,17 +2806,13 @@ const ChartJsComponent = ({
           {field.chartType !== 'Area chart' && (
             <>
               <Image
-                className='cursor-pointer'
+                className="cursor-pointer"
                 onClick={() => onChartChange('Area chart')}
-                src={`/chart/${
-                  field.chartType == 'Area chart'
-                    ? field.chartType
-                    : 'Area chart'
-                }.svg`}
+                src={`/chart/${field.chartType == 'Area chart' ? field.chartType : 'Area chart'}.svg`}
                 height={27}
                 width={27}
               />
-            {/* <div
+              {/* <div
               onClick={() => onChartChange('Area chart')}
               className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
             >
@@ -2911,8 +2821,8 @@ const ChartJsComponent = ({
             </>
           )}
         </div>
-        </div>
       </div>
+    </div>
   );
 };
 

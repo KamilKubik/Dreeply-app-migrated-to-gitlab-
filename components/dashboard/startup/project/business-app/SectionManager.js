@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState, useMemo } from 'react';
 import SectionManagerItem from './SectionManagerItem';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useWindowSize } from '../../../../../utils/useWindowSize';
 
 const SectionManager = ({
   selectedSection,
@@ -14,6 +15,7 @@ const SectionManager = ({
 }) => {
   const [title, setTitle] = useState(null);
   const [addingSection, setAddingSection] = useState(false);
+  const size = useWindowSize();
 
   const onNewSectionAdd = () => {
     setTitle(null);

@@ -24,10 +24,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/dashboard/projects/[project]": [
+    "/dashboard/projects/[project]/startup-idea/success": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/dashboard/projects/[project].js"
+      "static/chunks/pages/dashboard/projects/[project]/startup-idea/success.js"
+    ],
+    "/dashboard/projects/[project]/startup-idea/vision": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/dashboard/projects/[project]/startup-idea/vision.js"
     ]
   },
   "ampFirstPages": []

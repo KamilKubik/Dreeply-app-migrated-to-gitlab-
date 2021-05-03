@@ -5,21 +5,12 @@ import { useRouter } from 'next/router';
 import gsap, { Power4, Linear } from 'gsap';
 import { saveAs } from 'file-saver';
 
-import {
-  Font,
-  pdf,
-  Page,
-  Text,
-  View,
-  Image,
-  Document,
-  StyleSheet,
-  PDFViewer,
-  PDFDownloadLink,
-} from '@react-pdf/renderer';
+import { Font, pdf, Page, Text, View, Image, Document, StyleSheet, PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import TippyMonster from '../Tippy';
 import MyDocument1 from './PDFDocument';
 import AnimatedBackground from './AnimatedBackground';
+import Cookies from 'js-cookie';
+import ExitComponent from './ExitComponent';
 
 const StartupSuccess = () => {
   const [projectId, setProjectId] = useState();
@@ -45,20 +36,14 @@ const StartupSuccess = () => {
   // MARKET
   const [marketOverviewSection, setMarketOverviewSection] = useState('');
   const [competitorsSection, setCompetitorsSection] = useState('');
-  const [
-    competitionDistinguishSection,
-    setCompetitionDistinguishSection,
-  ] = useState('');
+  const [competitionDistinguishSection, setCompetitionDistinguishSection] = useState('');
   const [targetCustomersSection, setTargetCustomersSection] = useState('');
   // FINANCES
   const [startupCostsSection, setStartupCostsSection] = useState('');
   const [runningCostsSection, setRunningCostsSection] = useState('');
   const [financingSection, setFinancingSection] = useState('');
   // BUSINESS MODEL
-  const [
-    businessModelOverviewSection,
-    setBusinessModelOverviewSection,
-  ] = useState('');
+  const [businessModelOverviewSection, setBusinessModelOverviewSection] = useState('');
   const [businessGrowSection, setBusinessGrowSection] = useState('');
   const [whySuccessSection, setWhySuccessSection] = useState('');
 
@@ -66,92 +51,73 @@ const StartupSuccess = () => {
   const router = useRouter();
   const contentRef = useRef();
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-  };
-
+  // Data fetch
+  const [loadingHelper, setLoadingHelper] = useState(false);
+  const [documentId, setDocumentId] = useState('');
   useEffect(() => {
-    gsap.fromTo(
-      contentRef.current,
-      { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 1, ease: Linear.easeIn }
-    );
-    const getProjectId = async () => {
-      const data = await db
-        .collection('currentProject')
-        .doc(currentUser.uid)
-        .get();
-      const {
-        projectId,
-        // STARTER
-        ideaName,
-        ideaDesc,
-        ideaCountry,
-        startupField,
-        startupEmail,
-        startupPhone,
-        // IMAGE
-        imageNameExists,
-        avatarExists,
-        // OVERVIEW
-        marketProblemSectionData,
-        marketSolutionSectionData,
-        foundersSectionData,
-        // PRODUCT
-        productOverviewSectionData,
-        productPromotionSectionData,
-        productBenefitsSectionData,
-        // MARKET
-        marketOverviewSectionData,
-        competitorsSectionData,
-        targetCustomersSectionData,
-        competitionDistinguishSectionData,
-        // FINANCES
-        startupCostsSectionData,
-        runningCostsSectionData,
-        financingSectionData,
-        // BUSINESS MODEL
-        businessModelOverviewSectionData,
-        businessGrowSectionData,
-        whySuccessSectionData,
-      } = data.data();
-      return (
-        setProjectId(projectId),
-        // STARTER
-        setIdeaName(ideaName),
-        setIdeaDesc(ideaDesc),
-        setIdeaCountry(ideaCountry),
-        setStartupField(startupField),
-        setStartupEmail(startupEmail),
-        setStartupPhone(startupPhone),
-        // IMAGE
-        setImageNameExists(imageNameExists),
-        setAvatarExists(avatarExists),
-        // OVERVIEW
-        setMarketProblemSection(marketProblemSectionData),
-        setMarketSolutionSection(marketSolutionSectionData),
-        setFoundersSection(foundersSectionData),
-        // PRODUCT
-        setProductOverviewSection(productOverviewSectionData),
-        setProductPromotionSection(productPromotionSectionData),
-        setProductBenefitsSection(productBenefitsSectionData),
-        // MARKET
-        setMarketOverviewSection(marketOverviewSectionData),
-        setCompetitorsSection(competitorsSectionData),
-        setCompetitionDistinguishSection(competitionDistinguishSectionData),
-        setTargetCustomersSection(targetCustomersSectionData),
-        // FINANCES
-        setStartupCostsSection(startupCostsSectionData),
-        setRunningCostsSection(runningCostsSectionData),
-        setFinancingSection(financingSectionData),
-        // BUSINESS MODEL
-        setBusinessModelOverviewSection(businessModelOverviewSectionData),
-        setBusinessGrowSection(businessGrowSectionData),
-        setWhySuccessSection(whySuccessSectionData)
-      );
-    };
-    getProjectId();
-  }, []);
+    const userUid = Cookies.get('uid');
+    gsap.fromTo(contentRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 1, ease: Linear.easeIn });
+    if (userUid && router.query.project) {
+      const data = db.collection('projects').where('uid', '==', userUid);
+      data
+        .where('projectName', '==', router.query.project)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach(async (doc1) => {
+            const initialData = doc1.data();
+            setProjectId(initialData.projectId);
+            // STARTER;
+            setIdeaName(initialData.projectName);
+            setIdeaDesc(initialData.projectDescription);
+            setIdeaCountry(initialData.projectCountry);
+            setStartupField(initialData.projectField);
+            setStartupEmail(initialData.projectEmail);
+            setStartupPhone(initialData.projectNumber);
+            // IMAGE
+            setImageNameExists(initialData.imageName);
+            setAvatarExists(initialData.imageFileUrl);
+
+            db.collection('projects')
+              .doc(initialData.projectId)
+              .collection('startupIdea')
+              .doc(router.query.project)
+              .collection('inputs')
+              .onSnapshot((serverUpdate) => {
+                serverUpdate.docs.map((doc) => {
+                  console.log(doc.data());
+                  const data = doc.data();
+                  setDocumentId(doc.id);
+                  // OVERVIEW
+                  setMarketProblemSection(data.marketProblemSectionData);
+                  setMarketSolutionSection(data.marketSolutionSectionData);
+                  setFoundersSection(data.foundersSectionData);
+                  // PRODUCT
+                  setProductOverviewSection(data.productOverviewSectionData);
+                  setProductPromotionSection(data.productPromotionSectionData);
+                  setProductBenefitsSection(data.productBenefitsSectionData);
+                  // MARKET
+                  setMarketOverviewSection(data.marketOverviewSectionData);
+                  setCompetitorsSection(data.competitorsSectionData);
+                  setCompetitionDistinguishSection(data.competitionDistinguishSectionData);
+                  setTargetCustomersSection(data.targetCustomersSectionData);
+                  // FINANCES
+                  setStartupCostsSection(data.startupCostsSectionData);
+                  setRunningCostsSection(data.runningCostsSectionData);
+                  setFinancingSection(data.financingSectionData);
+                  // BUSINESS MODEL
+                  setBusinessModelOverviewSection(data.businessModelOverviewSectionData);
+                  setBusinessGrowSection(data.businessGrowSectionData);
+                  setWhySuccessSection(data.whySuccessSectionData);
+                  setLoadingHelper(false);
+                });
+              });
+          });
+        });
+    } else {
+      console.log('Loading failed');
+      setLoadingHelper(true);
+    }
+  }, [loadingHelper, router.query.project]);
 
   const image = avatarExists != 'blank' ? avatarExists : imageNameExists;
   console.log(image);
@@ -191,11 +157,9 @@ const StartupSuccess = () => {
       ease: Linear.easeOut,
     });
     setTimeout(() => {
-      router.push('/dashboard/startup/creator/business-model');
+      router.push(`/dashboard/projects/${router.query.project}/startup-idea/business-model`);
     }, 1200);
   };
-
-  console.log(ideaDesc);
 
   // ------------------------------------------------------------- PDF -----------------------------------------------------------------
 
@@ -454,18 +418,11 @@ const StartupSuccess = () => {
 
   const MyDocument = (props) => (
     <Document>
-      <Page size='A4' style={styles.homePage}>
+      <Page size="A4" style={styles.homePage}>
         <View style={styles.homePageTitleSection}>
           <Text style={styles.homePageTitle}>Startup idea plan</Text>
-          <Text style={styles.homePageDesc}>
-            Just a simple startup about tech field
-          </Text>
-          <Image
-            src={image}
-            style={styles.image}
-            height='250px'
-            width='250px'
-          />
+          <Text style={styles.homePageDesc}>Just a simple startup about tech field</Text>
+          <Image src={image} style={styles.image} height="250px" width="250px" />
           <View style={styles.leftDescBlock}>
             <Text style={styles.leftDescBlockText}>{ideaDesc}</Text>
           </View>
@@ -496,54 +453,30 @@ const StartupSuccess = () => {
           <View style={styles.contentsBarFive}></View>
         </View>
         <View style={styles.contentsRightBar}>
-          <Text style={styles.contentsRightTextOne}>
-            01. This section will help you better understand the startup vision
-          </Text>
-          <Text style={styles.contentsRightTextTwo}>
-            02. This section will introduce you to the vision of the product
-          </Text>
-          <Text style={styles.contentsRightTextThree}>
-            03. This section will reveal all the cards of the market
-          </Text>
-          <Text style={styles.contentsRightTextFour}>
-            04. Discover the costs of implementing our idea
-          </Text>
-          <Text style={styles.contentsRightTextFive}>
-            05. In the final section, you will discover the startup's business
-            model
-          </Text>
+          <Text style={styles.contentsRightTextOne}>01. This section will help you better understand the startup vision</Text>
+          <Text style={styles.contentsRightTextTwo}>02. This section will introduce you to the vision of the product</Text>
+          <Text style={styles.contentsRightTextThree}>03. This section will reveal all the cards of the market</Text>
+          <Text style={styles.contentsRightTextFour}>04. Discover the costs of implementing our idea</Text>
+          <Text style={styles.contentsRightTextFive}>05. In the final section, you will discover the startup's business model</Text>
         </View>
       </Page>
       {/* OVERVIEW SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/idea.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/idea.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Startup overview</Text>
-          <Text style={styles.overviewSubtitle}>
-            This section will help you better understand the startup vision
-          </Text>
+          <Text style={styles.overviewSubtitle}>This section will help you better understand the startup vision</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              Market problem that needs to be solved
-            </Text>
+            <Text style={styles.sectionHeadingOne}>Market problem that needs to be solved</Text>
             <Text style={styles.sectionText}>{marketProblemSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              Our startup solution for this problem
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>Our startup solution for this problem</Text>
             <Text style={styles.sectionText}>{marketSolutionSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              Who is behind the foundation of the future company?
-            </Text>
+            <Text style={styles.sectionHeadingThree}>Who is behind the foundation of the future company?</Text>
             <Text style={styles.sectionText}>{foundersSection}</Text>
           </View>
         </View>
@@ -551,33 +484,20 @@ const StartupSuccess = () => {
       {/* PRODUCT SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/blueprint.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/blueprint.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Product</Text>
-          <Text style={styles.overviewSubtitle}>
-            This section will introduce you to the vision of the product
-          </Text>
+          <Text style={styles.overviewSubtitle}>This section will introduce you to the vision of the product</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              What does the perfect version of the product look like?
-            </Text>
+            <Text style={styles.sectionHeadingOne}>What does the perfect version of the product look like?</Text>
             <Text style={styles.sectionText}>{productOverviewSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              How will other people find out about the product?
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>How will other people find out about the product?</Text>
             <Text style={styles.sectionText}>{productPromotionSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              What benefits will this product brings to customers?
-            </Text>
+            <Text style={styles.sectionHeadingThree}>What benefits will this product brings to customers?</Text>
             <Text style={styles.sectionText}>{productBenefitsSection}</Text>
           </View>
         </View>
@@ -585,41 +505,24 @@ const StartupSuccess = () => {
       {/* MARKET SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/unicorn.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/unicorn.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Market analysis</Text>
-          <Text style={styles.overviewSubtitle}>
-            This section will reveal all the cards of the market
-          </Text>
+          <Text style={styles.overviewSubtitle}>This section will reveal all the cards of the market</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              A general view of the market that can be obtained
-            </Text>
+            <Text style={styles.sectionHeadingOne}>A general view of the market that can be obtained</Text>
             <Text style={styles.sectionText}>{marketOverviewSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              What is the main competition on the market?
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>What is the main competition on the market?</Text>
             <Text style={styles.sectionText}>{competitorsSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              What makes a startup stand out from the competition?
-            </Text>
-            <Text style={styles.sectionText}>
-              {competitionDistinguishSection}
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>What makes a startup stand out from the competition?</Text>
+            <Text style={styles.sectionText}>{competitionDistinguishSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              Who are the target customers of the startup?
-            </Text>
+            <Text style={styles.sectionHeadingThree}>Who are the target customers of the startup?</Text>
             <Text style={styles.sectionText}>{targetCustomersSection}</Text>
           </View>
         </View>
@@ -627,33 +530,20 @@ const StartupSuccess = () => {
       {/* FINANCES SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/budget.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/budget.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Finances</Text>
-          <Text style={styles.overviewSubtitle}>
-            Discover the costs of implementing our idea
-          </Text>
+          <Text style={styles.overviewSubtitle}>Discover the costs of implementing our idea</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              How much money will it take to launch the startup?
-            </Text>
+            <Text style={styles.sectionHeadingOne}>How much money will it take to launch the startup?</Text>
             <Text style={styles.sectionText}>{startupCostsSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              Approximate costs of maintaining a startup
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>Approximate costs of maintaining a startup</Text>
             <Text style={styles.sectionText}>{runningCostsSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              How does the idea will be fund?
-            </Text>
+            <Text style={styles.sectionHeadingThree}>How does the idea will be fund?</Text>
             <Text style={styles.sectionText}>{financingSection}</Text>
           </View>
         </View>
@@ -661,35 +551,20 @@ const StartupSuccess = () => {
       {/* BUSINESS MODEL SECTION */}
       <Page style={styles.overviewPage}>
         <View style={styles.rightBar} fixed></View>
-        <Image
-          style={styles.overviewImage}
-          src='/pdf/startup.png'
-          height={20}
-          width={20}
-        />
+        <Image style={styles.overviewImage} src="/pdf/startup.png" height={20} width={20} />
         <View style={styles.overviewSection}>
           <Text style={styles.overviewHeading}>Business model</Text>
-          <Text style={styles.overviewSubtitle}>
-            In the final section, you will discover the startup's business model
-          </Text>
+          <Text style={styles.overviewSubtitle}>In the final section, you will discover the startup's business model</Text>
           <View style={styles.sectionContainerOne}>
-            <Text style={styles.sectionHeadingOne}>
-              What will the startup's business model look like?
-            </Text>
-            <Text style={styles.sectionText}>
-              {businessModelOverviewSection}
-            </Text>
+            <Text style={styles.sectionHeadingOne}>What will the startup's business model look like?</Text>
+            <Text style={styles.sectionText}>{businessModelOverviewSection}</Text>
           </View>
           <View style={styles.sectionContainerTwo}>
-            <Text style={styles.sectionHeadingTwo}>
-              Predictions for startup growth
-            </Text>
+            <Text style={styles.sectionHeadingTwo}>Predictions for startup growth</Text>
             <Text style={styles.sectionText}>{businessGrowSection}</Text>
           </View>
           <View style={styles.sectionContainerThree}>
-            <Text style={styles.sectionHeadingThree}>
-              Why is it that startup that will conquer the world?
-            </Text>
+            <Text style={styles.sectionHeadingThree}>Why is it that startup that will conquer the world?</Text>
             <Text style={styles.sectionText}>{whySuccessSection}</Text>
           </View>
         </View>
@@ -715,18 +590,12 @@ const StartupSuccess = () => {
   //   </Document>
   // );
 
-  const onProjectSave = () => {
-    // console.log(whySuccessSection);
-  };
-
   return useMemo(
     () => (
       <>
-        <div
-          ref={contentRef}
-          className='h-screen w-full relative flex flex-col items-center justify-center'
-        >
-          <ul className='circles'>
+        <ExitComponent />
+        <div ref={contentRef} className="h-screen w-full relative flex flex-col items-center justify-center">
+          <ul className="circles">
             <li></li>
             <li></li>
             <li></li>
@@ -759,30 +628,31 @@ const StartupSuccess = () => {
             <li></li>
             <li></li>
           </ul>
-          <div className='flex flex-col items-center justify-center w-full max-w-screen-md relative pl-6 pr-6 mt-16 pb-24'>
-            <p className='text-primarydark text-2xl normal:text-3xl mt-2 pl-2 dark:text-background text-center'>
-            <img src='/gifs/popper.gif' height={60} width={60} className='inline-block relative bottom-4 left-3' />Congratulations!
+          <div className="flex flex-col items-center justify-center w-full max-w-screen-md relative pl-6 pr-6 mt-16 pb-24">
+            <p className="text-primarydark text-2xl normal:text-3xl mt-2 pl-2 dark:text-background text-center">
+              <img src="/gifs/popper.gif" height={60} width={60} className="inline-block relative bottom-4 left-3" />
+              Congratulations!
             </p>
-            <p className='text-primarydark text-base normal:text-lg pl-2 dark:text-background text-center'>
+            <p className="text-primarydark text-base normal:text-lg pl-2 dark:text-background text-center">
               Now you can save your idea and set off to conquer the world
             </p>
-            <img src='/success.svg' height={200} width={200} className='mt-4' />
+            <img src="/success.svg" height={200} width={200} className="mt-4" />
             <div>
               <button
-                className='z-10 mr-4 mt-6 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark'
+                className="z-10 mr-4 mt-6 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark"
                 onClick={onProjectLeave}
               >
                 Back
               </button>
               <button
-                className='z-10 ml-4 mt-6 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark'
+                className="z-10 ml-4 mt-6 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark"
                 onClick={async (e) => {
                   e.preventDefault();
                   const doc = <MyDocument1 data={data} />;
                   const asPdf = pdf([]); // {} is important, throws without an argument
                   asPdf.updateContainer(doc);
                   const blob = await asPdf.toBlob();
-                  saveAs(blob, `${ideaName}.pdf`);
+                  saveAs(blob, `${ideaName}/idea-plan.pdf`);
                 }}
               >
                 Save

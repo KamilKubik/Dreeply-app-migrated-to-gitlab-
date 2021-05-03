@@ -94,7 +94,7 @@ const CompetitorsPage = () => {
   useEffect(() => {
     if (!isMobile) {
       exitImage.current.addEventListener('mouseenter', () => {
-        gsap.to(exitImage.current, { rotation: '360_cw', duration: 0.5, ease: Linear.easeIn });
+        gsap.to(exitImage.current, { rotation: '180_cw', duration: 0.5, ease: Linear.easeIn });
       });
       exitImage.current.addEventListener('mouseleave', () => {
         gsap.to(exitImage.current, { rotation: '0_cw', duration: 0.5, ease: Linear.easeIn });

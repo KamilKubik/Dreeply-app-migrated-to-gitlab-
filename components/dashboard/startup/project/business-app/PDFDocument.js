@@ -7,12 +7,13 @@ import { db } from '../../../../../lib/firebase';
 import Router from 'next/router';
 import ChartJsImage from 'chartjs-to-image';
 import ChartPDF from './ChartPDF';
+import gsap, { Linear } from 'gsap';
 // import fs from 'fs';
 
 const fs = require('fs');
 
 const PDFDocument = ({ projectId, pdfChartsCreate }) => {
-  const containerRef = useRef();
+  // const containerRef = useRef();
   const [sections, setSections] = useState();
   const [document1, setDocument] = useState();
   const [imagesUrl, setImagesUrl] = useState();
@@ -430,7 +431,7 @@ const PDFDocument = ({ projectId, pdfChartsCreate }) => {
                     legend: {
                       position: 'bottom',
                     },
-                    defaultFontFamily: (Chart.defaults.global.defaultFontFamily = 'Comfortaa'),
+                    // defaultFontFamily: (Chart.defaults.global.defaultFontFamily = 'Comfortaa'),
                     scales: {
                       yAxes: [
                         {
@@ -615,19 +616,58 @@ const PDFDocument = ({ projectId, pdfChartsCreate }) => {
     pdfDocGenerator.download(`${Router.query.project}/business-plan.pdf`);
   };
 
-  // useEffect(() => {
-  //   arrayer.push(document1);
-  //   console.log(arrayer);
-  // }, [document1])
+  const saveContainer = useRef();
+
+  const dropdownButton = useRef();
+  const dropdownContainer = useRef();
+  const [dropdownButtonColorHelper, setDropdownButtonColorHelper] = useState(false);
+  const [dropdownContainerHelper, setDropdownContainerHelper] = useState(false);
+  const onSaveDropdownShow = () => {
+    if (!dropdownContainerHelper) {
+      gsap.to(dropdownContainer.current, { autoAlpha: 1, duration: 1, ease: Linear });
+      // gsap.to(dropdownButton.current, { backgroundColor: '#6C63FF', color: '#f8f9fb', duration: 1, ease: Linear });
+      setDropdownContainerHelper(true);
+      setDropdownButtonColorHelper(true);
+    } else if (dropdownContainerHelper) {
+      gsap.to(dropdownContainer.current, { autoAlpha: 0, duration: 1, ease: Linear });
+      // gsap.to(dropdownButton.current, { backgroundColor: '#f8f9fb', color: '#6C63FF', duration: 1, ease: Linear });
+      setDropdownContainerHelper(false);
+      setDropdownButtonColorHelper(false);
+    }
+  };
 
   return (
-    <div ref={containerRef} className="flex justify-end">
-      <button
-        onClick={onDocumentSave1}
-        className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl mt-2 dark:text-primarydark dark:border-primarydark"
-      >
-        PDF Save
-      </button>
+    <div ref={saveContainer} className="relative flex justify-start">
+      <div className="relative w-full flex justify-end items-center">
+        <button
+          ref={dropdownButton}
+          onClick={onSaveDropdownShow}
+          className={`hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm screenLarge:text-base font-light py-2 px-8 rounded-2xl mt-2 dark:text-primarydark dark:border-primarydark ${
+            dropdownButtonColorHelper ? 'bg-primary text-background dark:bg-primarydark dark:text-background' : ''
+          }`}
+        >
+          Save my work
+        </button>
+        <div ref={dropdownContainer} className="absolute bg-white rounded-2xl shadow-xl p-6 top-14 z-50 invisible opacity-0">
+          <div className="flex items-center justify-start">
+            <img src="/mobile-navbar/success.svg" height={26} width={26} />
+            <p className="text-lg ml-2">Show the world your work!</p>
+          </div>
+          <div className="px-6 py-4 bg-background rounded-2xl mt-2 pr-6">
+            <div>
+              <p className="flex">Save as PDF:</p>
+              <img onClick={onDocumentSave1} src="/mobile-navbar/pdf.svg" height={30} width={30} className="mt-2 cursor-pointer" />
+            </div>
+            <div className="w-full justify-start items-center mt-4">
+              <p>Share your competitors analysis with this public link:</p>
+              <div className="w-full flex mt-2">
+                <input value="www.project.com" className="bg-linkBackground text-sm px-2 py-1 dark:text-primarydark" />
+                <img src="/mobile-navbar/foreign.svg" height={28} width={28} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

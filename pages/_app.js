@@ -17,23 +17,35 @@ function MyApp({ Component, pageProps }) {
 
   if (directRoute.includes('/dashboard')) {
     return (
-      <>
-        {isMobile ? (
-          <MobilePrevent />
-        ) : (
-          <AuthProvider>
-            <ThemeProvider attribute="class">
-              <div className="bg-background dark:bg-secondary">
-                <Navbar>
-                  <DefaultSeo {...SEO} />
-                  <Component {...pageProps} />
-                </Navbar>
-              </div>
-            </ThemeProvider>
-          </AuthProvider>
-        )}
-      </>
+      <AuthProvider>
+        <ThemeProvider attribute="class">
+          <div className="bg-background dark:bg-secondary">
+            <Navbar>
+              <DefaultSeo {...SEO} />
+              <Component {...pageProps} />
+            </Navbar>
+          </div>
+        </ThemeProvider>
+      </AuthProvider>
+      // <>
+      //   {isMobile ? (
+      //     <MobilePrevent />
+      //   ) : (
+      //     <AuthProvider>
+      //       <ThemeProvider attribute="class">
+      //         <div className="bg-background dark:bg-secondary">
+      //           <Navbar>
+      //             <DefaultSeo {...SEO} />
+      //             <Component {...pageProps} />
+      //           </Navbar>
+      //         </div>
+      //       </ThemeProvider>
+      //     </AuthProvider>
+      //   )}
+      // </>
     );
+  } else if (isMobile && (directRoute.includes('/signup') || directRoute.includes('/login'))) {
+    return <MobilePrevent />;
   } else {
     return (
       <AuthProvider>
@@ -41,6 +53,20 @@ function MyApp({ Component, pageProps }) {
       </AuthProvider>
     );
   }
+
+  // else {
+  //   return (
+  //     <>
+  //       {isMobile &&
+  //         (directRoute.includes('/signup') || directRoute.includes('/login') ? (
+  //           <MobilePrevent />
+  //         ) : (
+  //           <AuthProvider>
+  //             <Component {...pageProps} />
+  //           </AuthProvider>
+  //         ))}
+  //     </>
+  //   );
 }
 
 export default MyApp;
