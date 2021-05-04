@@ -476,20 +476,12 @@ const PDFDocument = ({ projectId, pdfChartsCreate }) => {
     const pdfContent = htmlToPdfmake(
       // `<div><p style='color: #6C63FF'>Hello from pdf document1<br />${helper ? '<p>Hello from helper</p>' : ''}</p></div>`
       `<div>
-          <div>
-            <h2 style='text-align: center; color: green'>First page</h2>
-            <p class='red'>Some more random text below...</p>
-            <br />
-            <br />
-            <br />
-            <br />
-            <p style='text-align: center'>Some more random text below...</p>
-            <div class='test'></div>
-            <p>normal</p><p style='text-align: center'>center</p><p class="ql-align-right">right</p><p class="ql-align-justify">justify</p>
+          <div style='height: '100%'>
+            <h1 style='text-align: center'>Business plan</h1>
           </div>
           <div>${sections
             .map((section) => {
-              return `<h2 class='pdf-pagebreak-before' style='margin-bottom: 50px'>${section.title}</h2>
+              return `<h3 class='pdf-pagebreak-before' style='margin-bottom: 20px'>${section.title}</h3>
               ${section.fields
                 .map((field) => {
                   console.log(field.type);
@@ -520,7 +512,7 @@ const PDFDocument = ({ projectId, pdfChartsCreate }) => {
                           console.log('Images url --> ', imagesUrl);
                           console.log('Field --> ', field);
                           if (image.imageIndex == field.index) {
-                            return `<img src='${image.imageUrl}' style='margin-top: 30px; margin-bottom: 30px; width: '80%'; height: '80%';' />`;
+                            return `<img src='${image.imageUrl}' width="675" style='margin-top: 30px; margin-bottom: 30px;' />`;
                           }
                         })
                         .join('');

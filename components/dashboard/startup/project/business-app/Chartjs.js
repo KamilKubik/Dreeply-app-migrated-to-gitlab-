@@ -9,6 +9,7 @@ import { db } from '../../../../../lib/firebase';
 import gsap, { Power4, Linear } from 'gsap';
 import Image from 'next/image';
 import Router from 'next/router';
+import { scroller, scrollTo } from 'react-scroll';
 
 // Chart functions
 // import { chartLabelsUpdate } from '../../../../../utils/chart';
@@ -531,6 +532,7 @@ const ChartJsComponent = ({
           'rgba(177,70,194 ,1 )',
         ];
 
+  console.log(field.dataset1);
   const data = {
     labels: field.labels && [
       ...field.labels.map((label) => {
@@ -753,6 +755,7 @@ const ChartJsComponent = ({
         datasets: newDatasets.filter((dataset) => dataset.label !== ''),
       },
       options: {
+        skipNull: true,
         responsive: true,
         legend: {
           position: 'bottom',
@@ -1874,6 +1877,12 @@ const ChartJsComponent = ({
           transformOrigin: 'top',
           ease: Linear,
         });
+        scroller.scrollTo(
+          document.getElementById(`${field.index}table`, {
+            duration: 1000,
+            smooth: true,
+          })
+        );
       });
     document.getElementById(`${field.index}container`) &&
       document.getElementById(`${field.index}container`).addEventListener('mouseleave', () => {

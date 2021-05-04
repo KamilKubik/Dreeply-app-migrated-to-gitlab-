@@ -5,56 +5,15 @@ import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import UniqueElement from '../../../../../components/dashboard/startup/project/business-app/competitors/UniqueElement';
 
-const UniqueCompetitorsPage = ({ projects }) => {
-  console.log('Particular project --> ', projects);
+const UniqueCompetitorsPage = ({ project }) => {
+  console.log('Particular project --> ', project);
+  useEffect(() => {
+    project && setSelectedProject(project[0]);
+    project && setCompetitors(project[0].competitorsArray);
+  }, [project]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [competitors, setCompetitors] = useState();
+  const [competitors, setCompetitors] = useState([]);
   const router = useRouter();
-  //   Selected project
-  useEffect(() => {
-    const uid = Cookies.get('uid');
-    const filteredArray = projects && projects.filter((project) => project.uid == uid);
-    console.log(filteredArray);
-    filteredArray && filteredArray.length == 1 && setSelectedProject(filteredArray[0]);
-  }, [projects]);
-  console.log(selectedProject);
-
-  // Competitors
-  const [loadingHelper, setLoadingHelper] = useState(false);
-  useEffect(() => {
-    const userUid = Cookies.get('uid');
-    if (userUid && router.query.project) {
-      const data = dbClient.collection('projects').where('uid', '==', userUid);
-      data
-        .where('projectName', '==', router.query.project)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach(async (doc1) => {
-            //   setProjectId(doc1.data().projectId);
-
-            dbClient
-              .collection('projects')
-              .doc(doc1.data().projectId)
-              .collection('competitors')
-              .doc(router.query.project)
-              .collection('inputs')
-              .onSnapshot((serverUpdate) => {
-                serverUpdate.docs.map((doc) => {
-                  console.log(doc.data());
-                  const data = doc.data();
-                  //   setDocumentId(doc.id);
-                  setCompetitors(data.competitorsArray);
-                  setLoadingHelper(false);
-                });
-              });
-          });
-        });
-    } else {
-      console.log('Loading failed');
-      setLoadingHelper(true);
-    }
-  }, [loadingHelper, router.query.project]);
-  console.log(competitors);
 
   if (router.isFallback) {
     return (
@@ -127,17 +86,25 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  let ref = db.collection('projects').where('projectName', '==', params.project);
+  console.log(params);
+  // let ref = db.collection('projects').where('projectName', '==', params.project);
+  let ref = db
+    .collection('projects')
+    .doc(params.id)
+    .collection('competitors')
+    .doc(params.project)
+    .collection('inputs')
+    .where('projectId', '==', params.id);
 
   const snapshot = await ref.get();
-  const projects = [];
+  const project = [];
 
   snapshot.forEach((doc) => {
-    projects.push({ id: doc.id, ...doc.data() });
+    project.push({ ...doc.data() });
   });
 
   return {
-    props: { projects },
+    props: { project },
     revalidate: 1,
   };
 };

@@ -317,6 +317,8 @@ const EditorInputElement = ({
       setElementsArray(selectedSection.fields);
     }
   }, [selectedSection]);
+  console.log('Elements array after reorder ==> ', elementsArray);
+  console.log('Selected section after reorder ==> ', selectedSection);
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;

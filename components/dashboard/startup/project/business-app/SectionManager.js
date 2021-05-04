@@ -43,34 +43,39 @@ const SectionManager = ({
   };
 
   // Problem występuje przy zmianie sekcji. Dane, które wprowadzimy w danej sekcji, przy zmianie na inną, a później przy powrocie, zostają usunięte z firebase'a
+  // useEffect(() => {
+  //   console.log('SECTIONS --> ', sections);
+  //   console.log('SECTIONS ARRAY --> ', sectionsArray);
+  //   if (!sectionsArray && sections) {
+  //     console.log('Its running...');
+  //     setSectionsArray(sections);
+  //     return;
+  //   }
+  // }, [sections]);
+
+  // useEffect(() => {
+  //   if (sections && sectionsArray) {
+  //     if (sections.length !== sectionsArray.length) {
+  //       console.log('Is this running twice?');
+  //       console.log(sections);
+  //       console.log(sectionsArray);
+  //       setSectionsArray(sections);
+
+  //       console.log(sections);
+  //     }
+  //   }
+  // }, [sections]);
   useEffect(() => {
-    console.log('SECTIONS --> ', sections);
-    console.log('SECTIONS ARRAY --> ', sectionsArray);
-    if (!sectionsArray && sections) {
-      console.log('Its running...');
+    if (sectionsArray !== sections) {
       setSectionsArray(sections);
-      return;
     }
   }, [sections]);
 
-  useEffect(() => {
-    if (sections && sectionsArray) {
-      if (sections.length !== sectionsArray.length) {
-        console.log('Is this running twice?');
-        console.log(sections);
-        console.log(sectionsArray);
-        setSectionsArray(sections);
-
-        console.log(sections);
-      }
-    }
-  }, [sections]);
-
-  const [sectionsArray, setSectionsArray] = useState();
+  const [sectionsArray, setSectionsArray] = useState(null);
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
-    const items = Array.from(sectionsArray);
+    const items = Array.from(sections);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 

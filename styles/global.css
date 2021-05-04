@@ -141,11 +141,15 @@
 }
 
 .table-element tbody tr td {
-  border-bottom: 2px solid #0a1230;
+  /* border-bottom: 2px solid #0a1230; */
   /* Right border width changing on different screen widths */
-  border-right: 2px solid #0a1230;
-  border-left: 2px solid #0a1230;
+  /* /* border-right: 2px solid #0a1230; */
+  /* border-left: 1px solid #0a1230; */
 }
+
+/* .table-element tbody tr td:last-of-type {
+  border-right: 2px solid #0a1230;
+} */
 
 /* Chart table */
 .content-table {

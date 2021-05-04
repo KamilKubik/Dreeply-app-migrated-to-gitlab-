@@ -17,6 +17,7 @@ import ChartJsImage from 'chartjs-to-image';
 import { isMobile } from 'react-device-detect';
 import TippyMonster from '../../../Tippy';
 import ExitComponent from '../../ExitComponent';
+import ReactPDFDocument from './ReactPDFDocument';
 
 // import { useAsyncCallback } from 'react-async-hook';
 
@@ -374,6 +375,27 @@ class BusinessPlanApp extends Component {
   reorderElements = async (elements) => {
     console.log(elements);
     console.log(this.state.selectedSection.id);
+    let newSectionsArray = [...this.state.sections];
+    newSectionsArray[this.state.selectedSectionIndex] = {
+      createdAt: this.state.selectedSection.createdAt,
+      fields: elements,
+      timestamp: this.state.selectedSection.timestamp,
+      title: this.state.selectedSection.title,
+      position: this.state.selectedSection.position,
+      id: this.state.selectedSection.id,
+    };
+
+    const newSelectedSection = {
+      createdAt: this.state.selectedSection.createdAt,
+      fields: elements,
+      timestamp: this.state.selectedSection.timestamp,
+      title: this.state.selectedSection.title,
+      position: this.state.selectedSection.position,
+      id: this.state.selectedSection.id,
+    };
+
+    await this.setState({ sections: newSectionsArray });
+    await this.setState({ selectedSection: newSelectedSection });
 
     db.collection('projects')
       .doc(this.state.projectId)
@@ -585,6 +607,7 @@ class BusinessPlanApp extends Component {
 
   headerUpdate = async (title, index, currentIndex) => {
     console.log('Title --> ', title);
+    console.log(currentIndex);
 
     let newFieldsArray = [...this.state.selectedSection.fields];
     newFieldsArray[currentIndex] = {
@@ -3527,7 +3550,8 @@ class BusinessPlanApp extends Component {
                   </svg>
                   <p className="text-primarydark text-2xl screenLarge:text-3xl mt-2 pl-2 dark:text-background">Business plan</p>
                 </div>
-                <PDFDocument allData={this.state.sections} pdfChartsCreate={this.pdfChartsCreate} projectId={this.state.projectId} />
+                {/* <PDFDocument allData={this.state.sections} pdfChartsCreate={this.pdfChartsCreate} projectId={this.state.projectId} /> */}
+                <ReactPDFDocument sections={this.state.sections} pdfChartsCreate={this.pdfChartsCreate} projectId={this.state.projectId} />
               </div>
               <div>
                 <h1 className="text-secondary text-md screenLarge:text-base text-gray">Create your business plan any way you want</h1>

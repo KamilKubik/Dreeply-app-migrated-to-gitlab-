@@ -277,16 +277,16 @@ const ProjectPage = ({ projects }) => {
                     className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/competitors.svg" />
-                    <h1 className="text-base text-gray text-center px-4 py-4">
+                    <p className="text-base text-gray text-center px-4 py-4">
                       Competitor analysis will help you better prepare to enter a given market
-                    </h1>
+                    </p>
                     <button
                       onClick={onCompetitorsAnalysisCreate}
                       className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
                     >
                       {selectedProject.isCompetitorsAnalysisCreated
-                        ? 'Create your competitors analysis'
-                        : 'Manage your competitors analysis'}
+                        ? 'Manage your competitors analysis'
+                        : 'Create your competitors analysis'}
                     </button>
                   </div>
                 </div>
