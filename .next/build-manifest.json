@@ -24,11 +24,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/dashboard/projects/[project]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/dashboard/projects/[project].js"
-    ],
     "/dashboard/projects/[project]/business-plan": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

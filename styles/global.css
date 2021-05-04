@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Rest quill changes */
+.ql-snow .ql-editor h2 {
+  font-size: 1rem !important;
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='2']::before {
+  font-size: 1rem !important;
+}
+
+.ql-snow .ql-editor h1 {
+  font-size: 1.125rem !important;
+}
+
+.ql-snow .ql-picker.ql-header .ql-picker-item[data-value='1']::before {
+  font-size: 1.125rem !important;
+}
+
+.ql-snow .ql-picker-options .ql-picker-item:hover {
+  color: #6c63ff !important;
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  border: none !important;
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  border: none !important;
+}
+
+.ql-toolbar.ql-snow .ql-picker-options {
+  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+
+.ql-snow .ql-picker-options {
+  background-color: #fcfefe;
+  border-radius: 8px;
+}
+
 #tax-input:focus {
   text-align-last: end;
   text-align: end;

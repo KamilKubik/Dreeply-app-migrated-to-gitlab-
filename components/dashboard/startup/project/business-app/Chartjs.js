@@ -1877,12 +1877,12 @@ const ChartJsComponent = ({
           transformOrigin: 'top',
           ease: Linear,
         });
-        scroller.scrollTo(
-          document.getElementById(`${field.index}table`, {
-            duration: 1000,
-            smooth: true,
-          })
-        );
+        // scroller.scrollTo(
+        //   document.getElementById(`${field.index}table`, {
+        //     duration: 1000,
+        //     smooth: true,
+        //   })
+        // );
       });
     document.getElementById(`${field.index}container`) &&
       document.getElementById(`${field.index}container`).addEventListener('mouseleave', () => {
