@@ -257,56 +257,14355 @@ const MyDocument = ({ imagesUrl, sections }) => {
                         console.log(res.toString().includes('<p></p>'));
                         console.log(res.includes('<strong>'));
                         // START --> <p></p>
-                        if (res.startsWith('<p>') && !res.includes('<strong>') && !res.includes('<em>') && !res.includes('<s>')) {
-                          return <Text style={{ fontSize: 12 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                        console.log(res);
+                        if (
+                          res.startsWith('<p') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>') &&
+                          !res.includes('<br>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 12, marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 12, marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 12, marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 12, marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 12, marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 12, marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 12, marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 12, marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 12, textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 12, textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 12, textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 12 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
                         }
                         // <p>STRONG</p>
-                        else if (res.startsWith('<p>') && res.includes('<strong>') && !res.includes('<em>') && !res.includes('<s>')) {
-                          return (
-                            <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
-                          );
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                            );
+                          }
                         }
                         // <p>EM</p>
-                        else if (res.startsWith('<p>') && !res.includes('<strong>') && res.includes('<em>') && !res.includes('<s>')) {
-                          return <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                        else if (
+                          res.startsWith('<p') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                            );
+                          }
                         }
                         // <p>EM + STRONG</p>
-                        else if (res.startsWith('<p>') && res.includes('<strong>') && res.includes('<em>') && !res.includes('<s>')) {
-                          return (
-                            <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic' }}>
-                              {res.replace(/(<([^>]+)>)/gi, '')}
-                            </Text>
-                          );
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
                         }
                         // <p>S</p>
-                        else if (res.startsWith('<p>') && res.includes('<s>') && !res.includes('<strong>') && !res.includes('<em>')) {
-                          return <Text style={{ fontSize: 12, textDecoration: 'line-through' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-through', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-through', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return <Text style={{ fontSize: 12, textDecoration: 'line-through' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
                         }
                         // <p>S + EM</p>
-                        else if (res.startsWith('<p>') && res.includes('<s>') && res.includes('<em>') && !res.includes('<strong>')) {
-                          return (
-                            <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'line-through' }}>
-                              {res.replace(/(<([^>]+)>)/gi, '')}
-                            </Text>
-                          );
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<s>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <p>S + STRONG</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<s>') &&
+                          !res.includes('<em>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
                         }
                         // <p>S + EM + STRONG</p>
-                        else if (res.startsWith('<p>') && res.includes('<s>') && res.includes('<em>') && res.includes('<strong>')) {
-                          return (
-                            <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textDecoration: 'line-through' }}>
-                              {res.replace(/(<([^>]+)>)/gi, '')}
-                            </Text>
-                          );
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<s>') &&
+                          res.includes('<em>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <p>U</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'underline', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return <Text style={{ fontSize: 12, textDecoration: 'underline' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <p>U + EM</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-Italic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <p>U + S</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-trough underline' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <p>U + STRONG</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'underline',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'underline',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <p>U + S + STRONG</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', fontFamily: 'Montserrat-SemiBold' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <p>U + S + STRONG + EM</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text
+                                style={{ fontSize: 12, textDecoration: 'line-trough underline', fontFamily: 'Montserrat-SemiBoldItalic' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <p>U + S + EM</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'line-trough underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'line-trough underline',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'line-trough underline', fontFamily: 'Montserrat-Italic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <p>U + STRONG + EM</p>
+                        else if (
+                          res.startsWith('<p') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 12,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'underline',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'underline',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 12,
+                                  textDecoration: 'underline',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 12, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
                         }
                         // END --> <p></p>
-                        // <h2></h2>
-                        else if (res.startsWith('<h2>')) {
-                          return <Text style={{ fontSize: 14 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                        // START --> <h2></h2>
+                        if (
+                          res.startsWith('<h2') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 14, textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 14, textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 14, textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 14 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
                         }
-                        // <h1></h1>
-                        else if (res.startsWith('<h1>')) {
-                          return <Text style={{ fontSize: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                        // <h2>STRONG</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBold' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                            );
+                          }
                         }
+                        // <h2>EM</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-Italic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                            );
+                          }
+                        }
+                        // <h2>EM + STRONG</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, fontFamily: 'Montserrat-SemiBoldItalic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <h2>S</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h2>S + EM</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<s>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-Italic',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <H2>S + STRONG</H2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<s>') &&
+                          !res.includes('<em>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <h2>S + EM + STRONG</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<s>') &&
+                          res.includes('<em>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through',
+                                    fontFamily: 'Montserrat-SemiBoldItalic',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'right',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'line-through',
+                                  fontFamily: 'Montserrat-SemiBoldItalic',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <h2>U</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'underline', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return <Text style={{ fontSize: 14, textDecoration: 'underline' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h2>U + EM</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-Italic',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-Italic' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <h2>U + S</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'center' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'right' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through underline', textAlign: 'justify' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'line-through underline' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <h2>U + STRONG</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 16,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 24,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 32,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 40,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 48,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 56,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'right',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'justify',
+                                    marginLeft: 64,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return (
+                                <Text
+                                  style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 64 }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'underline',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'center',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-right')) {
+                            return (
+                              <Text
+                                style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else if (res.includes('ql-align-justify')) {
+                            return (
+                              <Text
+                                style={{
+                                  fontSize: 14,
+                                  textDecoration: 'underline',
+                                  fontFamily: 'Montserrat-SemiBold',
+                                  textAlign: 'justify',
+                                }}
+                              >
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          } else {
+                            return (
+                              <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold' }}>
+                                {res.replace(/(<([^>]+)>)/gi, '')}
+                              </Text>
+                            );
+                          }
+                        }
+                        // <h2>U + S + STRONG</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text
+                                  style={{
+                                    fontSize: 14,
+                                    textDecoration: 'line-through underline',
+                                    fontFamily: 'Montserrat-SemiBold',
+                                    textAlign: 'center',
+                                    marginLeft: 8,
+                                  }}
+                                >
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold',textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h2>U + S + STRONG + EM</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h2>U + S + EM</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 14, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h2>U + STRONG + EM</h2>
+                        else if (
+                          res.startsWith('<h2') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 14, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // END --> <h2></h2>
+                        // START --> <h1></h1>
+                        if (
+                          res.startsWith('<h1') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>STRONG</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBold' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>EM</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-Italic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>EM + STRONG</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, fontFamily: 'Montserrat-SemiBoldItalic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>S</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>S + EM</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<s>') &&
+                          res.includes('<em>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-Italic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>S + STRONG</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<s>') &&
+                          !res.includes('<em>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBold' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>S + EM + STRONG</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<s>') &&
+                          res.includes('<em>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<u>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through', fontFamily: 'Montserrat-SemiBoldItalic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>U</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>U + EM</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-Italic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>U + S</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>U + STRONG</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBold' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>U + S + STRONG</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          !res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBold' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>U + S + STRONG + EM</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-SemiBoldItalic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>U + S + EM</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<u>') &&
+                          res.includes('<s>') &&
+                          !res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'line-through underline', fontFamily: 'Montserrat-Italic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // <h1>U + STRONG + EM</h1>
+                        else if (
+                          res.startsWith('<h1') &&
+                          res.includes('<u>') &&
+                          !res.includes('<s>') &&
+                          res.includes('<strong>') &&
+                          res.includes('<em>')
+                        ) {
+                          if (res.includes('ql-indent-1')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 8 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 8 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-2')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 16 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 16 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-3')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 24 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 24 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-4')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 32 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 32 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-5')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 40 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 40 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-6')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 48 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 48 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-7')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 56 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 56 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-indent-8')) {
+                            if (res.includes('ql-align-center')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else if (res.includes('ql-align-right')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>
+                              );
+                            } else if (res.includes('ql-align-justify')) {
+                              return (
+                                <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify', marginLeft: 64 }}>
+                                  {res.replace(/(<([^>]+)>)/gi, '')}
+                                </Text>
+                              );
+                            } else {
+                              return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', marginLeft: 64 }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                            }
+                          } else if (res.includes('ql-align-center')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'center' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-right')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'right' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else if (res.includes('ql-align-justify')) {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic', textAlign: 'justify' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          } else {
+                            return <Text style={{ fontSize: 16, textDecoration: 'underline', fontFamily: 'Montserrat-SemiBoldItalic' }}>{res.replace(/(<([^>]+)>)/gi, '')}</Text>;
+                          }
+                        }
+                        // END --> <h1></h1>
+                        // -------------------- ORDERED LIST START --------------------
+                        else if (res.startsWith('<ol>')) {
+                          const beforeFormatted = res.replace('<ol>', '');
+                          const afterFormatted = beforeFormatted.replace('</ol>', '');
+                          var response = afterFormatted.split(/<\/li>/g);
+
+                          // Determine where to put the >< back in (after >< remove).
+                          for (let i = 0; i < response.length; i++) {
+                            if (response[i].substring(0, 1) != '<') {
+                              response[i] = '<' + response[i];
+                            }
+
+                            // if (response[i].slice(-1) != '>') {
+                            //   response[i] = response[i] + '>';
+                            // }
+                          }
+                          console.log(response);
+                          let k = 1;
+                          return response.map((item) => {
+                            console.log(item);
+                            if (
+                              item.startsWith('<li>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<em>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12 }}>{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<em>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold' }}>{`${k++}. ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              !item.includes('<strong>') &&
+                              item.includes('<em>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic' }}>{`${k++}. ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>EM + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<strong>') &&
+                              item.includes('<em>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic' }}>{`${k++}. ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>S</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<em>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, textDecoration: 'line-through' }}>{`${k++}. ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>S + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<s>') &&
+                              item.includes('<em>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'line-through' }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>S + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<s>') &&
+                              !item.includes('<em>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through' }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>S + EM + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<s>') &&
+                              item.includes('<em>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textDecoration: 'line-through' }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, textDecoration: 'underline' }}>{`${k++}. ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'underline' }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + S</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, textDecoration: 'line-through underline' }}>{`${k++}. ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              !item.includes('<s>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'underline' }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + S + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              item.includes('<s>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through underline' }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + S + STRONG + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              item.includes('<s>') &&
+                              item.includes('<strong>') &&
+                              item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{
+                                      fontSize: 12,
+                                      fontFamily: 'Montserrat-SemiBoldItalic',
+                                      textDecoration: 'line-through underline',
+                                    }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + S + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{
+                                      fontSize: 12,
+                                      fontFamily: 'Montserrat-Italic',
+                                      textDecoration: 'line-through underline',
+                                    }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + STRONG + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              !item.includes('<s>') &&
+                              item.includes('<strong>') &&
+                              item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{
+                                      fontSize: 12,
+                                      fontFamily: 'Montserrat-SemiBoldItalic',
+                                      textDecoration: 'underline',
+                                    }}
+                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                          });
+                        }
+                        // -------------------- ORDERED LIST END --------------------
+                        // -------------------- UNORDERED LIST START --------------------
+                        else if (res.startsWith('<ul>')) {
+                          const beforeFormatted = res.replace('<ul>', '');
+                          const afterFormatted = beforeFormatted.replace('</ul>', '');
+                          var response = afterFormatted.split(/<\/li>/g);
+
+                          // Determine where to put the >< back in (after >< remove).
+                          for (let i = 0; i < response.length; i++) {
+                            if (response[i].substring(0, 1) != '<') {
+                              response[i] = '<' + response[i];
+                            }
+
+                            // if (response[i].slice(-1) != '>') {
+                            //   response[i] = response[i] + '>';
+                            // }
+                          }
+                          console.log(response);
+                          return response.map((item) => {
+                            console.log(item);
+                            if (
+                              item.startsWith('<li>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<em>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12 }}>{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<em>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold' }}>{`- ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              !item.includes('<strong>') &&
+                              item.includes('<em>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic' }}>{`- ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>EM + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<strong>') &&
+                              item.includes('<em>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic' }}>{`- ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>S</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<em>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, textDecoration: 'line-through' }}>{`- ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>S + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<s>') &&
+                              item.includes('<em>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'line-through' }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>S + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<s>') &&
+                              !item.includes('<em>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through' }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>S + EM + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<s>') &&
+                              item.includes('<em>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<u>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textDecoration: 'line-through' }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, textDecoration: 'underline' }}>{`- ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              !item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'underline' }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + S</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              !item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text style={{ fontSize: 12, textDecoration: 'line-through underline' }}>{`- ${item.replace(
+                                    /(<([^>]+)>)/gi,
+                                    ''
+                                  )}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              !item.includes('<s>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'underline' }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + S + STRONG</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              item.includes('<s>') &&
+                              item.includes('<strong>') &&
+                              !item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through underline' }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + S + STRONG + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              item.includes('<s>') &&
+                              item.includes('<strong>') &&
+                              item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{
+                                      fontSize: 12,
+                                      fontFamily: 'Montserrat-SemiBoldItalic',
+                                      textDecoration: 'line-through underline',
+                                    }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + S + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              item.includes('<s>') &&
+                              !item.includes('<strong>') &&
+                              item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{
+                                      fontSize: 12,
+                                      fontFamily: 'Montserrat-Italic',
+                                      textDecoration: 'line-through underline',
+                                    }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                            // <p>U + STRONG + EM</p>
+                            else if (
+                              item.startsWith('<li>') &&
+                              item.includes('<u>') &&
+                              !item.includes('<s>') &&
+                              item.includes('<strong>') &&
+                              item.includes('<em>')
+                            ) {
+                              return (
+                                <View style={{ marginLeft: 8 }}>
+                                  <Text
+                                    style={{
+                                      fontSize: 12,
+                                      fontFamily: 'Montserrat-SemiBoldItalic',
+                                      textDecoration: 'underline',
+                                    }}
+                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                </View>
+                              );
+                            }
+                          });
+                        }
+                        // -------------------- UNORDERED LIST END --------------------
                       })}
                     </View>
                   );

@@ -78,7 +78,7 @@ const TextElement = ({ fieldUpdate, selectedSection, currentIndex, provided, fie
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      ['bold', 'italic', 'underline', 'strike'],
       [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
       [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
       ['link', 'image'],
@@ -94,7 +94,7 @@ const TextElement = ({ fieldUpdate, selectedSection, currentIndex, provided, fie
     'italic',
     'underline',
     'strike',
-    'blockquote',
+    // 'blockquote',
     'list',
     'bullet',
     'indent',
