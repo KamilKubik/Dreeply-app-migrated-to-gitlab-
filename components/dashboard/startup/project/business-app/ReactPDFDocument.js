@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import gsap, { Linear } from 'gsap';
 import { Font, pdf, Page, Text, View, Image, Document, StyleSheet, PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import Router from 'next/router';
+import Link from 'next/link';
 import splitHtml from 'split-html';
 import $ from 'jquery';
 import { useWindowSize } from '../../../../../utils/useWindowSize';
@@ -19,11 +20,94 @@ Font.register({ src: '/fonts/Montserrat-Italic.ttf', family: 'Montserrat-Italic'
 
 const styles = StyleSheet.create({
   homePage: {
-    padding: 36,
     // fontFamily: 'Comfortaa',
     fontFamily: 'Montserrat-Regular',
     backgroundColor: '#f8f9fb',
     color: '#0a1230',
+    flexDirection: 'row',
+  },
+  dynamicPage: {
+    padding: 36,
+    fontFamily: 'Montserrat-Regular',
+    backgroundColor: '#f8f9fb',
+    color: '#0a1230',
+  },
+  homePageTitleSection: {
+    width: '100%',
+    textAlign: 'center',
+    marginTop: 40,
+  },
+  homePageTitle: {
+    fontSize: 26,
+    color: '#0a1230',
+  },
+  homePageDesc: {
+    fontSize: 16,
+    color: '#a0aec0',
+  },
+  image: {
+    height: '200px',
+    width: '200px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 22,
+  },
+  leftDescBlock: {
+    width: '75%',
+    backgroundColor: '#6C63FF',
+    textAlign: 'left',
+    marginTop: '32px',
+    borderTopRightRadius: 50,
+  },
+  leftDescBlockText: {
+    fontSize: 14,
+    padding: 32,
+    lineHeight: 1.4,
+    color: '#f8f9fb',
+  },
+  rightBar: {
+    height: '100vh',
+    width: '15px',
+    backgroundColor: '#6C63FF',
+    position: 'absolute',
+    right: '5%',
+  },
+  rightBarContact: {
+    color: '#f8f9fb',
+    fontSize: 14,
+    width: '50%',
+    backgroundColor: '#6C63FF',
+    position: 'absolute',
+    bottom: '10%',
+    right: '5%',
+    padding: 32,
+    borderTopLeftRadius: 50,
+  },
+  countryText: {
+    marginTop: 6,
+  },
+  emailText: {
+    marginTop: 6,
+  },
+  phoneNumberText: {
+    marginTop: 6,
+  },
+  grayBarOne: {
+    height: '25%',
+    width: '2px',
+    backgroundColor: '#a0aec0',
+    position: 'absolute',
+    bottom: '3%',
+    left: '10%',
+  },
+  grayBarTwo: {
+    height: '2px',
+    width: '20%',
+    backgroundColor: '#a0aec0',
+    position: 'absolute',
+    bottom: '5%',
+    left: '5%',
   },
   mainTitle: {
     fontSize: 22,
@@ -38,19 +122,46 @@ const styles = StyleSheet.create({
   tableCell: { marginTop: 5, fontSize: 9, borderLeft: '1px solid #0a1230', paddingLeft: 4 },
 });
 
-const MyDocument = ({ imagesUrl, sections }) => {
+const MyDocument = ({
+  imagesUrl,
+  sections,
+  projectName,
+  projectDescription,
+  projectCountry,
+  projectField,
+  projectEmail,
+  projectNumber,
+  imageName,
+  imageFileUrl,
+}) => {
   console.log('PDF Sections --> ', sections);
   console.log('PDF ImagesUrl --> ', imagesUrl);
+  const image = imageFileUrl != null ? imageFileUrl : `/png/${imageName}.png`;
   return (
     <Document scale={96 / 72} renderMode="svg">
       <Page size="A4" style={styles.homePage}>
-        <View>
-          <Text style={styles.mainTitle}>Business plan</Text>
+        <View style={styles.homePageTitleSection}>
+          <Text style={styles.homePageTitle}>Business plan</Text>
+          <Text style={styles.homePageDesc}>{projectName}</Text>
+          <Image src={image} style={styles.image} height="250px" width="250px" />
+          <View style={styles.leftDescBlock}>
+            <Text style={styles.leftDescBlockText}>{projectDescription}</Text>
+          </View>
         </View>
+        <View style={styles.rightBar}></View>
+        <View style={styles.rightBarContact}>
+          <Text>{projectField}</Text>
+          <Text style={styles.countryText}>{projectCountry}</Text>
+          <Text style={styles.emailText}>{projectEmail}</Text>
+          <Text style={styles.phoneNumberText}>{projectNumber}</Text>
+        </View>
+        <View style={styles.grayBarOne}></View>
+        <View style={styles.grayBarTwo}></View>
       </Page>
       {sections.map((section) => {
         return (
-          <Page size="A4" style={styles.homePage}>
+          <Page size="A4" style={styles.dynamicPage}>
+            {/* <View style={styles.rightBar} fixed></View> */}
             <View style={{ marginBottom: 8 }}>
               <Text style={{ fontSize: 18 }}>{section.title}</Text>
             </View>
@@ -264,7 +375,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           !res.includes('<em>') &&
                           !res.includes('<s>') &&
                           !res.includes('<u>') &&
-                          !res.includes('<br>')
+                          !res.includes('<br>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -440,7 +553,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<strong>') &&
                           !res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -680,7 +795,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           !res.includes('<strong>') &&
                           res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -920,7 +1037,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<strong>') &&
                           res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -1192,7 +1311,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
                           !res.includes('<em>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -1430,7 +1551,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           res.includes('<em>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -1901,7 +2024,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           !res.includes('<em>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -2407,7 +2532,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           res.includes('<em>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -2920,7 +3047,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -3158,7 +3287,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -3612,7 +3743,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -3884,7 +4017,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -4350,7 +4485,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -4861,7 +4998,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -5374,7 +5513,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -5885,7 +6026,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -6397,7 +6540,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           !res.includes('<strong>') &&
                           !res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -6573,7 +6718,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<strong>') &&
                           !res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -6809,7 +6956,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           !res.includes('<strong>') &&
                           res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -7049,7 +7198,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<strong>') &&
                           res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -7321,7 +7472,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
                           !res.includes('<em>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -7559,7 +7712,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           res.includes('<em>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -8030,7 +8185,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           !res.includes('<em>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -8536,7 +8693,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           res.includes('<em>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -9047,7 +9206,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -9285,7 +9446,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -9739,7 +9902,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -10027,7 +10192,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -10493,7 +10660,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -11004,7 +11173,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -11517,7 +11688,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -12028,7 +12201,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -12540,7 +12715,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           !res.includes('<strong>') &&
                           !res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -12716,7 +12893,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<strong>') &&
                           !res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -12956,7 +13135,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           !res.includes('<strong>') &&
                           res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -13196,7 +13377,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<strong>') &&
                           res.includes('<em>') &&
                           !res.includes('<s>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -13468,7 +13651,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
                           !res.includes('<em>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -13706,7 +13891,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           res.includes('<em>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -14177,7 +14364,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           !res.includes('<em>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -14683,7 +14872,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<s>') &&
                           res.includes('<em>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<u>')
+                          !res.includes('<u>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -15194,7 +15385,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -15432,7 +15625,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -15886,7 +16081,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -16174,7 +16371,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -16640,7 +16839,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          !res.includes('<em>')
+                          !res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -17151,7 +17352,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -17664,7 +17867,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           res.includes('<s>') &&
                           !res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -18175,7 +18380,9 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           res.includes('<u>') &&
                           !res.includes('<s>') &&
                           res.includes('<strong>') &&
-                          res.includes('<em>')
+                          res.includes('<em>') &&
+                          !res.includes('<a') &&
+                          !res.includes('<img')
                         ) {
                           if (res.includes('ql-indent-1')) {
                             if (res.includes('ql-align-center')) {
@@ -18702,275 +18909,859 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           return response.map((item) => {
                             console.log(item);
                             if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               !item.includes('<strong>') &&
                               !item.includes('<em>') &&
                               !item.includes('<s>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12 }}>{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
-                            }
-                            // <p>STRONG</p>
-                            else if (
-                              item.startsWith('<li>') &&
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'center' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'right' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'justify' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12 }}>{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
+                            } else if (
+                              item.startsWith('<li') &&
                               item.includes('<strong>') &&
                               !item.includes('<em>') &&
                               !item.includes('<s>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold' }}>{`${k++}. ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', fontFamily: 'Montserrat-SemiBold' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', fontFamily: 'Montserrat-SemiBold' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', fontFamily: 'Montserrat-SemiBold' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               !item.includes('<strong>') &&
                               item.includes('<em>') &&
                               !item.includes('<s>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic' }}>{`${k++}. ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', fontFamily: 'Montserrat-Italic' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', fontFamily: 'Montserrat-Italic' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', fontFamily: 'Montserrat-Italic' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>EM + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<strong>') &&
                               item.includes('<em>') &&
                               !item.includes('<s>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic' }}>{`${k++}. ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', fontFamily: 'Montserrat-SemiBoldItalic' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', fontFamily: 'Montserrat-SemiBoldItalic' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', fontFamily: 'Montserrat-SemiBoldItalic' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>S</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<s>') &&
                               !item.includes('<strong>') &&
                               !item.includes('<em>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, textDecoration: 'line-through' }}>{`${k++}. ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', textDecoration: 'line-through' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', textDecoration: 'line-through' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', textDecoration: 'line-through' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textDecoration: 'line-through' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>S + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<s>') &&
                               item.includes('<em>') &&
                               !item.includes('<strong>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'line-through' }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'line-through' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>S + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<s>') &&
                               !item.includes('<em>') &&
                               item.includes('<strong>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through' }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>S + EM + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<s>') &&
                               item.includes('<em>') &&
                               item.includes('<strong>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textDecoration: 'line-through' }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textDecoration: 'line-through' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               !item.includes('<s>') &&
                               !item.includes('<strong>') &&
-                              !item.includes('<em>')
+                              !item.includes('<em>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, textDecoration: 'underline' }}>{`${k++}. ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', textDecoration: 'underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', textDecoration: 'underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', textDecoration: 'underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textDecoration: 'underline' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               !item.includes('<s>') &&
                               !item.includes('<strong>') &&
-                              item.includes('<em>')
+                              item.includes('<em>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'underline' }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + S</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               item.includes('<s>') &&
                               !item.includes('<strong>') &&
-                              !item.includes('<em>')
+                              !item.includes('<em>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, textDecoration: 'line-through underline' }}>{`${k++}. ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', textDecoration: 'line-through underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', textDecoration: 'line-through underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', textDecoration: 'line-through underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textDecoration: 'line-through underline' }}>{`${k++}. ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               !item.includes('<s>') &&
                               item.includes('<strong>') &&
-                              !item.includes('<em>')
+                              !item.includes('<em>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'underline' }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + S + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               item.includes('<s>') &&
                               item.includes('<strong>') &&
-                              !item.includes('<em>')
+                              !item.includes('<em>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through underline' }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'jsutify',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through underline' }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + S + STRONG + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               item.includes('<s>') &&
                               item.includes('<strong>') &&
-                              item.includes('<em>')
+                              item.includes('<em>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{
-                                      fontSize: 12,
-                                      fontFamily: 'Montserrat-SemiBoldItalic',
-                                      textDecoration: 'line-through underline',
-                                    }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + S + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               item.includes('<s>') &&
                               !item.includes('<strong>') &&
-                              item.includes('<em>')
+                              item.includes('<em>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{
-                                      fontSize: 12,
-                                      fontFamily: 'Montserrat-Italic',
-                                      textDecoration: 'line-through underline',
-                                    }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + STRONG + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               !item.includes('<s>') &&
                               item.includes('<strong>') &&
-                              item.includes('<em>')
+                              item.includes('<em>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{
-                                      fontSize: 12,
-                                      fontFamily: 'Montserrat-SemiBoldItalic',
-                                      textDecoration: 'underline',
-                                    }}
-                                  >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`${k++}. ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                           });
                         }
@@ -18995,279 +19786,901 @@ const MyDocument = ({ imagesUrl, sections }) => {
                           return response.map((item) => {
                             console.log(item);
                             if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               !item.includes('<strong>') &&
                               !item.includes('<em>') &&
                               !item.includes('<s>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12 }}>{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'center' }}>{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'right' }}>{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'justify' }}>{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12 }}>{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<strong>') &&
                               !item.includes('<em>') &&
                               !item.includes('<s>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold' }}>{`- ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', fontFamily: 'Montserrat-SemiBold' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', fontFamily: 'Montserrat-SemiBold' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', fontFamily: 'Montserrat-SemiBold' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               !item.includes('<strong>') &&
                               item.includes('<em>') &&
                               !item.includes('<s>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic' }}>{`- ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'center', fontFamily: 'Montserrat-Italic' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'right', fontFamily: 'Montserrat-Italic' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', fontFamily: 'Montserrat-Italic' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, fontFamily: 'Montserrat-Italic' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>EM + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<strong>') &&
                               item.includes('<em>') &&
                               !item.includes('<s>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic' }}>{`- ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', fontFamily: 'Montserrat-SemiBoldItalic' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', fontFamily: 'Montserrat-SemiBoldItalic' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', fontFamily: 'Montserrat-SemiBoldItalic' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>S</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<s>') &&
                               !item.includes('<strong>') &&
                               !item.includes('<em>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, textDecoration: 'line-through' }}>{`- ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'center', textDecoration: 'line-through' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'right', textDecoration: 'line-through' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'justify', textDecoration: 'line-through' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textDecoration: 'line-through' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>S + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<s>') &&
                               item.includes('<em>') &&
                               !item.includes('<strong>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<a') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'line-through' }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'line-through' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>S + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<s>') &&
                               !item.includes('<em>') &&
                               item.includes('<strong>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through' }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>S + EM + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<s>') &&
                               item.includes('<em>') &&
                               item.includes('<strong>') &&
-                              !item.includes('<u>')
+                              !item.includes('<u>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textDecoration: 'line-through' }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBoldItalic', textDecoration: 'line-through' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               !item.includes('<s>') &&
                               !item.includes('<strong>') &&
-                              !item.includes('<em>')
+                              !item.includes('<em>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, textDecoration: 'underline' }}>{`- ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'center', textDecoration: 'underline' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'right', textDecoration: 'underline' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textAlign: 'justify', textDecoration: 'underline' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textDecoration: 'underline' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               !item.includes('<s>') &&
                               !item.includes('<strong>') &&
-                              item.includes('<em>')
+                              item.includes('<em>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'underline' }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-Italic', textDecoration: 'underline' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + S</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               item.includes('<s>') &&
                               !item.includes('<strong>') &&
-                              !item.includes('<em>')
+                              !item.includes('<em>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text style={{ fontSize: 12, textDecoration: 'line-through underline' }}>{`- ${item.replace(
-                                    /(<([^>]+)>)/gi,
-                                    ''
-                                  )}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'center', textDecoration: 'line-through underline' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'right', textDecoration: 'line-through underline' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, textAlign: 'justify', textDecoration: 'line-through underline' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text style={{ fontSize: 12, textDecoration: 'line-through underline' }}>{`- ${item.replace(
+                                      /(<([^>]+)>)/gi,
+                                      ''
+                                    )}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               !item.includes('<s>') &&
                               item.includes('<strong>') &&
-                              !item.includes('<em>')
+                              !item.includes('<em>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'underline' }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'underline' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + S + STRONG</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               item.includes('<s>') &&
                               item.includes('<strong>') &&
-                              !item.includes('<em>')
+                              !item.includes('<em>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through underline' }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBold',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{ fontSize: 12, fontFamily: 'Montserrat-SemiBold', textDecoration: 'line-through underline' }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + S + STRONG + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               item.includes('<s>') &&
                               item.includes('<strong>') &&
-                              item.includes('<em>')
+                              item.includes('<em>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{
-                                      fontSize: 12,
-                                      fontFamily: 'Montserrat-SemiBoldItalic',
-                                      textDecoration: 'line-through underline',
-                                    }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + S + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               item.includes('<s>') &&
                               !item.includes('<strong>') &&
-                              item.includes('<em>')
+                              item.includes('<em>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{
-                                      fontSize: 12,
-                                      fontFamily: 'Montserrat-Italic',
-                                      textDecoration: 'line-through underline',
-                                    }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        fontFamily: 'Montserrat-Italic',
+                                        textDecoration: 'line-through underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                             // <p>U + STRONG + EM</p>
                             else if (
-                              item.startsWith('<li>') &&
+                              item.startsWith('<li') &&
                               item.includes('<u>') &&
                               !item.includes('<s>') &&
                               item.includes('<strong>') &&
-                              item.includes('<em>')
+                              item.includes('<em>') &&
+                              !res.includes('<img')
                             ) {
-                              return (
-                                <View style={{ marginLeft: 8 }}>
-                                  <Text
-                                    style={{
-                                      fontSize: 12,
-                                      fontFamily: 'Montserrat-SemiBoldItalic',
-                                      textDecoration: 'underline',
-                                    }}
-                                  >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
-                                </View>
-                              );
+                              if (item.includes('ql-align-center')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'center',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-right')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'right',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else if (item.includes('ql-align-justify')) {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        textAlign: 'justify',
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              } else {
+                                return (
+                                  <View style={{ marginLeft: 8 }}>
+                                    <Text
+                                      style={{
+                                        fontSize: 12,
+                                        fontFamily: 'Montserrat-SemiBoldItalic',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >{`- ${item.replace(/(<([^>]+)>)/gi, '')}`}</Text>
+                                  </View>
+                                );
+                              }
                             }
                           });
                         }
                         // -------------------- UNORDERED LIST END --------------------
+                        else if (res.includes('<br>')) {
+                          return <View style={{ marginTop: 4, marginBottom: 4 }} />;
+                        }
+                        // Link
+                        // else if (res.includes('<a')) {
+                        //   console.log(res);
+                        //   if (res.startsWith('<p>')) {
+                        //     const linkWithoutTags = res.replace('<p><a href=', '');
+                        //     console.log(linkWithoutTags);
+                        //   }
+                        //   return (
+                        //     <View>
+                        //       <Text>
+                        //         <Link
+                        //           style={{ fontSize: 12, color: '#6C63FF', textDecoration: 'underline' }}
+                        //           href="https://static.photocdn.pt/images/articles/2019/02/07/Simple_Landscape_Photography_Tips_With_Tons_of_Impact-2.jpg"
+                        //         >
+                        //           {res.replace(/(<([^>]+)>)/gi, '')}
+                        //         </Link>
+                        //       </Text>
+                        //     </View>
+                        //   );
+                        // }
+                        // Image
+                        else if (res.includes('<img')) {
+                          // const data = res.split(/(<img)/);
+                          //do the split on ><
+                          var data = res.split(/<img/g);
+
+                          //add the brackets back in
+                          for (var i = 0; i < data.length; i++) {
+                            data[i] = '<' + data[i] + '>';
+                          }
+                          return data.map((element) => {
+                            if (element.includes('< src="')) {
+                              const splittedImage = element.split(/>/g);
+                              return splittedImage.map((image) => {
+                                if (image.includes('src=')) {
+                                  const imageUrl = image.replace('< src=', '');
+                                  const formattedImageUrl = imageUrl.slice(1, -1);
+                                  console.log(formattedImageUrl);
+                                  return <Image src={formattedImageUrl} />;
+                                }
+                              });
+                            }
+                          });
+                        }
                       })}
                     </View>
                   );
@@ -19280,7 +20693,18 @@ const MyDocument = ({ imagesUrl, sections }) => {
   );
 };
 
-const ReactPDFDocument = ({ sections }) => {
+const ReactPDFDocument = ({
+  sections,
+  projectId,
+  projectName,
+  projectDescription,
+  projectCountry,
+  projectField,
+  projectEmail,
+  projectNumber,
+  imageName,
+  imageFileUrl,
+}) => {
   const size = useWindowSize();
 
   const saveContainer = useRef();
@@ -19802,7 +21226,20 @@ const ReactPDFDocument = ({ sections }) => {
                 <img
                   onClick={async (e) => {
                     e.preventDefault();
-                    const doc = <MyDocument imagesUrl={imagesUrl} sections={sections} />;
+                    const doc = (
+                      <MyDocument
+                        projectName={projectName}
+                        projectDescription={projectDescription}
+                        projectCountry={projectCountry}
+                        projectField={projectField}
+                        projectEmail={projectEmail}
+                        projectNumber={projectNumber}
+                        imageName={imageName}
+                        imageFileUrl={imageFileUrl}
+                        imagesUrl={imagesUrl}
+                        sections={sections}
+                      />
+                    );
                     const asPdf = pdf([]);
                     asPdf.updateContainer(doc);
                     const blob = await asPdf.toBlob();
@@ -19817,8 +21254,15 @@ const ReactPDFDocument = ({ sections }) => {
               <div className="w-full justify-start items-center mt-4">
                 <p>Share your competitors analysis with this public link:</p>
                 <div className="w-full flex mt-2">
-                  <input value="www.project.com" className="bg-linkBackground text-sm px-2 py-1 dark:text-primarydark" />
-                  <img src="/mobile-navbar/foreign.svg" height={28} width={28} />
+                  <input
+                    value={`http://localhost:3000/dashboard/projects/${projectName}/business-plan/${projectId}`}
+                    className="w-full bg-linkBackground text-sm px-2 py-1 dark:text-primarydark"
+                  />
+                  <Link href={`http://localhost:3000/dashboard/projects/${projectName}/business-plan/${projectId}`} passHref>
+                    <a target="_blank" rel="noreferrer">
+                      <img className="cursor-pointer" src="/mobile-navbar/foreign.svg" height={28} width={28} className="h-full" />
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

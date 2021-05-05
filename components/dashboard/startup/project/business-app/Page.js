@@ -270,6 +270,14 @@ class BusinessPlanApp extends Component {
       selectedSection: null,
       sections: null,
       projectId: null,
+      projectName: null,
+      projectDescription: null,
+      projectCountry: null,
+      projectField: null,
+      projectNumber: null,
+      projectEmail: null,
+      imageName: null,
+      imageFileUrl: null,
       // routerPath: useRouter().query.project
     };
     this.addNewElement = React.createRef();
@@ -288,7 +296,18 @@ class BusinessPlanApp extends Component {
           console.log(querySnapshot);
           const querySnap = querySnapshot.forEach((doc) => {
             console.log(doc.data());
-            return this.setState({ projectId: doc.data().projectId });
+            const data = doc.data();
+            return this.setState({
+              projectId: data.projectId,
+              projectName: data.projectName,
+              projectDescription: data.projectDescription,
+              projectCountry: data.projectCountry,
+              projectField: data.projectField,
+              projectEmail: data.projectEmail,
+              projectNumber: data.projectNumber,
+              imageName: data.imageName,
+              imageFileUrl: data.imageFileUrl,
+            });
           });
           console.log(querySnap);
           return querySnap;
@@ -354,9 +373,9 @@ class BusinessPlanApp extends Component {
   sectionTitleUpdate = async (title) => {
     let newSectionsArray = [...this.state.sections];
     newSectionsArray[this.state.selectedSectionIndex] = {
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: this.state.selectedSection.fields,
-      timestamp: this.state.selectedSection.timestamp,
+      // timestamp: this.state.selectedSection.timestamp,
       title: title,
       position: this.state.selectedSection.position,
     };
@@ -377,18 +396,18 @@ class BusinessPlanApp extends Component {
     console.log(this.state.selectedSection.id);
     let newSectionsArray = [...this.state.sections];
     newSectionsArray[this.state.selectedSectionIndex] = {
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: elements,
-      timestamp: this.state.selectedSection.timestamp,
+      // timestamp: this.state.selectedSection.timestamp,
       title: this.state.selectedSection.title,
       position: this.state.selectedSection.position,
       id: this.state.selectedSection.id,
     };
 
     const newSelectedSection = {
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: elements,
-      timestamp: this.state.selectedSection.timestamp,
+      // timestamp: this.state.selectedSection.timestamp,
       title: this.state.selectedSection.title,
       position: this.state.selectedSection.position,
       id: this.state.selectedSection.id,
@@ -451,9 +470,9 @@ class BusinessPlanApp extends Component {
     const newFields = this.state.selectedSection.fields.filter((field) => index !== field.index);
     console.log(this.state.selectedSection);
     const newSelectedSection = {
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFields,
-      timestamp: selectedSection.timestamp,
+      // timestamp: selectedSection.timestamp,
       title: selectedSection.title,
       id: selectedSection.id,
     };
@@ -618,7 +637,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
       position: this.state.selectedSection.position,
@@ -661,7 +680,7 @@ class BusinessPlanApp extends Component {
     console.log(newFieldsArray);
     const testSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       // id: id,
       id: this.state.selectedSection.id,
@@ -758,7 +777,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -809,7 +828,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -1059,7 +1078,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -1316,7 +1335,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -1572,7 +1591,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -1829,7 +1848,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2084,7 +2103,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2339,7 +2358,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2594,7 +2613,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2643,7 +2662,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2692,7 +2711,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2741,7 +2760,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2790,7 +2809,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2839,7 +2858,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2888,7 +2907,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2938,7 +2957,7 @@ class BusinessPlanApp extends Component {
 
     const newSection = {
       title: this.state.selectedSection.title,
-      createdAt: this.state.selectedSection.createdAt,
+      // createdAt: this.state.selectedSection.createdAt,
       fields: newFieldsArray,
       id: this.state.selectedSection.id,
     };
@@ -2977,8 +2996,8 @@ class BusinessPlanApp extends Component {
         title: section.title,
         // body: section.body,
         fields: [],
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        createdAt: new Date(),
+        // timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        // createdAt: new Date(),
       });
     const newID = newFromDB.id;
     // await this.setState({ sections: [...this.state.sections, section] });
@@ -3551,7 +3570,19 @@ class BusinessPlanApp extends Component {
                   <p className="text-primarydark text-2xl screenLarge:text-3xl mt-2 pl-2 dark:text-background">Business plan</p>
                 </div>
                 {/* <PDFDocument allData={this.state.sections} pdfChartsCreate={this.pdfChartsCreate} projectId={this.state.projectId} /> */}
-                <ReactPDFDocument sections={this.state.sections} pdfChartsCreate={this.pdfChartsCreate} projectId={this.state.projectId} />
+                <ReactPDFDocument
+                  projectName={this.state.projectName}
+                  projectDescription={this.state.projectDescription}
+                  projectCountry={this.state.projectCountry}
+                  projectField={this.state.projectField}
+                  projectEmail={this.state.projectEmail}
+                  projectNumber={this.state.projectNumber}
+                  imageName={this.state.imageName}
+                  imageFileUrl={this.state.imageFileUrl}
+                  sections={this.state.sections}
+                  pdfChartsCreate={this.pdfChartsCreate}
+                  projectId={this.state.projectId}
+                />
               </div>
               <div>
                 <h1 className="text-secondary text-md screenLarge:text-base text-gray">Create your business plan any way you want</h1>

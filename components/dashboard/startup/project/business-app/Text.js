@@ -79,9 +79,9 @@ const TextElement = ({ fieldUpdate, selectedSection, currentIndex, provided, fie
     toolbar: [
       [{ header: [1, 2, false] }],
       ['bold', 'italic', 'underline', 'strike'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
       [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
-      ['link', 'image'],
+      ['image'],
       ['clean'],
     ],
   };
@@ -97,9 +97,9 @@ const TextElement = ({ fieldUpdate, selectedSection, currentIndex, provided, fie
     // 'blockquote',
     'list',
     'bullet',
-    'indent',
+    // 'indent',
     'align',
-    'link',
+    // 'link',
     'image',
     'video',
     'code-block',

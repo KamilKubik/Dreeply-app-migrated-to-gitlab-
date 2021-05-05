@@ -47,7 +47,7 @@ const HeaderComponent = ({ currentIndex, headerUpdate, provided, deleteField, fi
       </div>
       <div className="col-start-12 col-end-13 justify-self-center self-start flex flex-col flex-wrap gap-2">
         <img onClick={() => deleteField(field.index)} className="cursor-pointer" src={`/plan-bar/exit4.svg`} height={36} width={36} />
-        <img {...provided.dragHandleProps} className="cursor-pointer mt-2" src={`/plan-bar/drag2.svg`} height={36} width={36} />
+        <img {...provided.dragHandleProps} className="cursor-pointer" src={`/plan-bar/drag2.svg`} height={36} width={36} />
       </div>
     </div>
   );

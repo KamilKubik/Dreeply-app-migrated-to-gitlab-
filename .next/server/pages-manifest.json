@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/dashboard/projects/[project]": "pages/dashboard/projects/[project].js",
+  "/dashboard/projects/[project]/business-plan/[id]": "pages/dashboard/projects/[project]/business-plan/[id].js",
   "/dashboard/projects/[project]/business-plan": "pages/dashboard/projects/[project]/business-plan.js"
 }
