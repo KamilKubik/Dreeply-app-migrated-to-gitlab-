@@ -3,6 +3,7 @@ import { db } from '../../../../../lib/firebase-admin';
 import { db as dbClient } from '../../../../../lib/firebase';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
+const safeJsonStringify = require('safe-json-stringify');
 import Sections from '../../../../../components/dashboard/startup/project/business-app/business-plan/unique/Sections';
 import SectionEditor from '../../../../../components/dashboard/startup/project/business-app/business-plan/unique/SectionEditor';
 
@@ -104,7 +105,8 @@ export const getStaticProps = async ({ params }) => {
   const project = [];
 
   snapshot.docs.forEach((doc) => {
-    project.push({ ...doc.data() });
+    const data = JSON.parse(safeJsonStringify(doc.data()));
+    project.push({ ...data });
   });
 
   return {
