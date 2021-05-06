@@ -277,25 +277,6 @@ const ProjectPage = ({ projects }) => {
                     </button>
                   </div>
                 </div>
-                {/* SHOWUP5 */}
-                {/* <div className="rounded-2xl transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
-                  <h1 className="text-primarydark text-lg dark:text-background">Startup members</h1>
-                  <div
-                    style={{ maxHeight: 330 }}
-                    className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
-                  >
-                    <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/members1.svg" />
-                    <h1 className="text-base text-gray text-center px-4 py-4">
-                      Identify the roles of your team and the people who will have access to this project
-                    </h1>
-                    <button
-                      onClick={onCompetitorsAnalysisCreate}
-                      className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
-                    >
-                      Manage your startup members
-                    </button>
-                  </div>
-                </div> */}
               </div>
               <UsersManager selectedProject={selectedProject} />
             </div>

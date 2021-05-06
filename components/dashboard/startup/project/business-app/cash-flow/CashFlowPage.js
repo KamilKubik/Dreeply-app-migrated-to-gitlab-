@@ -29,6 +29,7 @@ import ExitComponent from '../../../ExitComponent';
 const CashFlowPage = () => {
   // const size = useWindowSize();
   // console.log(size);
+  const [projectName, setProjectName] = useState('');
   const [mainDocument, setMainDocument] = useState('');
   const [projectId, setProjectId] = useState('');
   const [documentId, setDocumentId] = useState('');
@@ -61,6 +62,7 @@ const CashFlowPage = () => {
           console.log(querySnapshot);
           querySnapshot.forEach(async (doc1) => {
             setProjectId(doc1.data().projectId);
+            setProjectName(doc1.data().projectName);
 
             await db
               .collection('projects')
@@ -298,6 +300,8 @@ const CashFlowPage = () => {
             data: finalDataAfterTax,
             backgroundColor: 'rgba(10, 18, 48, 1)',
             borderColor: 'rgba(10, 18, 48, 1)',
+            fill: 0,
+            lineTension: 0,
             borderWidth: size.width < 680 ? 1 : 3,
             pointRadius: size.width < 680 ? 2 : 3,
           },
@@ -312,6 +316,7 @@ const CashFlowPage = () => {
           legend: {
             position: 'right',
             labels: {
+              fontFamily: 'Comfortaa',
               font: {
                 size: size.width < 680 ? 8 : 12,
               },
@@ -323,6 +328,7 @@ const CashFlowPage = () => {
           x: {
             stacked: true,
             ticks: {
+              fontFamily: 'Comfortaa',
               beginAtZero: true,
               font: {
                 size: size.width < 680 ? 8 : 12,
@@ -333,6 +339,7 @@ const CashFlowPage = () => {
           y: {
             stacked: true,
             ticks: {
+              fontFamily: 'Comfortaa',
               beginAtZero: true,
               font: {
                 size: size.width < 680 ? 8 : 12,
@@ -493,7 +500,7 @@ const CashFlowPage = () => {
   const [isRevenueShown, setIsRevenueShown] = useState(false);
 
   const onRevenueShow = () => {
-    const margins = size.width < 1280 ? 68 : 96;
+    const margins = size.width < 1280 ? 72 : 96;
     const revenueContainerHeight = innerContainerRevenueRef.current.offsetHeight + margins;
     console.log(innerContainerRevenueRef.current.offsetHeight);
     if (!isRevenueShown) {
@@ -539,7 +546,8 @@ const CashFlowPage = () => {
   const [isCostsShown, setIsCostsShown] = useState(false);
 
   const onCostsShow = () => {
-    const revenueContainerHeight = innerContainerCostsRef.current.offsetHeight + 96;
+    const margins = size.width < 1280 ? 72 : 96;
+    const revenueContainerHeight = innerContainerCostsRef.current.offsetHeight + margins;
     console.log(innerContainerCostsRef.current.offsetHeight);
     if (!isCostsShown) {
       gsap.to(costsRef.current, {
@@ -680,6 +688,23 @@ const CashFlowPage = () => {
                 Cash flow analysis
               </p>
             </div>
+            <CashFlowPDF
+              projectName={projectName}
+              projectId={projectId}
+              data={data}
+              periods={periods}
+              revenueElements={revenueElements}
+              costsElements={costsElements}
+              tax={tax}
+              totalRevenue={totalRevenue}
+              monthlyRevenue={monthlyRevenue}
+              totalCosts={totalCosts}
+              monthlyCosts={monthlyCosts}
+              grossProfit={grossProfit}
+              netProfit={netProfit}
+              startDate={startDate}
+              endDate={endDate}
+            />
           </div>
           <div>
             <h1 className="text-secondary text-xs mdContainer:text-sm lgContainer:text-base text-gray relative -top-1 lgContainer:top-0">
@@ -858,7 +883,7 @@ const CashFlowPage = () => {
           {/* Revenue */}
           <div
             ref={revenueRef}
-            style={{ height: 55 }}
+            style={{ height: 55, zIndex: 10 }}
             className="overflow-hidden relative w-full rounded-2xl bg-white dark:bg-background px-4 py-4 flex justify-center items-center mt-12 flex flex-wrap shadow-md"
           >
             <div className="w-full flex justify-between items-center">
@@ -940,7 +965,7 @@ const CashFlowPage = () => {
           {/* Costs */}
           <div
             ref={costsRef}
-            style={{ height: 55 }}
+            style={{ height: 55, zIndex: 10 }}
             className="overflow-hidden relative w-full rounded-2xl bg-white dark:bg-background px-4 py-4 flex justify-center items-center mt-8 flex flex-wrap shadow-md"
           >
             <div className="w-full flex justify-between items-center">

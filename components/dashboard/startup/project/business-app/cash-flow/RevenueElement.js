@@ -377,6 +377,10 @@ const RevenueElement = ({ provided, setRevenueElements, mainDocument, projectId,
         </div>
         <div>
           <DatePicker
+            popperPlacement="top-start"
+            popperProps={{
+              positionFixed: true,
+            }}
             selected={startDate}
             onChange={(date) => onStartDateUpdate(date, element.type)}
             dateFormat="MMMM yyyy"
@@ -388,6 +392,10 @@ const RevenueElement = ({ provided, setRevenueElements, mainDocument, projectId,
         <div>
           {element.type == 'Recurring' ? (
             <DatePicker
+              popperPlacement="top-start"
+              popperProps={{
+                positionFixed: true,
+              }}
               selected={endDate}
               onChange={(date) => onEndDateUpdate(date)}
               dateFormat="MMMM yyyy"

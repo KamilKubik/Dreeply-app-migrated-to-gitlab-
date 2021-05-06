@@ -74,38 +74,38 @@ const newStartupPage = () => {
     // SHOW LOADING SCREEN
     setLoadingScreen(true);
     // ADD NEW PROJECT
-    // const projectId = uuidv4();
-    // const newProject = {
-    //   projectName: projectName,
-    //   projectDescription: projectDescription,
-    //   projectField: projectField,
-    //   projectCountry: projectCountry,
-    //   projectEmail: projectEmail,
-    //   projectNumber: projectNumber,
-    //   imageName,
-    //   imageFileUrl: fileUrl,
-    //   createdAt: new Date().toISOString(),
-    //   projectId: projectId,
-    //   uid: currentUser.uid,
-    //   isIdeaPlanCreated: false,
-    //   isBusinessPlanCreated: false,
-    //   isCashflowCreated: false,
-    //   isCompetitorsAnalysisCreated: false,
-    //   isMembersManagerCreated: false,
-    //   projectUsers: [
-    //     {
-    //       userName: userName,
-    //       userUid: currentUser.uid,
-    //       userStripeRole: currentUser.stripeRole,
-    //       userToken: currentUser.token,
-    //       userEmail: currentUser.email,
-    //     },
-    //   ],
-    // };
-    // await db.collection('projects').doc(projectId).set(newProject);
-    // // await db.collection('currentProject').doc(currentUser.uid).set(newProject);
+    const projectId = uuidv4();
+    const newProject = {
+      projectName: projectName,
+      projectDescription: projectDescription,
+      projectField: projectField,
+      projectCountry: projectCountry,
+      projectEmail: projectEmail,
+      projectNumber: projectNumber,
+      imageName,
+      imageFileUrl: fileUrl,
+      createdAt: new Date().toISOString(),
+      projectId: projectId,
+      uid: currentUser.uid,
+      isIdeaPlanCreated: false,
+      isBusinessPlanCreated: false,
+      isCashflowCreated: false,
+      isCompetitorsAnalysisCreated: false,
+      isMembersManagerCreated: false,
+      projectUsers: [
+        {
+          userName: userName,
+          userUid: currentUser.uid,
+          userStripeRole: currentUser.stripeRole,
+          userToken: currentUser.token,
+          userEmail: currentUser.email,
+        },
+      ],
+    };
+    await db.collection('projects').doc(projectId).set(newProject);
+    // await db.collection('currentProject').doc(currentUser.uid).set(newProject);
 
-    // router.push(`/dashboard/projects/[project]`, `/dashboard/projects/${projectName}`);
+    router.push(`/dashboard/projects/[project]`, `/dashboard/projects/${projectName}`);
   };
 
   const onFileChange = async (e) => {

@@ -24,10 +24,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/dashboard/projects/new-startup": [
+    "/dashboard/projects/[project]/cash-flow": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/dashboard/projects/new-startup.js"
+      "static/chunks/pages/dashboard/projects/[project]/cash-flow.js"
+    ],
+    "/dashboard/projects/[project]/cash-flow/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/dashboard/projects/[project]/cash-flow/[id].js"
     ]
   },
   "ampFirstPages": []

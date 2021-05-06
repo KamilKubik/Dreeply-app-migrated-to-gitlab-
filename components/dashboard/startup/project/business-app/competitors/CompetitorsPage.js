@@ -122,7 +122,7 @@ const CompetitorsPage = () => {
               </svg>
               <p className="text-primarydark text-xl ssmContainer:text-2xl mt-2 pl-2 dark:text-background">Competitors analysis</p>
             </div>
-            {size.width > 680 && <CompetitorsPDF />}
+            <CompetitorsPDF />
           </div>
           <div>
             <h1 className="text-secondary text-base ssmContainer:text-md text-gray">Manage your startup competitors</h1>

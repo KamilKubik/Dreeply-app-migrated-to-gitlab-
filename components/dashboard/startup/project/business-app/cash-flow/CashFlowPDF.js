@@ -3,6 +3,7 @@ import { saveAs } from 'file-saver';
 import ChartJsImage from 'chartjs-to-image';
 import { format } from 'date-fns';
 import Router from 'next/router';
+import Link from 'next/link';
 import gsap, { Linear } from 'gsap';
 import { useWindowSize } from '../../../../../../utils/useWindowSize';
 
@@ -385,6 +386,8 @@ const MyDocument = ({
 };
 
 const CashFlowPDF = ({
+  projectName,
+  projectId,
   data,
   periods,
   revenueElements,
@@ -670,7 +673,24 @@ const CashFlowPDF = ({
                 <img
                   onClick={async (e) => {
                     e.preventDefault();
-                    const doc = <MyDocument competitors={competitors} />;
+                    const doc = (
+                      <MyDocument
+                        image={imageUrl}
+                        data={data}
+                        periods={periods}
+                        revenueElements={revenueElements}
+                        costsElements={costsElements}
+                        tax={tax}
+                        totalRevenue={totalRevenue}
+                        monthlyRevenue={monthlyRevenue}
+                        totalCosts={totalCosts}
+                        monthlyCosts={monthlyCosts}
+                        grossProfit={grossProfit}
+                        netProfit={netProfit}
+                        startDate={startDate}
+                        endDate={endDate}
+                      />
+                    );
                     const asPdf = pdf([]);
                     asPdf.updateContainer(doc);
                     const blob = await asPdf.toBlob();
@@ -685,8 +705,15 @@ const CashFlowPDF = ({
               <div className="w-full justify-start items-center mt-4">
                 <p>Share your competitors analysis with this public link:</p>
                 <div className="w-full flex mt-2">
-                  <input value="www.project.com" className="bg-linkBackground text-sm px-2 py-1 dark:text-primarydark" />
-                  <img src="/mobile-navbar/foreign.svg" height={28} width={28} />
+                  <input
+                    value={`http://localhost:3000/dashboard/projects/${projectName}/cash-flow/${projectId}`}
+                    className="w-full bg-linkBackground text-sm px-2 py-1 dark:text-primarydark"
+                  />
+                  <Link href={`/dashboard/projects/${projectName}/cash-flow/${projectId}`} passHref>
+                    <a target="_blank" rel="noreferrer">
+                      <img className="cursor-pointer" src="/mobile-navbar/foreign.svg" height={28} width={28} className="h-full" />
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
