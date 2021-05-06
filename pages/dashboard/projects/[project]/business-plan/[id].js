@@ -3,16 +3,15 @@ import { db } from '../../../../../lib/firebase-admin';
 import { db as dbClient } from '../../../../../lib/firebase';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
-import UniqueElement from '../../../../../components/dashboard/startup/project/business-app/competitors/UniqueElement';
+import Sections from '../../../../../components/dashboard/startup/project/business-app/business-plan/unique/Sections';
+import SectionEditor from '../../../../../components/dashboard/startup/project/business-app/business-plan/unique/SectionEditor';
 
 const UniqueBusinessPlanPage = ({ project }) => {
   console.log('Particular project --> ', project);
-  //   useEffect(() => {
-  //     project && setSelectedProject(project[0]);
-  //     project && setCompetitors(project[0].competitorsArray);
-  //   }, [project]);
-  //   const [selectedProject, setSelectedProject] = useState(null);
-  //   const [competitors, setCompetitors] = useState([]);
+  // useEffect(() => {
+  //   project && setSelectedProject(project[0]);
+  // }, [project]);
+  // const [selectedProject, setSelectedProject] = useState(null);
   const router = useRouter();
 
   if (router.isFallback) {
@@ -22,6 +21,9 @@ const UniqueBusinessPlanPage = ({ project }) => {
       </div>
     );
   }
+  const [selectedSection, setSelectedSection] = useState(project[0]);
+
+  const selectSectionPage = (section, index) => setSelectedSection(section);
 
   return (
     <div className="min-h-screen w-full relative flex flex-col items-center">
@@ -47,49 +49,13 @@ const UniqueBusinessPlanPage = ({ project }) => {
           </div>
         </div>
         <div>
-          <h1 className="text-secondary text-md screenLarge:text-base text-gray">Create your business plan any way you want</h1>
+          <h1 className="text-secondary text-md screenLarge:text-base text-gray">Insight into a detailed business plan</h1>
         </div>
         {/* SECTIONS */}
         <div className="grid grid-cols-businessSmall screenSmall:grid-cols-business screenMedium:grid-cols-businessMedium grid-flow-col gap-x-8">
           <div className="w-full h-maxcontent mt-12 pb-20">
             {selectedSection ? (
-              (console.log('selected'),
-              (
-                <EditorInputElement
-                  // sectionUpdate={sectionUpdate}
-                  // sectionUpdate={sectionUpdate}
-                  sectionTitleUpdate={this.sectionTitleUpdate}
-                  tableUpdate={this.tableUpdate}
-                  headerUpdate={this.headerUpdate}
-                  reorderElements={this.reorderElements}
-                  projectId={this.state.projectId}
-                  addChart={this.addChart}
-                  addNewHeader={this.addNewHeader}
-                  chartTypeUpdate={this.chartTypeUpdate}
-                  onDatasetLabel6Update={this.onDatasetLabel6Update}
-                  onDatasetLabel5Update={this.onDatasetLabel5Update}
-                  onDatasetLabel4Update={this.onDatasetLabel4Update}
-                  onDatasetLabel3Update={this.onDatasetLabel3Update}
-                  onDatasetLabel2Update={this.onDatasetLabel2Update}
-                  onDatasetLabel1Update={this.onDatasetLabel1Update}
-                  onDataset6Update={this.onDataset6Update}
-                  onDataset5Update={this.onDataset5Update}
-                  onDataset4Update={this.onDataset4Update}
-                  onDataset3Update={this.onDataset3Update}
-                  onDataset2Update={this.onDataset2Update}
-                  onDataset1Update={this.onDataset1Update}
-                  chartLabelsUpdate={this.chartLabelsUpdate}
-                  chartValueUpdate={this.chartValueUpdate}
-                  addNewChart={this.addNewChart}
-                  deleteParticularField={this.deleteParticularField}
-                  addNewField={this.addNewField}
-                  fieldUpdate={this.fieldUpdate}
-                  sectionUpdate={this.sectionUpdate}
-                  selectedSection={this.state.selectedSection}
-                  selectedSectionIndex={this.state.selectedSectionIndex}
-                  sections={this.state.sections}
-                />
-              ))
+              <SectionEditor selectedSection={selectedSection} />
             ) : (
               <div className="w-full bg-white rounded-2xl p-8 flex justify-center items-center">
                 <div className="flex flex-col justify-center items-center">
@@ -99,15 +65,7 @@ const UniqueBusinessPlanPage = ({ project }) => {
               </div>
             )}
           </div>
-          {/* <SectionManager
-                  selectedSection={this.state.selectedSection}
-                  reorderSections={this.reorderSections}
-                  sections={this.state.sections}
-                  selectedSectionIndex={this.state.selectedSectionIndex}
-                  selectSectionPage={this.selectSectionPage}
-                  newSectionPage={this.newSectionPage}
-                  deleteSectionPage={this.deleteSectionPage}
-                /> */}
+          <Sections selectSectionPage={selectSectionPage} selectedProject={project} />
         </div>
       </div>
     </div>

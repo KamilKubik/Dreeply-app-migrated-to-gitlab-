@@ -21209,7 +21209,7 @@ const ReactPDFDocument = ({
           <button
             ref={dropdownButton}
             onClick={onSaveDropdownShow}
-            className={`hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl mt-2 dark:text-primarydark dark:border-primarydark ${
+            className={`relative top-2 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-base py-2 px-8 rounded-2xl mt-2 dark:text-primarydark dark:border-primarydark ${
               dropdownButtonColorHelper ? 'bg-primary text-background dark:bg-primarydark dark:text-background' : ''
             }`}
           >

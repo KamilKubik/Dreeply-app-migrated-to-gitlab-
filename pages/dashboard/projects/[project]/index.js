@@ -9,6 +9,8 @@ import TippyMonster from '../../../../components/dashboard/Tippy';
 // import ProjectNav from '../../../../components/dashboard/startup/project/ProjectNav';
 import { isMobile } from 'react-device-detect';
 import MobilePrevent from '../../../../components/MobilePrevent';
+import BounceLoaderComponent from '../../../../components/BounceLoader';
+import UsersManager from '../../../../components/dashboard/startup/project/business-app/UsersManager';
 
 const ProjectPage = ({ projects }) => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -21,8 +23,6 @@ const ProjectPage = ({ projects }) => {
     console.log(filteredArray);
     filteredArray && filteredArray.length == 1 && setSelectedProject(filteredArray[0]);
   }, [projects]);
-  console.log(projects);
-  console.log(selectedProject);
 
   // STARTUP IDEA CREATE
   const onStartupIdeaCreate = async () => {
@@ -140,23 +140,10 @@ const ProjectPage = ({ projects }) => {
   };
 
   if (router.isFallback) {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    );
+    return <BounceLoaderComponent />;
   }
 
   return (
-    // <div className="w-full h-full justify-center items-center">
-    //   <h2 className="text-center">Welcome to the project page! Project name:</h2>
-    //   {selectedProject !== null && (
-    //     <>
-    //       <p className="text-center">{selectedProject.projectName}</p>
-    //       <p className="text-center">{selectedProject.uid}</p>
-    //     </>
-    //   )}
-    // </div>
     <>
       <TippyMonster
         projectManager
@@ -204,7 +191,7 @@ const ProjectPage = ({ projects }) => {
                 <h1 className="text-secondary text-md screenLarge:text-base text-gray -mt-1">This is the best startup in the tech field</h1>
               </div>
               {/* SECTION */}
-              <div className="grid grid-cols-1frr screenSmall:grid-cols-2fr grid-rows-5fr screenSmall:grid-rows-3fr mt-12 gap-16 mb-32">
+              <div className="grid grid-cols-1frr screenSmall:grid-cols-2fr grid-rows-4fr screenSmall:grid-rows-2fr mt-8 gap-x-16 gap-y-16 mb-16">
                 {/* SHOWUP1 */}
                 <div className="rounded-2xl transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
                   <h1 className="text-primarydark text-lg dark:text-background">Startup idea</h1>
@@ -291,7 +278,7 @@ const ProjectPage = ({ projects }) => {
                   </div>
                 </div>
                 {/* SHOWUP5 */}
-                <div className="rounded-2xl transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
+                {/* <div className="rounded-2xl transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
                   <h1 className="text-primarydark text-lg dark:text-background">Startup members</h1>
                   <div
                     style={{ maxHeight: 330 }}
@@ -308,14 +295,13 @@ const ProjectPage = ({ projects }) => {
                       Manage your startup members
                     </button>
                   </div>
-                </div>
+                </div> */}
               </div>
+              <UsersManager selectedProject={selectedProject} />
             </div>
           </div>
         ) : (
-          <div className="h-screen w-full flex justify-center items-center">
-            <p className="text-primarydark text-lg">...Loading</p>
-          </div>
+          <BounceLoaderComponent />
         )}
       </NavbarTemplate>
     </>

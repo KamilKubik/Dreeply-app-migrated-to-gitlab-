@@ -9,26 +9,6 @@ import { db } from '../../../../../lib/firebase';
 import gsap, { Power4, Linear } from 'gsap';
 import Image from 'next/image';
 import Router from 'next/router';
-import { scroller, scrollTo } from 'react-scroll';
-
-// Chart functions
-// import { chartLabelsUpdate } from '../../../../../utils/chart';
-
-// const MyDocument = ({ imageUrl }) => {
-//   // console.log(imageUrl);
-//   return (
-//     <Document>
-//       <Page size='A4'>
-//         <View>
-//           <Text>Section #1</Text>
-//         </View>
-//         <View>
-//           <Image src={imageUrl && imageUrl} />
-//         </View>
-//       </Page>
-//     </Document>
-//   );
-// };
 
 const ChartJsComponent = ({
   chartImageUpdate,
@@ -1903,7 +1883,7 @@ const ChartJsComponent = ({
   const onChartChange = (value) => {
     if (!activeChartType) {
       gsap.to(chartFormat.current, {
-        height: 216,
+        height: 256,
         transformOrigin: 'top',
         ease: Linear,
       });
@@ -2699,9 +2679,9 @@ const ChartJsComponent = ({
       </div>
       {/* Side manager bar */}
       <div className="col-start-12 col-end-13 justify-self-center self-start flex flex-col flex-wrap gap-2 overflow-hidden">
-        <Image onClick={() => deleteField(field.index)} className="cursor-pointer" src={`/plan-bar/exit4.svg`} height={36} width={36} />
-        <Image {...provided.dragHandleProps} className="cursor-pointer" src={`/plan-bar/drag2.svg`} height={36} width={36} />
-        <Image
+        <img onClick={() => deleteField(field.index)} className="cursor-pointer" src={`/plan-bar/exit4.svg`} height={36} width={36} />
+        <img {...provided.dragHandleProps} className="cursor-pointer" src={`/plan-bar/drag2.svg`} height={36} width={36} />
+        <img
           onClick={() => onStackedChange(field.stacked)}
           className="cursor-pointer"
           src={`/plan-bar/layers.svg`}
@@ -2713,121 +2693,78 @@ const ChartJsComponent = ({
           ref={chartFormat}
           className="overflow-hidden bg-background focus:outline-none rounded-lg"
         >
-          <Image
+          <img
             onClick={() => onChartChange(false)}
             className="cursor-pointer"
-            src={`/chart/${field.chartType}.svg`}
+            src={`/chart/charts/${field.chartType}.svg`}
             height={36}
             width={36}
           />
-          {/* <div
-              style={{ height: '36px' }}
-              onClick={() => onChartChange(false)}
-              className='px-2 py-1 text-sm ease-in-out flex items-center justify-between cursor-pointer'
-            >
-              {field.chartType}
-            </div> */}
           {field.chartType !== 'Bar chart' && (
-            <>
-              <Image
+            <div className="mt-2 bg-background rounded-2xl">
+              <img
                 className="cursor-pointer"
                 onClick={() => onChartChange('Bar chart')}
-                src={`/chart/${field.chartType == 'Bar chart' ? field.chartType : 'Bar chart'}.svg`}
-                height={27}
-                width={27}
+                src={`/chart/charts/${field.chartType == 'Bar chart' ? field.chartType : 'Bar chart'}.svg`}
+                height={36}
+                width={36}
               />
-              {/* <div
-              onClick={() => onChartChange('Bar chart')}
-              className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
-            >
-              Bar chart
-            </div> */}
-            </>
+            </div>
           )}
           {field.chartType !== 'Reverse chart' && (
-            <>
-              <Image
+            <div className="mt-2 bg-background rounded-2xl">
+              <img
                 className="cursor-pointer"
                 onClick={() => onChartChange('Reverse chart')}
-                src={`/chart/${field.chartType == 'Reverse chart' ? field.chartType : 'Reverse chart'}.svg`}
-                height={27}
-                width={27}
+                src={`/chart/charts/${field.chartType == 'Reverse chart' ? field.chartType : 'Reverse chart'}.svg`}
+                height={36}
+                width={36}
               />
-              {/* <div
-              onClick={() => onChartChange('Reverse chart')}
-              className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
-            >
-              Reverse chart
-            </div> */}
-            </>
+            </div>
           )}
           {field.chartType !== 'Line chart' && (
-            <>
-              <Image
+            <div className="mt-2">
+              <img
                 className="cursor-pointer"
                 onClick={() => onChartChange('Line chart')}
-                src={`/chart/${field.chartType == 'Line chart' ? field.chartType : 'Line chart'}.svg`}
-                height={27}
-                width={27}
+                src={`/chart/charts/${field.chartType == 'Line chart' ? field.chartType : 'Line chart'}.svg`}
+                height={36}
+                width={36}
               />
-              {/* <div
-              onClick={() => onChartChange('Line chart')}
-              className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
-            >
-              Line chart
-            </div> */}
-            </>
+            </div>
           )}
           {field.chartType !== 'Pie chart' && (
-            <>
-              <Image
+            <div className="mt-2">
+              <img
                 className="cursor-pointer"
                 onClick={() => onChartChange('Pie chart')}
-                src={`/chart/${field.chartType == 'Pie chart' ? field.chartType : 'Pie chart'}.svg`}
-                height={27}
-                width={27}
+                src={`/chart/charts/${field.chartType == 'Pie chart' ? field.chartType : 'Pie chart'}.svg`}
+                height={36}
+                width={36}
               />
-              {/* <div
-              onClick={() => onChartChange('Pie chart')}
-              className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
-            >
-              Pie chart
-            </div> */}
-            </>
+            </div>
           )}
           {field.chartType !== 'Doughnut chart' && (
-            <>
-              <Image
+            <div className="mt-2">
+              <img
                 className="cursor-pointer"
                 onClick={() => onChartChange('Doughnut chart')}
-                src={`/chart/${field.chartType == 'Doughnut chart' ? field.chartType : 'Doughnut chart'}.svg`}
-                height={27}
-                width={27}
+                src={`/chart/charts/${field.chartType == 'Doughnut chart' ? field.chartType : 'Doughnut chart'}.svg`}
+                height={36}
+                width={36}
               />
-              {/* <div
-              onClick={() => onChartChange('Doughnut chart')}
-              className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
-            >
-              Doughnut chart
-            </div> */}
-            </>
+            </div>
           )}
           {field.chartType !== 'Area chart' && (
-            <>
-              <Image
+            <div className="mt-2">
+              <img
                 className="cursor-pointer"
                 onClick={() => onChartChange('Area chart')}
-                src={`/chart/${field.chartType == 'Area chart' ? field.chartType : 'Area chart'}.svg`}
-                height={27}
-                width={27}
+                src={`/chart/charts/${field.chartType == 'Area chart' ? field.chartType : 'Area chart'}.svg`}
+                height={36}
+                width={36}
               />
-              {/* <div
-              onClick={() => onChartChange('Area chart')}
-              className='px-2 py-1 text-sm flex items-center justify-between cursor-pointer'
-            >
-              Area chart
-            </div> */}
-            </>
+            </div>
           )}
         </div>
       </div>

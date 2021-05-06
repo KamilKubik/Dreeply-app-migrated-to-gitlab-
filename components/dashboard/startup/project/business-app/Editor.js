@@ -345,10 +345,10 @@ const EditorInputElement = ({
               value={title ? title : ''}
               onChange={(e) => updateTitle(e.target.value)}
             />
-            <div className="flex justify-end items-center w-2/5">
+            {/* <div className="flex justify-end items-center w-2/5">
               <p className="text-primarydark text-basae mr-4 pl-2">New element</p>
-              <Image onClick={onLeftBarShow} src="/chart/pencil.svg" height={40} width={40} />
-            </div>
+              <img onClick={onLeftBarShow} src="/chart/pencil.svg" height={40} width={40} />
+            </div> */}
           </div>
         </div>
       </div>

@@ -4,6 +4,10 @@ import Tippy from '@tippyjs/react';
 import Image from 'next/image';
 
 const TippyMonster = ({
+  setTippyHelper,
+  setWrongNameTippyHelper,
+  wrongName,
+  projectCreator,
   cashFlow,
   businessPlan,
   projectManager,
@@ -50,6 +54,8 @@ const TippyMonster = ({
     emptyInput && setTippyMonster(false);
     setVisible(false);
     emptyInput && setCurrentTippy(false);
+    tippyMonster && setTippyHelper(false);
+    wrongName && setWrongNameTippyHelper(false);
   };
 
   const onImageClick = () => {
@@ -66,9 +72,6 @@ const TippyMonster = ({
     emptyInput && setCurrentTippy(true);
   }, []);
 
-  console.log('tm - ', tippyMonster);
-  console.log('visible - ', visible);
-
   return (
     <Tippy
       // trigger={tippyMonster}
@@ -79,19 +82,28 @@ const TippyMonster = ({
       touch={true}
       visible={visible || tippyMonster}
       onClickOutside={hide}
-      offset={market || model || success || tippyMonster ? [-265, -65] : [-220, -65]}
+      offset={market || model || success || tippyMonster || wrongName ? [-265, -65] : [-220, -65]}
       // placement='left-end'
       interactive={true}
       content={
-        tippyMonster ? (
-          <div ref={tippyRef} className="h-12 w-96 shadow-lg rounded-2xl bg-red flex justify-center items-center focus:outline-none">
-            <p className="text-primarydark py-4 px-2 text-sm text-center text-white flex justify-center items-center">
-              Oops, you have to provide all the information
-              <img src="/emojis/crying.svg" height={25} width={25} className="inline-block relative" />.
+        (wrongName && (
+          <div ref={tippyRef} className="h-16 w-96 shadow-lg rounded-2xl bg-red flex justify-center items-center focus:outline-none">
+            <p className="p-4 text-sm text-center text-white flex justify-center items-center">
+              Ops, unfortunately you already have a project with that name!
+              {/* <img src="/emojis/crying.svg" height={25} width={25} className="inline-block relative" /> */}
             </p>
             <div className="flex items-center justify-center flex-wrap gap-2 mt-2"></div>
           </div>
-        ) : (
+        )) ||
+        (tippyMonster && (
+          <div ref={tippyRef} className="h-12 w-96 shadow-lg rounded-2xl bg-red flex justify-center items-center focus:outline-none">
+            <p className="py-4 px-2 text-sm text-center text-white flex justify-center items-center">
+              Oops, you have to provide all the information
+              <img src="/project-create/sad.svg" height={18} width={18} className="ml-2 inline-block relative" />
+            </p>
+            <div className="flex items-center justify-center flex-wrap gap-2 mt-2"></div>
+          </div>
+        )) || (
           <div ref={tippyRef} className={`focus:outline-none ${contentClass}`}>
             <div className="text-primarydark p-4 text-sm text-center text-white">
               {contentText}
@@ -164,6 +176,12 @@ const TippyMonster = ({
               {cashFlow && (
                 <>
                   <img src="/cash-flow/tippy.svg" height={20} width={20} className="inline-block relative bottom-0.5 left-1" />
+                  {/* <p className="inline-block">.</p> */}
+                </>
+              )}
+              {projectCreator && (
+                <>
+                  <img src="/project-create/bulb.svg" height={20} width={20} className="inline-block relative bottom-0.5 left-1" />
                   {/* <p className="inline-block">.</p> */}
                 </>
               )}

@@ -11,10 +11,10 @@ const SectionManagerItem = ({ provided, _section, _index, selectedSectionIndex, 
   // }, [_section])
 
   const onDeleteSection = (section) => {
-    if (confirm(`Are you sure u want to delete ${section.title}`)) {
-      // Jeśli true, odpalamy funkcję deleteSection, tak samo, jak u góry odpalamy selectSection
-      deleteSection(section);
-    }
+    // if (confirm(`Are you sure u want to delete ${section.title}`)) {
+    //   deleteSection(section);
+    // }
+    deleteSection(section);
   };
 
   return (
@@ -32,16 +32,20 @@ const SectionManagerItem = ({ provided, _section, _index, selectedSectionIndex, 
         <img
           {...provided.dragHandleProps}
           className="z-50"
-          src="/business-model/hand.svg"
-          height={(size.width < 960 && 16) || (size.width > 960 && size.width < 1220 && 18) || (size.width > 1220 && 20)}
-          width={(size.width < 960 && 16) || (size.width > 960 && size.width < 1220 && 18) || (size.width > 1220 && 20)}
+          src="/sections/drag1.svg"
+          height={14}
+          width={14}
+          // height={(size.width < 960 && 10) || (size.width > 960 && size.width < 1220 && 12) || (size.width > 1220 && 14)}
+          // width={(size.width < 960 && 10) || (size.width > 960 && size.width < 1220 && 12) || (size.width > 1220 && 14)}
         />
         <img
           className="z-50"
-          onClick={(e) => onDeleteSection(_section)}
+          onClick={(e) => onDeleteSection(_section, _index)}
           src="/business-model/delete.svg"
-          height={(size.width < 960 && 16) || (size.width > 960 && size.width < 1220 && 18) || (size.width > 1220 && 20)}
-          width={(size.width < 960 && 16) || (size.width > 960 && size.width < 1220 && 18) || (size.width > 1220 && 20)}
+          height={20}
+          width={20}
+          // height={(size.width < 960 && 16) || (size.width > 960 && size.width < 1220 && 18) || (size.width > 1220 && 20)}
+          // width={(size.width < 960 && 16) || (size.width > 960 && size.width < 1220 && 18) || (size.width > 1220 && 20)}
         />
       </div>
     </div>

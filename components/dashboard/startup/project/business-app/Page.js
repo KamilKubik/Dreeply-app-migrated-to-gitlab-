@@ -18,248 +18,7 @@ import { isMobile } from 'react-device-detect';
 import TippyMonster from '../../../Tippy';
 import ExitComponent from '../../ExitComponent';
 import ReactPDFDocument from './ReactPDFDocument';
-
-// import { useAsyncCallback } from 'react-async-hook';
-
-// const BusinessPlanApp = () => {
-//   const [sections, setSections] = useStateWithPromise(null);
-//   const [selectedSection, setSelectedSection] = useState(null);
-//   const [selectedSectionIndex, setSelectedSectionIndex] = useState(null);
-//   const { currentUser } = useAuth();
-
-//   useEffect(() => {
-//     db.collection('currentBusinessPlan')
-//       .doc(currentUser.uid)
-//       .collection('inputs')
-//       .onSnapshot((querySnapshot) => {
-//         const sections = querySnapshot.docs.map((_doc) => {
-//           const data = _doc.data();
-//           data['id'] = _doc.id;
-//           return data;
-//         });
-//         setSections(sections);
-//       });
-//   }, [selectedSection, deleteHelper]);
-
-//   const selectSectionPage = (section, index) => {
-//     console.log(section);
-//     setSelectedSectionIndex(index);
-//     setSelectedSection(section);
-//   };
-
-//   const sectionUpdate = (id, sectionObj) => {
-//     console.log(id, sectionObj);
-//     console.log('ss', selectedSection);
-//     console.log(sections);
-//     console.log(deleteHelper);
-//     // if (id == selectedSection.id && !deleteHelper) {
-//     // const willsee = sections.filter((_section) => _section.id === id);
-//     // console.log(willsee);
-//     // PROBLEM W TYM, ŻE TO PRÓBOJE ZUPDATOWAĆ DOKUMENT, KTÓREGO NIE MA, BO WŁAŚNIE GO USUNELIŚMY, TYLKO TO USUWANIE NIE JEST ASYNCHRONICZNE TAM U GÓRY
-//     // sectionObj.title !== '' || sectionObj.body !== '' id == selectedSection.id
-//     console.log(sections.includes(sectionObj.title));
-//     if (sectionObj !== selectedSection && sectionObj.title && sectionObj.body && sectionObj.id && typeof sectionObj != 'undefined' && deleteHelper == false) {
-//       db.collection('currentBusinessPlan')
-//       .doc(currentUser.uid)
-//       .collection('inputs')
-//       .doc(id)
-//       .update({
-//         title: sectionObj.title,
-//         body: sectionObj.body,
-//         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-//       });
-//       console.log(' --- UPDATED --- ');
-//       setDeleteHelper(false);
-//       return
-//     } else {
-//       return
-//     }
-//   };
-
-//   const [loading, setLoading] = useState(false);
-//   const [newIdSection, setNewIdSection] = useState(null);
-
-//   // ADD NEW SECTION
-//   const newSectionPage = async (title) => {
-//     const section = {
-//       title,
-//       body: '',
-//     };
-//     const newFromDB = await db
-//       .collection('currentBusinessPlan')
-//       .doc(currentUser.uid)
-//       .collection('inputs')
-//       .add({
-//         title: section.title,
-//         body: section.body,
-//         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-//       });
-//     const newId = newFromDB.id;
-//     setNewIdSection(newId);
-//     console.log(newId);
-//     setLoading(true);
-//     await setSections([...sections, section]);
-//     console.log(sections);
-//     // To, co dzieje się pod tą linijką, służy między innymi temu, żeby wyświetlić od razu nową sekcję, po jej utworzeniu (po prostu tą nową sekcję, którą tworzymy, przypisujemy jako selectedSection).
-//     setLoading(true);
-//     // setTimeout(() => {
-//     //   console.log('sections after timeout - ', sections);
-//     //   const newSectionIndex = sections.indexOf(
-//     //     sections.filter((_section) => _section.id === newId)[0]
-//     //   );
-//     //   console.log(newSectionIndex);
-//     //   setSelectedSection(sections[newSectionIndex]);
-//     //   setSelectedSectionIndex(newSectionIndex);
-//     //   console.log('SELECTED SECTION --> ', selectedSection);
-//     // }, 2000)
-//   };
-
-//   console.log('SECTIONS --> ', sections);
-//   console.log('SELECTED SECTION --> ', selectedSection);
-
-//   useEffect(() => {
-//     if (loading) {
-//       const newSectionIndex = sections.indexOf(
-//         sections.filter((_section) => _section.id === newIdSection)[0]
-//       );
-//       console.log(newSectionIndex);
-//       console.log('here? - ', selectedSection);
-//       if (newSectionIndex !== -1) {
-//         setSelectedSection(sections[newSectionIndex]);
-//         setSelectedSectionIndex(newSectionIndex);
-//       }
-//       // reset
-//       setNewIdSection(null);
-//       setLoading(false);
-//     }
-//   }, [loading]);
-
-//   const [deleteHelper, setDeleteHelper] = useCustomState(false);
-//   const [what, setWhat] = useState();
-
-//   // DELETE SECTION
-//   const deleteSectionPage = (section) => {
-//     setDeleteHelper(true);
-//     const sectionIndex = sections.indexOf(section);
-//     // To musi być async / await, asynchroniczne jakimś cudem !!!
-//     // setSections(async () => await sections.filter((_section) => _section !== section));
-//     // setSections(sections.filter((_section) => _section !== section));
-//     async () => await setSections(sections.filter((_section) => _section !== section)).then((sect) => sect);
-//     if (selectedSectionIndex === sectionIndex) {
-//       // Jeśli usuwamy sekcję, którą obecnie mamy wybraną (activeSection), to robimy to:
-//       setSelectedSectionIndex(null);
-//       setSelectedSection(null);
-//     } else {
-//       // Po tym, jak usuniemy element, to selectedSection nie istnieje, dlatego wybieramy jako selectedSection, następną sekcję z listy
-//       // --> FIRST VERSION
-//       // sections.length >= 1
-//       //   ? selectSectionPage(
-//       //       sections[selectedSectionIndex - 1],
-//       //       selectedSectionIndex - 1
-//       //     )
-//       //   : (setSelectedSectionIndex(null), setSelectedSection(null));
-//       // --> SECOND VERSION (chodzi o to, żeby po usunięciu danej sekcji, selectedSection nie było undefined)
-//       if (sections.length >= 1) {
-//         selectedSectionIndex < sectionIndex
-//           ? selectSectionPage(
-//               sections[selectedSectionIndex],
-//               selectedSectionIndex
-//             )
-//           : selectSectionPage(
-//               sections[selectedSectionIndex - 1],
-//               selectedSectionIndex - 1
-//             );
-//       } else {
-//         setSelectedSection(null);
-//         setSelectedSectionIndex(null);
-//       }
-//     }
-
-//     db.collection('currentBusinessPlan')
-//       .doc(currentUser.uid)
-//       .collection('inputs')
-//       .doc(section.id)
-//       .delete();
-//   };
-
-//   return useMemo(
-//     () => (
-//       <NavbarTemplate>
-//         <div className='min-h-screen w-full relative flex flex-col items-center'>
-//           <div className='w-full max-w-full relative mt-16 px-32'>
-//             <div className='grid grid-cols-2 grid-rows-1 grid-flow-col'>
-//               <div className='flex items-center'>
-//                 <svg
-//                   height='30'
-//                   width='30'
-//                   className='fill-current text-primary dark:text-primarydark'
-//                   xmlns='http://www.w3.org/2000/svg'
-//                   viewBox='0 0 128 128'
-//                 >
-//                   <title>Landing Success</title>
-//                   <g id='Landing_Success' data-name='Landing Success'>
-//                     <path
-//                       className='cls-1'
-//                       d='M109.3,90.1A46,46,0,0,0,65,36V20.08c1.78-.62,7.21-2.14,12.57.23a19.33,19.33,0,0,0,14.82,0c.87-.38.61.31.61-17.93a1,1,0,0,0-1.43-.93c-.07,0-6.69,2.87-13.18,0A19.41,19.41,0,0,0,65,.93,1,1,0,0,0,63,1V36a45.86,45.86,0,0,0-28.66,10.8C16.18,40.48,4,40,.79,45.51-2.29,50.86,3.94,59.3,10,65.68A11,11,0,0,0,18,83c.81,38.41,46.08,59.2,75.66,34.21,8.53,3,29,9.15,33.55,1.31C130.39,113,123.86,102.65,109.3,90.1ZM77.59,3.31A19.39,19.39,0,0,0,91,3.83V18.68c-1.79.62-7.22,2.13-12.57-.23A19.19,19.19,0,0,0,65,17.93V3.08C66.81,2.46,72.24,1,77.59,3.31ZM65,45v-7c39.69.91,58,50.27,28.21,76.81C71.32,107,46,92.66,27.77,78.64a11,11,0,0,0-3.2-16.13A43.88,43.88,0,0,1,63,38.06V45A1,1,0,0,0,65,45ZM32.55,48.36a46.21,46.21,0,0,0-9.83,13.28,10.93,10.93,0,0,0-11.4,2.47C-8.39,43.23,5.23,39.08,32.55,48.36ZM10,72a9,9,0,1,1,9,9A9,9,0,0,1,10,72Zm10,11a11,11,0,0,0,6.34-2.82c18.45,14.21,43.45,28.35,65.05,36.22C63,139.16,20.83,119.1,20.05,83Zm105.4,34.5c-2.51,4.35-14,3.62-30-1.85a45.61,45.61,0,0,0,13.42-23.21C121.59,103.58,128,113.12,125.45,117.47Z'
-//                     />
-//                   </g>
-//                 </svg>
-//                 <p className='text-primarydark text-2xl mt-2 pl-2 dark:text-background'>
-//                   Business plan
-//                 </p>
-//               </div>
-//               <div className='flex justify-end mt-4'>
-//                 <button className='hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl mt-2 dark:text-primarydark dark:border-primarydark'>
-//                   Settings
-//                 </button>
-//               </div>
-//             </div>
-//             <div>
-//               <h1 className='text-secondary text-md text-gray'>
-//                 Create your business plan any way you want
-//               </h1>
-//             </div>
-//             {/* SECTIONS */}
-//             <div className='grid grid-cols-8fr grid-flow-col'>
-//               <div className='col-start-1 col-end-7 w-full h-maxcontent mt-12'>
-//                 <h1 className='text-primarydark text-base dark:text-background'>
-//                   Manage your input
-//                 </h1>
-//                 <div className='relative flex flex-col h-full w-full flex px-8 pt-8 pb-8 rounded-2xl bg-white dark:bg-background mt-1'>
-//                   {selectedSection ? (
-//                     (console.log('selected --> ', selectedSection),
-//                     (
-//                       <EditorInputElement
-//                         // sectionUpdate={sectionUpdate}
-//                         // sectionUpdate={sectionUpdate}
-//                         sectionUpdate={sectionUpdate}
-//                         selectedSection={selectedSection}
-//                         selectedSectionIndex={selectedSectionIndex}
-//                         sections={sections}
-//                       />
-//                     ))
-//                   ) : (
-//                     <div>Text section or chart???</div>
-//                   )}
-//                 </div>
-//               </div>
-//               <SectionManager
-//                 sections={sections}
-//                 selectedSectionIndex={selectedSectionIndex}
-//                 selectSectionPage={selectSectionPage}
-//                 newSectionPage={newSectionPage}
-//                 deleteSectionPage={deleteSectionPage}
-//               />
-//             </div>
-//           </div>
-//         </div>
-//       </NavbarTemplate>
-//     ),
-//     [sections, selectedSectionIndex, selectedSection]
-//   );
-// };
-
-// export default BusinessPlanApp;
+import BounceLoaderComponent from '../../../../BounceLoader';
 
 // Class based component
 class BusinessPlanApp extends Component {
@@ -281,6 +40,7 @@ class BusinessPlanApp extends Component {
       // routerPath: useRouter().query.project
     };
     this.addNewElement = React.createRef();
+    this.exitImage = React.createRef();
   }
 
   componentDidMount = async () => {
@@ -338,34 +98,14 @@ class BusinessPlanApp extends Component {
         });
     }
 
-    // await db.collection('projects')
-    // .doc(this.state.projectId)
-    // .collection('businessPlan')
-    // .where('pathName', '==', Router.query.project)
-    // .where('projectId', '==', this.state.projectId)
-    // .onSnapshot((serverUpdate) => {
-    //   const sections = serverUpdate.docs.map((doc) => {
-    //    const data = doc.data();
-    //    data['id'] = doc.id;
-    //    return data.sections;
-    //   })
-    //   const sectionsArray = sections[0];
-    //   console.log(sectionsArray);
-    // })
-
-    //   db.collection('currentBusinessPlan')
-    // .doc('GrcvhyJwvlWVy31QsiudoQKdKI72')
-    // .collection('inputs')
-    // .onSnapshot((serverUpdate) => {
-    //   const sections = serverUpdate.docs.map((_doc) => {
-    //     const data = _doc.data();
-    //     data['id'] = _doc.id;
-    //     return data;
-    //   });
-    //   console.log(sections);
-    //   sections.sort((a, b) => b.createdAt - a.createdAt);
-    //   this.setState({ sections: sections });
-    // });
+    if (this.exitImage.current) {
+      this.exitImage.current.addEventListener('mouseenter', () => {
+        gsap.to(this.exitImage.current, { rotation: '180_cw', duration: 0.5, ease: Linear.easeIn });
+      });
+      this.exitImage.current.addEventListener('mouseleave', () => {
+        gsap.to(this.exitImage.current, { rotation: '0_cw', duration: 0.5, ease: Linear.easeIn });
+      });
+    }
   };
 
   selectSectionPage = (section, index) => this.setState({ selectedSectionIndex: index, selectedSection: section });
@@ -3008,7 +2748,7 @@ class BusinessPlanApp extends Component {
     });
   };
 
-  deleteSectionPage = async (section) => {
+  deleteSectionPage = async (section, index) => {
     const sectionIndex = this.state.sections.indexOf(section);
     await this.setState({
       sections: this.state.sections.filter((_section) => _section !== section),
@@ -3044,44 +2784,44 @@ class BusinessPlanApp extends Component {
     await this.setState({ selectedSection: newSection });
   };
 
-  onLeftBarHidden = () => {
-    // --- VERSION 1 ---
-    // EXIT
-    // gsap.to(document.getElementById('exit'), { autoAlpha: 0, duration: 1, ease: Linear })
-    // // TEXT
-    // gsap.to(document.getElementById('left-text'), { scale: 0, duration: 1, ease: Linear });
-    // gsap.to(document.getElementById('left-text1'), { scale: 0, duration: 1, ease: Linear });
-    // gsap.to(document.getElementById('left-text2'), { scale: 0, duration: 1, ease: Linear });
-    // // IMAGES
-    // gsap.to(document.getElementById('left-element'), { scale: 0, duration: 1, ease: Linear });
-    // gsap.to(document.getElementById('left-element1'), { scale: 0, duration: 1, ease: Linear });
-    // gsap.to(document.getElementById('left-element2'), { scale: 0, duration: 1, ease: Linear });
-    // gsap.to(document.getElementById('left-bar'), {width: 0, transformOrigin: 'left', duration: 1, ease: Linear, delay: 1 });
+  // onLeftBarHidden = () => {
+  //   // --- VERSION 1 ---
+  //   // EXIT
+  //   // gsap.to(document.getElementById('exit'), { autoAlpha: 0, duration: 1, ease: Linear })
+  //   // // TEXT
+  //   // gsap.to(document.getElementById('left-text'), { scale: 0, duration: 1, ease: Linear });
+  //   // gsap.to(document.getElementById('left-text1'), { scale: 0, duration: 1, ease: Linear });
+  //   // gsap.to(document.getElementById('left-text2'), { scale: 0, duration: 1, ease: Linear });
+  //   // // IMAGES
+  //   // gsap.to(document.getElementById('left-element'), { scale: 0, duration: 1, ease: Linear });
+  //   // gsap.to(document.getElementById('left-element1'), { scale: 0, duration: 1, ease: Linear });
+  //   // gsap.to(document.getElementById('left-element2'), { scale: 0, duration: 1, ease: Linear });
+  //   // gsap.to(document.getElementById('left-bar'), {width: 0, transformOrigin: 'left', duration: 1, ease: Linear, delay: 1 });
 
-    // --- VERSION 2 ---
-    // CONTAINERS
-    gsap.to(document.getElementById('container'), { autoAlpha: 0, delay: 1 });
-    gsap.to(document.getElementById('container1'), { autoAlpha: 0, delay: 1 });
-    gsap.to(document.getElementById('container2'), { autoAlpha: 0, delay: 1 });
-    gsap.to(document.getElementById('container3'), { autoAlpha: 0, delay: 1 });
-    gsap.to(document.getElementById('container4'), { autoAlpha: 0, delay: 1 });
-    // LEFT BAR
-    gsap.to(document.getElementById('left-bar'), { height: 0, transformOrigin: 'top', duration: 2.5, ease: Linear });
-    // EXIT
-    gsap.to(document.getElementById('exit'), { autoAlpha: 0, duration: 2, ease: Linear });
-    // TEXTS
-    gsap.to(document.getElementById('left-text4'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear });
-    gsap.to(document.getElementById('left-text3'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.2 });
-    gsap.to(document.getElementById('left-text2'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.4 });
-    gsap.to(document.getElementById('left-text1'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.6 });
-    gsap.to(document.getElementById('left-text'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.8 });
-    // IMAGES
-    gsap.to(document.getElementById('left-element4'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear });
-    gsap.to(document.getElementById('left-element3'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.2 });
-    gsap.to(document.getElementById('left-element2'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.4 });
-    gsap.to(document.getElementById('left-element1'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.6 });
-    gsap.to(document.getElementById('left-element'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.8 });
-  };
+  //   // --- VERSION 2 ---
+  //   // CONTAINERS
+  //   gsap.to(document.getElementById('container'), { autoAlpha: 0, delay: 1 });
+  //   gsap.to(document.getElementById('container1'), { autoAlpha: 0, delay: 1 });
+  //   gsap.to(document.getElementById('container2'), { autoAlpha: 0, delay: 1 });
+  //   gsap.to(document.getElementById('container3'), { autoAlpha: 0, delay: 1 });
+  //   gsap.to(document.getElementById('container4'), { autoAlpha: 0, delay: 1 });
+  //   // LEFT BAR
+  //   gsap.to(document.getElementById('left-bar'), { height: 0, transformOrigin: 'top', duration: 2.5, ease: Linear });
+  //   // EXIT
+  //   gsap.to(document.getElementById('exit'), { autoAlpha: 0, duration: 2, ease: Linear });
+  //   // TEXTS
+  //   gsap.to(document.getElementById('left-text4'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear });
+  //   gsap.to(document.getElementById('left-text3'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.2 });
+  //   gsap.to(document.getElementById('left-text2'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.4 });
+  //   gsap.to(document.getElementById('left-text1'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.6 });
+  //   gsap.to(document.getElementById('left-text'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.8 });
+  //   // IMAGES
+  //   gsap.to(document.getElementById('left-element4'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear });
+  //   gsap.to(document.getElementById('left-element3'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.2 });
+  //   gsap.to(document.getElementById('left-element2'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.4 });
+  //   gsap.to(document.getElementById('left-element1'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.6 });
+  //   gsap.to(document.getElementById('left-element'), { scale: 0, transformOrigin: 'top', duration: 1, ease: Linear, delay: 0.8 });
+  // };
 
   pdfChartsCreate = async (sections) => {
     // console.log(sections);
@@ -3431,25 +3171,36 @@ class BusinessPlanApp extends Component {
         }
       });
     });
-
-    console.log(images);
   };
 
+  override = css`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `;
+
   render() {
-    return (
+    return this.state.sections ? (
       <>
         <TippyMonster
           businessPlan
           contentClass="h-32 w-80 shadow-lg rounded-2xl bg-primary flex justify-center items-center"
           contentText="In this place, you can create a business plan that will be completely customized to your needs, so this time, I won't guide you through the process of creating one. "
         />
-        <ExitComponent />
+        {/* Delete alert */}
+        {/* <div className="w-full z-0">
+          <div
+            style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+            className="bg-white shadow-lg py-4 px-8 z-50"
+          >
+            <p className="text-primarydark">Are you sure you want to delete this section?</p>
+          </div>
+        </div> */}
+        {/* <ExitComponent /> */}
         <NavbarTemplate>
-          {/* <NavbarTemplate> */}
           <div className="min-h-screen w-full relative flex flex-col items-center">
-            {/* <div className='h-1/5 w-4/5 bg-primarydark fixed bottom-0 z-50'></div> */}
-            {/* ADDING ITEMS LEFT BAR */}
-            <div id="left-bar" className="z-50 h-0 w-40 bg-primary fixed top-0 left-0">
+            <div id="left-bar" className="z-50 h-screen w-40 bg-primary fixed top-0 left-0">
               <ul className="circles1" style={{ zIndex: -1 }}>
                 <li></li>
                 <li></li>
@@ -3463,93 +3214,93 @@ class BusinessPlanApp extends Component {
                 <li></li>
                 {/* 10 */}
               </ul>
+              {/* <ExitComponent /> */}
               <img
+                ref={this.exitImage}
                 id="exit"
-                onClick={this.onLeftBarHidden}
-                src="/chart/exit1.svg"
-                width={15}
-                width={15}
-                style={{ position: 'absolute', top: '1%', right: '-15%', visibility: 'hidden', opacity: 0 }}
+                onClick={() => Router.push(`/dashboard/projects/${Router.query.project}`)}
+                src="/business-model/back4.svg"
+                width={28}
+                width={28}
+                style={{ position: 'absolute', left: 175, cursor: 'pointer' }}
+                // style={{ position: 'absolute', top: '1%', right: '-15%', cursor: 'pointer' }}
               />
               <div className="h-full w-full grid grid-cols-1frr grid-rows-5fr justify-items-center items-center">
                 <div
                   onClick={() => this.addNewHeader()}
                   id="container"
-                  className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+                  className="mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
                 >
                   <div
                     id="left-element"
-                    className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                    className="transform w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
                   >
-                    <Image src="/chart/header.svg" width={55} height={55} />
+                    <img src="/chart/header.svg" width={55} height={55} />
                   </div>
-                  <p id="left-text" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  <p id="left-text" className="transform text-center text-background mt-1 text-sm cursor-default">
                     Header
                   </p>
                 </div>
                 <div
                   onClick={() => this.addNewField()}
                   id="container1"
-                  className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+                  className="mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
                 >
                   <div
                     id="left-element1"
-                    className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                    className="transform w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
                   >
-                    <Image src="/chart/text.svg" width={55} height={55} />
+                    <img src="/chart/text.svg" width={55} height={55} />
                   </div>
-                  <p id="left-text1" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  <p id="left-text1" className="transform text-center text-background mt-1 text-sm cursor-default">
                     Text
                   </p>
                 </div>
                 <div
                   onClick={() => this.addNewSpacing()}
                   id="container2"
-                  className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+                  className="mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
                 >
-                  <div
-                    id="left-element2"
-                    className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
-                  >
-                    <Image src="/spacing/spacing.svg" width={55} height={55} />
+                  <div id="left-element2" className="w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center">
+                    <img src="/spacing/spacing.svg" width={55} height={55} />
                   </div>
-                  <p id="left-text2" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  <p id="left-text2" className="transform text-center text-background mt-1 text-sm cursor-default">
                     Spacing
                   </p>
                 </div>
                 <div
                   onClick={() => this.addNewChart()}
                   id="container3"
-                  className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+                  className="mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
                 >
                   <div
                     id="left-element3"
-                    className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                    className="transform w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
                   >
-                    <Image src="/chart/chart.svg" width={55} height={55} />
+                    <img src="/chart/chart.svg" width={55} height={55} />
                   </div>
-                  <p id="left-text3" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  <p id="left-text3" className="transform text-center text-background mt-1 text-sm cursor-default">
                     Chart
                   </p>
                 </div>
                 <div
                   onClick={() => this.addNewTable()}
                   id="container4"
-                  className="invisible opacity-0 mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
+                  className="mt-4 w-full h-full flex flex-col justify-center items-center hover:shadow-2xl transform transition duration-500 ease-in-out cursor-pointer"
                 >
                   <div
                     id="left-element4"
-                    className="transform scale-0 w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
+                    className="transform w-4/6 h-16 bg-background rounded-2xl shadow-lg flex justify-center items-center"
                   >
-                    <Image src="/table/table.svg" width={55} height={55} />
+                    <img src="/table/table.svg" width={55} height={55} />
                   </div>
-                  <p id="left-text4" className="transform scale-0 text-center text-background mt-1 text-sm cursor-default">
+                  <p id="left-text4" className="transform text-center text-background mt-1 text-sm cursor-default">
                     Table
                   </p>
                 </div>
               </div>
             </div>
-            <div className="w-full max-w-full relative mt-16 px-8 screenSmall:px-32 text-primarydark">
+            <div className="w-full max-w-full relative mt-8 px-8 screenSmall:px-32 text-primarydark">
               <div className="grid grid-cols-2 grid-rows-1 grid-flow-col">
                 <div className="flex items-center">
                   <svg
@@ -3569,7 +3320,6 @@ class BusinessPlanApp extends Component {
                   </svg>
                   <p className="text-primarydark text-2xl screenLarge:text-3xl mt-2 pl-2 dark:text-background">Business plan</p>
                 </div>
-                {/* <PDFDocument allData={this.state.sections} pdfChartsCreate={this.pdfChartsCreate} projectId={this.state.projectId} /> */}
                 <ReactPDFDocument
                   projectName={this.state.projectName}
                   projectDescription={this.state.projectDescription}
@@ -3589,7 +3339,7 @@ class BusinessPlanApp extends Component {
               </div>
               {/* SECTIONS */}
               <div className="grid grid-cols-businessSmall screenSmall:grid-cols-business screenMedium:grid-cols-businessMedium grid-flow-col gap-x-8">
-                <div className="w-full h-maxcontent mt-12 pb-20">
+                <div className="w-full h-maxcontent mt-12 mb-32">
                   {this.state.selectedSection ? (
                     (console.log('selected --> ', this.state.selectedSection),
                     (
@@ -3649,9 +3399,10 @@ class BusinessPlanApp extends Component {
               </div>
             </div>
           </div>
-          {/* </NavbarTemplate> */}
         </NavbarTemplate>
       </>
+    ) : (
+      <BounceLoaderComponent />
     );
   }
 }

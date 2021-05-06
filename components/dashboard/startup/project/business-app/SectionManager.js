@@ -37,8 +37,8 @@ const SectionManager = ({
     console.log('select section');
   };
 
-  const deleteSection = (section) => {
-    deleteSectionPage(section);
+  const deleteSection = (section, index) => {
+    deleteSectionPage(section, index);
     console.log('delete section');
   };
 
