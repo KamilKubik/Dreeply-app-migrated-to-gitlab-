@@ -6,7 +6,7 @@ import '../../../../../../../node_modules/react-quill/dist/quill.bubble.css';
 import '../../../../../../../node_modules/react-quill/dist/quill.core.css';
 import UniqueHeader from './UniqueHeader';
 import UniqueText from './UniqueText';
-import UniqueChart from './UniqueChart';
+// import UniqueChart from './UniqueChart';
 import UniqueTable from './UniqueTable';
 
 const EditorInputElement = ({ selectedSection }) => {
@@ -34,7 +34,7 @@ const EditorInputElement = ({ selectedSection }) => {
         selectedSection.fields.map((field) => {
           return (
             (field.type == 'text' && <UniqueText field={field} />) ||
-            (field.type == 'chart' && <UniqueChart field={field} />) ||
+            // (field.type == 'chart' && <UniqueChart field={field} />) ||
             (field.type == 'header' && <UniqueHeader field={field} />) ||
             (field.type == 'table' && <UniqueTable field={field} />) ||
             (field.type == 'spacing' && <div />)
