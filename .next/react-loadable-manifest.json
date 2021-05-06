@@ -1,40 +1,8 @@
 {
-  "..\\components\\dashboard\\startup\\project\\business-app\\Editor.js -> react-quill": {
-    "id": "rmP6",
+  "..\\node_modules\\next\\dist\\client\\next-dev.js -> ./dev/noop": {
+    "id": "./node_modules/next/dist/client/dev/noop.js",
     "files": [
-      "static/chunks/framework.b8f98ae0cabfbf8d6dda.js",
-      "static/chunks/eabe11fc.1913c8bc3fee800d1aec.js",
-      "static/chunks/daa41b92f5d40ed443b454012c88b8d8ad323b81.5b1d4da8757dab60fa59.js",
-      "static/chunks/32.b3899101ff040797c0bb.js"
-    ]
-  },
-  "..\\components\\dashboard\\startup\\project\\business-app\\Text.js -> react-quill": {
-    "id": "rmP6",
-    "files": [
-      "static/chunks/framework.b8f98ae0cabfbf8d6dda.js",
-      "static/chunks/eabe11fc.1913c8bc3fee800d1aec.js",
-      "static/chunks/daa41b92f5d40ed443b454012c88b8d8ad323b81.5b1d4da8757dab60fa59.js",
-      "static/chunks/32.b3899101ff040797c0bb.js"
-    ]
-  },
-  "..\\components\\dashboard\\startup\\project\\business-app\\business-plan\\unique\\SectionEditor.js -> react-quill": {
-    "id": "rmP6",
-    "files": [
-      "static/chunks/framework.b8f98ae0cabfbf8d6dda.js",
-      "static/chunks/eabe11fc.1913c8bc3fee800d1aec.js",
-      "static/chunks/4a74b6d6b52a37749ae5278dd918bad6f9c479c5.4cde3f99aae9603f31d8.js",
-      "static/chunks/daa41b92f5d40ed443b454012c88b8d8ad323b81.5b1d4da8757dab60fa59.js",
-      "static/chunks/31.411f0c30c9da84e11f17.js"
-    ]
-  },
-  "..\\components\\dashboard\\startup\\project\\business-app\\business-plan\\unique\\UniqueText.js -> react-quill": {
-    "id": "rmP6",
-    "files": [
-      "static/chunks/framework.b8f98ae0cabfbf8d6dda.js",
-      "static/chunks/eabe11fc.1913c8bc3fee800d1aec.js",
-      "static/chunks/4a74b6d6b52a37749ae5278dd918bad6f9c479c5.4cde3f99aae9603f31d8.js",
-      "static/chunks/daa41b92f5d40ed443b454012c88b8d8ad323b81.5b1d4da8757dab60fa59.js",
-      "static/chunks/31.411f0c30c9da84e11f17.js"
+      "static/chunks/0.js"
     ]
   }
 }
