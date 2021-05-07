@@ -23,6 +23,7 @@ const newStartupPage = () => {
   const [fileUrl, setFileUrl] = useState(null);
 
   const [userName, setUserName] = useState('');
+  const [userCountry, setUserCountry] = useState('');
 
   const router = useRouter();
   const { currentUser } = useAuth();
@@ -46,6 +47,7 @@ const newStartupPage = () => {
     // Fetch current user name
     const data = await db.collection('users').doc(currentUser.uid).get();
     setUserName(data.data().name);
+    setUserCountry(data.data().userCountry);
   }, []);
 
   console.log('Current user --> ', currentUser);
@@ -76,6 +78,7 @@ const newStartupPage = () => {
     // ADD NEW PROJECT
     const projectId = uuidv4();
     const newProject = {
+      createdAt: new Date(),
       projectName: projectName,
       projectDescription: projectDescription,
       projectField: projectField,
@@ -94,11 +97,12 @@ const newStartupPage = () => {
       isMembersManagerCreated: false,
       projectUsers: [
         {
-          userName: userName,
+          userName,
           userUid: currentUser.uid,
           userStripeRole: currentUser.stripeRole,
           userToken: currentUser.token,
           userEmail: currentUser.email,
+          userCountry,
         },
       ],
     };

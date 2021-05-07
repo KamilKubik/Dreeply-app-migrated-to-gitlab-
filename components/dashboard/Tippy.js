@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap, { Power4 } from 'gsap';
 import Tippy from '@tippyjs/react';
-import Image from 'next/image';
 
 const TippyMonster = ({
   setTippyHelper,
@@ -41,7 +40,7 @@ const TippyMonster = ({
       { autoAlpha: 1, scale: 1, duration: 1, transformOrigin: 'bottom right', ease: Power4.easeOut }
     );
     setVisible(true);
-    emptyInput && setCurrentTippy(true); // current tippy jest częścią obsługi problemu, kiedy mamy otwartego tooltipa normalnego i wciskamy, żeby wyświetlić czerwonego
+    emptyInput && setCurrentTippy(true);
   };
   const hide = async () => {
     await gsap.to(tippyRef.current, {
@@ -185,8 +184,8 @@ const TippyMonster = ({
                   {/* <p className="inline-block">.</p> */}
                 </>
               )}
-              {/* <img src='/emojis/cocount.svg' height={22} width={22} className='inline-block' />. */}
-
+              {/* Project manager start */}
+              {/* Project manager end */}
               {/* TEXT 1 */}
               {contentText1 && contentText1}
               {startups && (
@@ -245,7 +244,7 @@ const TippyMonster = ({
       }
     >
       <div className="fixed flex flex-wrap m-2 bottom-4 right-2 z-50">
-        <Image src="/monsters/monster-two.svg" height={66} width={60} className="cursor-pointer z-50" onClick={onImageClick} />
+        <img src="/monsters/monster-two.svg" height={66} width={60} className="cursor-pointer z-50" onClick={onImageClick} />
       </div>
     </Tippy>
   );

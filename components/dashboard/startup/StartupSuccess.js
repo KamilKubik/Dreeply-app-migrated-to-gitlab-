@@ -12,7 +12,7 @@ import AnimatedBackground from './AnimatedBackground';
 import Cookies from 'js-cookie';
 import ExitComponent from './ExitComponent';
 
-const StartupSuccess = () => {
+const StartupSuccess = ({ managerPage }) => {
   const [projectId, setProjectId] = useState();
   // STARTER
   const [ideaName, setIdeaName] = useState('');
@@ -593,100 +593,95 @@ const StartupSuccess = () => {
   return useMemo(
     () => (
       <>
-        <ExitComponent />
-        <div ref={contentRef} className="h-screen w-full relative flex flex-col items-center justify-center">
-          <ul className="circles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            {/* 10 */}
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-          <div className="flex flex-col items-center justify-center w-full max-w-screen-md relative pl-6 pr-6 mt-16 pb-24">
-            <p className="text-primarydark text-2xl normal:text-3xl mt-2 pl-2 dark:text-background text-center">
-              <img src="/gifs/popper.gif" height={60} width={60} className="inline-block relative bottom-4 left-3" />
-              Congratulations!
-            </p>
-            <p className="text-gray text-base normal:text-lg pl-2 dark:text-background text-center">
-              Now you can save your idea and set off to conquer the world
-            </p>
-            <img src="/success.svg" height={200} width={200} className="mt-4" />
-            <div>
-              <button
-                className="z-10 mr-4 mt-6 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark"
-                onClick={onProjectLeave}
-              >
-                Back
-              </button>
-              <button
-                className="z-10 ml-4 mt-6 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark"
-                onClick={async (e) => {
-                  e.preventDefault();
-                  const doc = <MyDocument1 data={data} />;
-                  const asPdf = pdf([]); // {} is important, throws without an argument
-                  asPdf.updateContainer(doc);
-                  const blob = await asPdf.toBlob();
-                  saveAs(blob, `${ideaName}/idea-plan.pdf`);
-                }}
-              >
-                Save
-              </button>
-            </div>
-            {/* <button
-            onClick={async () => {
-              const doc = <MyDocument />;
-              const asPdf = pdf([]); // {} is important, throws without an argument
-              asPdf.updateContainer(doc);
-              const blob = await asPdf.toBlob();
-              saveAs(blob, `${ideaName}.pdf`);
-            }}
-          >
-            Download PDF
-          </button> */}
-            {/* <img src={image} height={200} width={200}></img> */}
-            {/* {data && (
-            <PDFDownloadLink
-              document={<MyDocument />}
-              fileName='somename.pdf'
-            >
-              {({ blob, url, loading, error }) =>
-                loading ? 'Loading document...' : 'Download now!'
-              }
-            </PDFDownloadLink>
-          )} */}
-            {/* {marketProblemSection && (
-          <PDFViewer data={marketProblemSection}>
-            <MyDocument />
-          </PDFViewer>
-        )} */}
+        {managerPage ? (
+          <div className="flex">
+            <img
+              className="mr-2"
+              src="/mobile-navbar/pdf.svg"
+              onClick={async (e) => {
+                e.preventDefault();
+                const doc = <MyDocument1 data={data} />;
+                const asPdf = pdf([]); // {} is important, throws without an argument
+                asPdf.updateContainer(doc);
+                const blob = await asPdf.toBlob();
+                saveAs(blob, `${ideaName}/idea-plan.pdf`);
+              }}
+              height={24}
+              width={24}
+            />
+            <img className="cursor-pointer" src="/mobile-navbar/foreign.svg" height={24} width={24} className="h-full" />
           </div>
-        </div>
+        ) : (
+          <>
+            <ExitComponent />
+            <div ref={contentRef} className="h-screen w-full relative flex flex-col items-center justify-center">
+              <ul className="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                {/* 10 */}
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <div className="flex flex-col items-center justify-center w-full max-w-screen-md relative pl-6 pr-6 mt-16 pb-24">
+                <p className="text-primarydark text-2xl normal:text-3xl mt-2 pl-2 dark:text-background text-center">
+                  <img src="/gifs/popper.gif" height={60} width={60} className="inline-block relative bottom-4 left-3" />
+                  Congratulations!
+                </p>
+                <p className="text-gray text-base normal:text-lg pl-2 dark:text-background text-center">
+                  Now you can save your idea and set off to conquer the world
+                </p>
+                <img src="/success.svg" height={200} width={200} className="mt-4" />
+                <div>
+                  <button
+                    className="z-10 mr-4 mt-6 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark"
+                    onClick={onProjectLeave}
+                  >
+                    Back
+                  </button>
+                  <button
+                    className="z-10 ml-4 mt-6 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-8 rounded-2xl dark:text-primarydark dark:border-primarydark"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      const doc = <MyDocument1 data={data} />;
+                      const asPdf = pdf([]); // {} is important, throws without an argument
+                      asPdf.updateContainer(doc);
+                      const blob = await asPdf.toBlob();
+                      saveAs(blob, `${ideaName}/idea-plan.pdf`);
+                    }}
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </>
     ),
     [data]

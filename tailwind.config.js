@@ -58,6 +58,7 @@ module.exports = {
       businessSmall: '1fr 220px',
       business: '1fr 240px',
       businessMedium: '1fr 280px',
+      projectMembers: '28% 28% 28% 16%',
     },
     gridTemplateRows: {
       '1fr': '1fr',

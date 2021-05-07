@@ -11,9 +11,18 @@ import { isMobile } from 'react-device-detect';
 import MobilePrevent from '../../../../components/MobilePrevent';
 import BounceLoaderComponent from '../../../../components/BounceLoader';
 import UsersManager from '../../../../components/dashboard/startup/project/business-app/UsersManager';
+import NewMembers from '../../../../components/dashboard/startup/project/business-app/NewMembers';
+import IdeaTippy from '../../../../components/dashboard/startup/project/business-app/tippys/IdeaTippy';
+import BusinessPlanTippy from '../../../../components/dashboard/startup/project/business-app/tippys/BusinessPlanTippy';
+import CashFlowTippy from '../../../../components/dashboard/startup/project/business-app/tippys/CashFlowTippy';
+import CompetitorsAnalysisTippy from '../../../../components/dashboard/startup/project/business-app/tippys/CompetitorsAnalysisTippy';
 
 const ProjectPage = ({ projects }) => {
+  // Tippy helpers
+  const [newMembersHelper, setNewMembersHelper] = useState(false);
+  const [usersManagerHelper, setUsersManagerHelper] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [projectUsers, setProjectUsers] = useState(null);
   const containerRef = useRef();
   const { currentUser } = useAuth();
   const router = useRouter();
@@ -22,7 +31,9 @@ const ProjectPage = ({ projects }) => {
     const filteredArray = projects && projects.filter((project) => project.uid == uid);
     console.log(filteredArray);
     filteredArray && filteredArray.length == 1 && setSelectedProject(filteredArray[0]);
+    filteredArray && filteredArray.length == 1 && setProjectUsers(filteredArray[0].projectUsers);
   }, [projects]);
+  console.log(projectUsers);
 
   // STARTUP IDEA CREATE
   const onStartupIdeaCreate = async () => {
@@ -154,7 +165,7 @@ const ProjectPage = ({ projects }) => {
       <NavbarTemplate>
         {selectedProject ? (
           <div ref={containerRef} className="min-h-screen w-full relative flex flex-col items-center">
-            <div className="w-full sm:max-w-smContainer md:max-w-mdContainer lg:max-w-lgContainer xl:max-w-xlContainer 2xl:max-w-xxlContainer normal:max-w-normalContainer relative mt-16">
+            <div className="z-30 w-full sm:max-w-smContainer md:max-w-mdContainer lg:max-w-lgContainer xl:max-w-xlContainer 2xl:max-w-xxlContainer normal:max-w-normalContainer relative mt-12">
               {/* <div className="w-full max-w-full relative mt-16 mb-16 px-32"> */}
               <div className="grid grid-cols-2 grid-rows-1 grid-flow-col">
                 <div className="flex items-center">
@@ -194,7 +205,10 @@ const ProjectPage = ({ projects }) => {
               <div className="grid grid-cols-1frr screenSmall:grid-cols-2fr grid-rows-4fr screenSmall:grid-rows-2fr mt-8 gap-x-16 gap-y-16 mb-16">
                 {/* SHOWUP1 */}
                 <div className="rounded-2xl transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
-                  <h1 className="text-primarydark text-lg dark:text-background">Startup idea</h1>
+                  <div className="flex">
+                    <p className="text-primarydark text-lg dark:text-background">Startup idea</p>
+                    <IdeaTippy />
+                  </div>
                   <div
                     style={{ maxHeight: 330 }}
                     className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
@@ -214,7 +228,10 @@ const ProjectPage = ({ projects }) => {
                 </div>
                 {/* SHOWUP2 */}
                 <div className="rounded-2xl transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
-                  <h1 className="text-primarydark text-lg dark:text-background">Business plan</h1>
+                  <div className="flex">
+                    <p className="text-primarydark text-lg dark:text-background">Business plan</p>
+                    <BusinessPlanTippy />
+                  </div>
                   <div
                     style={{ maxHeight: 330 }}
                     className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
@@ -222,12 +239,6 @@ const ProjectPage = ({ projects }) => {
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/business-plan.svg" />
                     <p className="text-base text-gray text-center px-4 py-4">
                       Let's create your business plan, which will be the core of your startup presentation
-                      {/* <img
-                        src="/project-manager/business-plan.svg"
-                        height={18}
-                        width={18}
-                        className="ml-1 inline-block relative bottom-0.5"
-                      /> */}
                     </p>
                     <button
                       onClick={onBusinessPlanCreate}
@@ -239,15 +250,18 @@ const ProjectPage = ({ projects }) => {
                 </div>
                 {/* SHOWUP3 */}
                 <div className="rounded-2xl transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
-                  <h1 className="text-primarydark text-lg dark:text-background">Cash flow analysis</h1>
+                  <div className="flex">
+                    <p className="text-primarydark text-lg dark:text-background">Cash flow analysis</p>
+                    <CashFlowTippy />
+                  </div>
                   <div
                     style={{ maxHeight: 330 }}
                     className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/cash-flow2.svg" />
-                    <h1 className=" text-base text-gray text-center px-4 py-4">
+                    <p className=" text-base text-gray text-center px-4 py-4">
                       Cash flow analysis will allow you to analyze the liquidity of your startup
-                    </h1>
+                    </p>
                     <button
                       onClick={onCashFlowAnalysisCreate}
                       className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
@@ -258,7 +272,10 @@ const ProjectPage = ({ projects }) => {
                 </div>
                 {/* SHOWUP4 */}
                 <div className="rounded-2xl transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
-                  <h1 className="text-primarydark text-lg dark:text-background">Competitors analysis</h1>
+                  <div className="flex">
+                    <p className="text-primarydark text-lg dark:text-background">Competitors analysis</p>
+                    <CompetitorsAnalysisTippy />
+                  </div>
                   <div
                     style={{ maxHeight: 330 }}
                     className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
@@ -278,7 +295,8 @@ const ProjectPage = ({ projects }) => {
                   </div>
                 </div>
               </div>
-              <UsersManager selectedProject={selectedProject} />
+              <UsersManager setUsersManagerHelper={setUsersManagerHelper} projectUsers={projectUsers} selectedProject={selectedProject} />
+              <NewMembers setNewMembersHelper={setNewMembersHelper} projectId={selectedProject.projectId} />
             </div>
           </div>
         ) : (
