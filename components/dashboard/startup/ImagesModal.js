@@ -81,8 +81,8 @@ const ImagesModal = ({ setImageName, setImagesModal, onFileChange, currentUser, 
         <p className="text-primarydark text-2xl normal:text-3xl mt-12 dark:text-background text-center">
           Choose the illustration that best represents your idea
         </p>
-        <p className="text-primarydark text-base normal:text-lg mt-2 dark:text-background text-center">
-          Startup idea creator will help you create the initial mockup of your future startup
+        <p className="text-gray text-base normal:text-lg dark:text-background text-center">
+          If you are undecided, feel free to add your own illustration
           {/* <img
             src='/emojis/palm.svg'
             height={25}

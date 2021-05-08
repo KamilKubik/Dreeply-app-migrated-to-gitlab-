@@ -27,7 +27,8 @@ const MembersCodeComponent = () => {
         // Update particular project users
         const newUsersArray = projectData.projectUsers;
         newUsersArray.push({
-          email: formatedUser.email,
+          role: 'member',
+          userEmail: formatedUser.email,
           stripeRole: formatedUser.stripeRole,
           token: formatedUser.token,
           userUid: formatedUser.uid,
@@ -47,7 +48,7 @@ const MembersCodeComponent = () => {
   };
 
   return (
-    <div className="z-50 text-primarydark rounded-2xl mb-32 flex flex-col">
+    <div className="z-50 text-primarydark rounded-2xl mb-32 mt-12 flex flex-col">
       <div className="flex">
         <p className="text-lg dark:text-background">Become a project member</p>
         <ManagerTippy />
@@ -65,7 +66,7 @@ const MembersCodeComponent = () => {
         ) : (
           <button
             onClick={onNewProjectAdd}
-            className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-6 rounded-2xl dark:text-primarydark dark:border-primarydark"
+            className="z-30 hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-sm font-light py-2 px-6 rounded-2xl dark:text-primarydark dark:border-primarydark"
           >
             Add Project
           </button>

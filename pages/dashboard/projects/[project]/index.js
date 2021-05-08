@@ -18,6 +18,29 @@ import CashFlowTippy from '../../../../components/dashboard/startup/project/busi
 import CompetitorsAnalysisTippy from '../../../../components/dashboard/startup/project/business-app/tippys/CompetitorsAnalysisTippy';
 
 const ProjectPage = ({ projects }) => {
+  console.log('Projects --> ', projects);
+  const [motivationStory, setMotivationStory] = useState('');
+  const stories = [
+    '“Business opportunities are like buses, there’s always another one coming.”',
+    '“Every problem is a gift - without problems we would not grow.”',
+    '“Success usually comes to those who are too busy to be looking for it.”',
+    '“I don’t know the word ‘quit.’ Either I never did, or I have abolished it.”',
+    '“If you really look closely, most overnight successes took a long time.”',
+    '“Even if you are on the right track, you’ll get run over if you just sit there.”',
+    '“Imagination is everything. It is the preview of life’s coming attractions.”',
+    '“The first one gets the oyster, the second gets the shell.”',
+    '“The way to get started is to quit talking and begin doing.”',
+    '“Whether you think you can or whether you think you can’t, you’re right!”',
+    '“I feel that luck is preparation meeting opportunity.”',
+    '“I never dreamed about success. I worked for it.”',
+    '“Yesterday’s home runs don’t win today’s games.”',
+    '“The only place where success comes before work is in the dictionary.”',
+    '“The only way around is through.”',
+  ];
+  useEffect(() => {
+    setMotivationStory(stories[Math.floor(Math.random() * stories.length)]);
+  }, []);
+  console.log(motivationStory);
   // Tippy helpers
   const [newMembersHelper, setNewMembersHelper] = useState(false);
   const [usersManagerHelper, setUsersManagerHelper] = useState(false);
@@ -28,7 +51,16 @@ const ProjectPage = ({ projects }) => {
   const router = useRouter();
   useEffect(() => {
     const uid = Cookies.get('uid');
-    const filteredArray = projects && projects.filter((project) => project.uid == uid);
+    const filteredArray =
+      projects &&
+      projects.filter((project) =>
+        project.projectName == router.query.project ? project.projectUsers.map((user) => user.userUid == uid) : null
+      );
+    // projects.filter((project) => {
+    //   if (project.projectName === router.query.project) {
+    //     project.projectUsers.map((user) => user.userUid === uid);
+    //   }
+    // });
     console.log(filteredArray);
     filteredArray && filteredArray.length == 1 && setSelectedProject(filteredArray[0]);
     filteredArray && filteredArray.length == 1 && setProjectUsers(filteredArray[0].projectUsers);
@@ -199,7 +231,7 @@ const ProjectPage = ({ projects }) => {
                 </div>
               </div>
               <div>
-                <h1 className="text-secondary text-md screenLarge:text-base text-gray -mt-1">This is the best startup in the tech field</h1>
+                <p className="screenLarge:text-base text-gray -mt-1">{motivationStory}</p>
               </div>
               {/* SECTION */}
               <div className="grid grid-cols-1frr screenSmall:grid-cols-2fr grid-rows-4fr screenSmall:grid-rows-2fr mt-8 gap-x-16 gap-y-16 mb-16">
@@ -211,7 +243,7 @@ const ProjectPage = ({ projects }) => {
                   </div>
                   <div
                     style={{ maxHeight: 330 }}
-                    className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
+                    className="p-6 mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background shadow-lg hover:shadow-xl transition duration-500 ease-in-out"
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/launch-maker.svg" />
                     <p className="text-base text-gray text-center px-4 py-4 inline-block">
@@ -234,7 +266,7 @@ const ProjectPage = ({ projects }) => {
                   </div>
                   <div
                     style={{ maxHeight: 330 }}
-                    className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
+                    className="p-6 mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background shadow-lg hover:shadow-xl transition duration-500 ease-in-out"
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/business-plan.svg" />
                     <p className="text-base text-gray text-center px-4 py-4">
@@ -256,7 +288,7 @@ const ProjectPage = ({ projects }) => {
                   </div>
                   <div
                     style={{ maxHeight: 330 }}
-                    className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
+                    className="p-6 mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background shadow-lg hover:shadow-xl transition duration-500 ease-in-out"
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/cash-flow2.svg" />
                     <p className=" text-base text-gray text-center px-4 py-4">
@@ -278,7 +310,7 @@ const ProjectPage = ({ projects }) => {
                   </div>
                   <div
                     style={{ maxHeight: 330 }}
-                    className="p-6 shadow-lg mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background"
+                    className="p-6 mt-1 w-full flex flex-col justify-center items-center border-r-6 rounded-2xl bg-white dark:bg-background shadow-lg hover:shadow-xl transition duration-500 ease-in-out"
                   >
                     <img style={{ maxHeight: 140 }} height={300} width={300} src="/main-sections/competitors.svg" />
                     <p className="text-base text-gray text-center px-4 py-4">
@@ -295,8 +327,13 @@ const ProjectPage = ({ projects }) => {
                   </div>
                 </div>
               </div>
-              <UsersManager setUsersManagerHelper={setUsersManagerHelper} projectUsers={projectUsers} selectedProject={selectedProject} />
-              <NewMembers setNewMembersHelper={setNewMembersHelper} projectId={selectedProject.projectId} />
+              <UsersManager
+                projectId={selectedProject.projectId}
+                currentUser={currentUser}
+                projectUsers={projectUsers}
+                selectedProject={selectedProject}
+              />
+              <NewMembers projectId={selectedProject.projectId} />
             </div>
           </div>
         ) : (

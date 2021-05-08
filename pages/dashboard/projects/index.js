@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Cookies from 'js-cookie';
-import cookie from 'cookie';
+import styled from 'styled-components';
+import { format, parseISO } from 'date-fns';
 import { db } from '../../../lib/firebase';
 import TippyMonster from '../../../components/dashboard/Tippy';
 import NavbarTemplate from '../../../components/dashboard/NavbarTemplate';
@@ -11,9 +12,114 @@ import BounceLoaderComponent from '../../../components/BounceLoader';
 import EmptyStartup from '../../../components/dashboard/startup/EmptyStartup';
 import StartupSuccess from '../../../components/dashboard/startup/StartupSuccess';
 import MembersCode from '../../../components/dashboard/MembersCode';
+import Link from 'next/link';
+
+const DivComponent = styled.div`
+  position: relative;
+  z-index: 2;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  // ::after {
+  //   content: '';
+  //   background-color: ${({ isIdeaPlanCreated }) => (isIdeaPlanCreated ? '#0aff00' : '#fc573b')};
+  //   height: 1px;
+  //   width: 150%;
+  //   display: block;
+  //   position: absolute;
+  //   right: 100%;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
+  //   z-index: -1;
+  // }
+  // @media (min-width: 1800px) {
+  //   ::after {
+  //     width: 225%;
+  //   }
+  }
+`;
+
+const DivComponent1 = styled.div`
+  position: relative;
+  z-index: 2;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  // ::after {
+  //   content: '';
+  //   background-color: ${({ isBusinessPlanCreated }) => (isBusinessPlanCreated ? '#0aff00' : '#fc573b')};
+  //   height: 1px;
+  //   width: 150%;
+  //   display: block;
+  //   position: absolute;
+  //   right: 100%;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
+  //   z-index: -1;
+  // }
+  // @media (min-width: 1800px) {
+  //   ::after {
+  //     width: 225%;
+  //   }
+  }
+`;
+
+const DivComponent2 = styled.div`
+  position: relative;
+  z-index: 2;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  // ::after {
+  //   content: '';
+  //   background-color: ${({ isCashflowCreated }) => (isCashflowCreated ? '#0aff00' : '#fc573b')};
+  //   height: 1px;
+  //   width: 150%;
+  //   display: block;
+  //   position: absolute;
+  //   right: 100%;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
+  //   z-index: -1;
+  // }
+  // @media (min-width: 1800px) {
+  //   ::after {
+  //     width: 225%;
+  //   }
+  }
+`;
+
+const DivComponent3 = styled.div`
+  position: relative;
+  z-index: 2;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  // ::after {
+  //   content: '';
+  //   background-color: ${({ isCompetitorsAnalysisCreated }) => (isCompetitorsAnalysisCreated ? '#0aff00' : '#fc573b')};
+  //   height: 1px;
+  //   width: 150%;
+  //   display: block;
+  //   position: absolute;
+  //   right: 100%;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
+  //   z-index: -1;
+  // }
+  // @media (min-width: 1800px) {
+  //   ::after {
+  //     width: 225%;
+  //   }
+  }
+`;
 
 const ProjectsManager = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(null);
   useEffect(async () => {
     const projectsArray = [];
     const userUid = Cookies.get('uid');
@@ -41,12 +147,9 @@ const ProjectsManager = () => {
     // });
   }, []);
 
-  console.log(projects);
-  console.log(projects.length);
   const router = useRouter();
   const containerRef = useRef();
   const { currentUser } = useAuth();
-  console.log(currentUser);
 
   const onProjectCreate = (e) => {
     e.preventDefault();
@@ -72,6 +175,11 @@ const ProjectsManager = () => {
       setActiveClass(true);
     }
   };
+
+  const onProjectDelete = (projectId) => {
+    console.log(projectId);
+  };
+
   return (
     <>
       <TippyMonster
@@ -102,7 +210,7 @@ const ProjectsManager = () => {
                 </svg>
                 <p className="self-end text-2xl pl-2 dark:text-background">Startups</p>
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-end relative top-2">
                 <button
                   onClick={(e) => onProjectCreate(e)}
                   className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary text-base font-light py-2 px-6 rounded-2xl dark:text-primarydark dark:border-primarydark"
@@ -112,77 +220,129 @@ const ProjectsManager = () => {
               </div>
             </div>
             <div>
-              <h1 className="text-secondary text-md text-gray">Bring your idea into reality</h1>
+              <p className="text text-gray">Bring your idea into reality</p>
             </div>
             <div>
               <p className="text-lg mt-10 -mb-6 dark:text-background">Ideas you invented</p>
             </div>
-            <div className="w-full grid sm:grid-cols-1 md:grid-cols-2fr lg:grid-cols-3fr 2xl:grid-cols-4fr gap-8 border-r-6 rounded-2xl bg-white mt-8 mb-8 dark:bg-background p-8 text-center">
-              {projects ? (
-                projects.length == 0 ? (
-                  <EmptyStartup onProjectCreate={onProjectCreate} />
-                ) : (
-                  projects.map(({ imageName, imageFileUrl, projectName, projectDescription, projectId }, index) => {
-                    return (
-                      <div className="shadow rounded-2xl flex flex-wrap justify-center items-center flex-col hover:shadow-lg transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out">
-                        {/* ---------------------------------- DROPDOWN START -------------------------------- */}
-                        <div className="relative inline-block text-right w-4/5 top-4 right-2">
-                          <img
-                            onClick={() => chooseClassesClick(index)}
-                            src="/dots-menu2.svg"
-                            height={26}
-                            width={26}
-                            className="cursor-pointer"
-                          />
-                          <div
-                            id={`menu${index}`}
-                            className="origin-top-right absolute left-1/2 transform -translate-x-1/2 w-44 lg:w-48 shadow-xl bg-white focus:outline-none invisible rounded-2xl"
-                          >
-                            <div className="pt-1 text-left">
-                              <div className="transition duration-500 ease-in-out flex items-center justify-between hover:bg-primary">
-                                <a
-                                  //   onClick={(e) => onProjectEdit(e, image)}
-                                  href="#"
-                                  className="block px-4 py-2 2xl:py-3 text-sm text-primarydark transition duration-500 ease-in-out hover:text-background"
-                                >
-                                  Edit
-                                </a>
-                                <p className="mr-3 flex justify-center items-center relative bottom-1">
-                                  <img src="/gifs/whale.gif" height={30} width={30} />
-                                </p>
-                              </div>
-                              <div className="transition duration-500 ease-in-out flex items-center justify-between hover:bg-primary rounded-bl-2xl rounded-br-2xl">
-                                <a
-                                  //   onClick={(e) => onProjectDelete(e, image.projectId)}
-                                  href="#"
-                                  className="block px-4 py-2 2xl:py-3 text-sm text-primarydark transition duration-500 ease-in-out hover:text-background"
-                                >
-                                  Remove
-                                </a>
-                                <p className="mr-3 flex justify-center items-center relative bottom-1">
-                                  <img src="/gifs/bomb.gif" height={30} width={30} />
-                                </p>
+            {projects ? (
+              projects.length == 0 ? (
+                <EmptyStartup onProjectCreate={onProjectCreate} />
+              ) : (
+                <div className="w-full grid sm:grid-cols-1 md:grid-cols-2fr lg:grid-cols-3fr 2xl:grid-cols-4fr gap-8 border-r-6 rounded-2xl bg-white mt-8 mb-8 dark:bg-background p-8 text-center">
+                  {projects.map(
+                    (
+                      {
+                        imageName,
+                        imageFileUrl,
+                        projectName,
+                        projectId,
+                        projectField,
+                        isIdeaPlanCreated,
+                        isBusinessPlanCreated,
+                        isCashflowCreated,
+                        isCompetitorsAnalysisCreated,
+                        createdAt,
+                      },
+                      index
+                    ) => {
+                      return (
+                        <div
+                          key={projectId}
+                          className="shadow rounded-2xl flex flex-wrap justify-center items-center flex-col hover:shadow-lg transform hover:scale-105 hover:-translate-y-2 hover:-translate-x-2 transition duration-500 ease-in-out"
+                        >
+                          {/* ---------------------------------- DROPDOWN START -------------------------------- */}
+                          <div className="relative inline-block text-right w-4/5 top-4 right-2">
+                            <img
+                              onClick={() => chooseClassesClick(index)}
+                              src="/dots-menu2.svg"
+                              height={26}
+                              width={26}
+                              className="cursor-pointer"
+                            />
+                            <div
+                              id={`menu${index}`}
+                              className="origin-top-right absolute left-1/2 transform -translate-x-1/2 w-44 lg:w-48 shadow-xl bg-white focus:outline-none invisible rounded-2xl"
+                            >
+                              <div className="pt-1 text-left">
+                                <div className="transition duration-500 ease-in-out flex items-center justify-between hover:bg-primary">
+                                  <Link href={`/dashboard/projects/${projectName}`}>
+                                    <a className="block px-4 py-2 2xl:py-3 text-sm text-primarydark transition duration-500 ease-in-out hover:text-background">
+                                      Edit
+                                    </a>
+                                  </Link>
+                                  <p className="mr-3 flex justify-center items-center relative bottom-1">
+                                    <img src="/gifs/whale.gif" height={30} width={30} />
+                                  </p>
+                                </div>
+                                <div className="transition duration-500 ease-in-out flex items-center justify-between hover:bg-primary rounded-bl-2xl rounded-br-2xl">
+                                  <button
+                                    onClick={() => onProjectDelete(projectId)}
+                                    className="block px-4 py-2 2xl:py-3 text-sm text-primarydark transition duration-500 ease-in-out hover:text-background"
+                                  >
+                                    Remove
+                                  </button>
+                                  <p className="mr-3 flex justify-center items-center relative bottom-1">
+                                    <img src="/gifs/bomb.gif" height={30} width={30} />
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>
+                          <img
+                            src={imageFileUrl == null ? `/modal/${imageName}.svg` : imageFileUrl}
+                            className="mt-6 h-40 w-40 p-4 border-b border-primary"
+                          />
+                          <div className="mb-4">
+                            <input
+                              value={projectName}
+                              contentEditable={false}
+                              className="w-4/5 text-center bg-white text-primarydark text-base px-4 mt-2 focus:outline-none"
+                            />
+                            <input
+                              value={projectField}
+                              contentEditable={false}
+                              className="w-4/5 text-center bg-white text-sm text-gray px-4 focus:outline-none"
+                            />
+                          </div>
+                          <div className="flex w-3/4 justify-between items-center -mt-4">
+                            <p className="text-sm text-primarydark">Startup idea</p>
+                            <DivComponent isIdeaPlanCreated={isIdeaPlanCreated}>
+                              <img src={`/progress/${isIdeaPlanCreated ? 'check' : 'remove'}.svg`} height={26} width={26} />
+                            </DivComponent>
+                            {/* <img src={`/progress/${isIdeaPlanCreated ? 'check' : 'remove'}.svg`} height={26} width={26} /> */}
+                          </div>
+                          <div className="flex w-3/4 justify-between items-center -mt-4">
+                            <p className="text-sm text-primarydark">Business plan</p>
+                            <DivComponent1 isBusinessPlanCreated={isBusinessPlanCreated}>
+                              <img src={`/progress/${isBusinessPlanCreated ? 'check' : 'remove'}.svg`} height={26} width={26} />
+                            </DivComponent1>
+                            {/* <img src={`/progress/${isBusinessPlanCreated ? 'check' : 'remove'}.svg`} height={26} width={26} /> */}
+                          </div>
+                          <div className="flex w-3/4 justify-between items-center -mt-4">
+                            <p className="text-sm text-primarydark">Cash flow</p>
+                            <DivComponent2 isCashflowCreated={isCashflowCreated}>
+                              <img src={`/progress/${isCashflowCreated ? 'check' : 'remove'}.svg`} height={26} width={26} />
+                            </DivComponent2>
+                            {/* <img src={`/progress/${isCashflowCreated ? 'check' : 'remove'}.svg`} height={26} width={26} /> */}
+                          </div>
+                          <div className="flex w-3/4 justify-between items-center -mt-4">
+                            <p className="text-sm text-primarydark">Competitors</p>
+                            <DivComponent3 isCompetitorsAnalysisCreated={isCompetitorsAnalysisCreated}>
+                              <img src={`/progress/${isCompetitorsAnalysisCreated ? 'check' : 'remove'}.svg`} height={26} width={26} />
+                            </DivComponent3>
+                            {/* <img src={`/progress/${isCompetitorsAnalysisCreated ? 'check' : 'remove'}.svg`} height={26} width={26} /> */}
+                          </div>
+                          <p className="text-xs text-gray px-4 pb-2">{format(parseISO(createdAt), 'PPP')}</p>
                         </div>
-
-                        <img
-                          src={imageFileUrl == null ? `/modal/${imageName}.svg` : imageFileUrl}
-                          className=" h-40 w-40 p-4 border-b border-primary"
-                        />
-                        <div style={{ height: 180 }} className=" overflow-scroll mt-2">
-                          <input className="bg-white text-center" value={projectName} />
-                          <p className="text-center mt-1 text-sm text-gray">{projectDescription}</p>
-                        </div>
-                      </div>
-                    );
-                  })
-                )
-              ) : (
-                <BounceLoaderComponent />
-              )}
-            </div>
+                      );
+                    }
+                  )}
+                </div>
+              )
+            ) : (
+              <BounceLoaderComponent />
+            )}
             <MembersCode />
           </div>
         </div>

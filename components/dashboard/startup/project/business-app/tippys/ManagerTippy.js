@@ -53,16 +53,21 @@ const ManagerTippy = () => {
       content={
         // Project manager start
         visible && (
-          <div ref={tippyRef} className="h-28 w-80 shadow-lg rounded-2xl bg-primary flex justify-center items-center focus:outline-none">
+          <div ref={tippyRef} className="h-20 w-80 shadow-lg rounded-2xl bg-primary flex justify-center items-center focus:outline-none">
             <p className="p-4 text-sm text-center text-white flex justify-center items-center">
-              Manage your team whenever you want! Remember, if you are the only person working on a project, your removal will delete the
-              entire project.
+              Only the project founder is able to manage the team composition.
             </p>
           </div>
         )
       }
     >
-      <img onClick={onImageClick} className="cursor-pointer ml-2 relative bottom-0.5" src="/members/bulb.svg" height={24} width={24} />
+      <img
+        onClick={onImageClick}
+        className="cursor-pointer ml-2 relative bottom-0.5 opacity-80"
+        src="/members/bulb.svg"
+        height={24}
+        width={24}
+      />
     </Tippy>
   );
 };

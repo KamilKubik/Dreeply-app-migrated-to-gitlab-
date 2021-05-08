@@ -62,7 +62,13 @@ const CompetitorsAnalysisTippy = () => {
         )
       }
     >
-      <img onClick={onImageClick} className="cursor-pointer ml-2 relative bottom-0.5" src="/members/bulb.svg" height={24} width={24} />
+      <img
+        onClick={onImageClick}
+        className="cursor-pointer ml-2 relative bottom-0.5 opacity-80"
+        src="/members/bulb.svg"
+        height={24}
+        width={24}
+      />
     </Tippy>
   );
 };

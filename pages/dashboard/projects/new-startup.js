@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import gsap, { Linear } from 'gsap';
 import { v4 as uuidv4 } from 'uuid';
 import { useAuth } from '../../../lib/newAuth';
-import { db } from '../../../lib/firebase';
+import { db, storage } from '../../../lib/firebase';
 import NavbarTemplate from '../../../components/dashboard/NavbarTemplate';
 import { CountryDropdown } from 'react-country-region-selector';
 import ImagesModal from '../../../components/dashboard/startup/ImagesModal';
@@ -98,6 +98,7 @@ const newStartupPage = () => {
       projectUsers: [
         {
           userName,
+          role: 'admin',
           userUid: currentUser.uid,
           userStripeRole: currentUser.stripeRole,
           userToken: currentUser.token,
@@ -158,7 +159,7 @@ const newStartupPage = () => {
                   <img src="/project-create/rocket.svg" height={36} width={36} className="inline-block" />
                   <p className="ml-2 text-primarydark">Let's create your startup!</p>
                 </div>
-                <div className="text-base text-gray px-4">Oops, one more tiny step and we will get down to business.</div>
+                <div className="text-base text-gray px-4">We are beginning with some fundamental information about your startup</div>
               </div>
               <div className="row-span-2">
                 {/* <form onSubmit={onNewProjectCreate} className="z-50 px-4 pt-2 rounded-2xl mt-4"> */}
