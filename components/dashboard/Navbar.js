@@ -18,7 +18,8 @@ const Navbar = ({ children }) => {
   const size = { width: window.innerWidth };
   console.log(size);
 
-  return <>{isMobile ? <MobileNavbar children={children} /> : <DesktopNavbar children={children} />}</>;
+  // return <>{isMobile ? <MobileNavbar children={children} /> : <DesktopNavbar children={children} />}</>;
+  return <DesktopNavbar children={children} />;
 };
 
 export default Navbar;

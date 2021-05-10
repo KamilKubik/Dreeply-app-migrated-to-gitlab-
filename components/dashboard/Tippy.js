@@ -74,7 +74,7 @@ const TippyMonster = ({
   return (
     <Tippy
       // trigger={tippyMonster}
-      zIndex={visible || tippyMonster || startups ? 40 : 0}
+      zIndex={visible ? 40 : -1}
       onShow={show}
       animation="fade"
       duration={500}

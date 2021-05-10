@@ -34,6 +34,9 @@ module.exports = {
       five: '#524CC2',
       six: '#3C388F',
       seven: '#292661',
+      // green: '#4aa96c',
+      green: '#29bb89',
+      // green: '#54e346',
     }),
     // inset: {
     //   '72.5': '72.5%',
@@ -59,6 +62,7 @@ module.exports = {
       business: '1fr 240px',
       businessMedium: '1fr 280px',
       projectMembers: '18% 20% 24% 24% 14%',
+      activePlanManager: '26% 26% 22% 26%',
     },
     gridTemplateRows: {
       '1fr': '1fr',
@@ -87,6 +91,14 @@ module.exports = {
       xlContainerBreak: '480px',
       QHD: '2000px',
       // '4K': '3200px',
+      screenMediumSmall: '920px',
+      // Pricing
+      mobileEnd: '680px',
+      screenSmall: '780px',
+      pricingBreakpoint: '1060px',
+      screenMedium: '1120px',
+      screenLarge: '1280px',
+      QHD: '1720px',
     },
     screens: {
       ...defaultTheme.screens,
@@ -103,12 +115,14 @@ module.exports = {
       bigContainer: '1400px',
       big2Container: '1720px',
       big3Container: '1900px',
-      QHD: '2550px',
       // '4k': '3800px',
       mobileEnd: '960px',
       screenSmall: '1120px',
+      screenMediumSmall: '1280px',
       screenMedium: '1480px',
       screenLarge: '1720px',
+      // screenLarge2: '1900px',
+      QHD: '2550px',
     },
     extend: {
       height: (theme) => ({

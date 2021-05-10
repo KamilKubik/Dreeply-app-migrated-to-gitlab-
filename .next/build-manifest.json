@@ -24,15 +24,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/dashboard/account": [
+    "/dashboard/active-plan": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/dashboard/account.js"
-    ],
-    "/name": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/name.js"
+      "static/chunks/pages/dashboard/active-plan.js"
     ]
   },
   "ampFirstPages": []

@@ -2,6 +2,5 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/name": "pages/name.js",
-  "/dashboard/account": "pages/dashboard/account.js"
+  "/dashboard/active-plan": "pages/dashboard/active-plan.js"
 }
