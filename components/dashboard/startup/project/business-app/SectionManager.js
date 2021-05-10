@@ -34,37 +34,12 @@ const SectionManager = ({
 
   const selectSection = (section, index) => {
     selectSectionPage(section, index);
-    console.log('select section');
   };
 
   const deleteSection = (section, index) => {
     deleteSectionPage(section, index);
-    console.log('delete section');
   };
 
-  // Problem występuje przy zmianie sekcji. Dane, które wprowadzimy w danej sekcji, przy zmianie na inną, a później przy powrocie, zostają usunięte z firebase'a
-  // useEffect(() => {
-  //   console.log('SECTIONS --> ', sections);
-  //   console.log('SECTIONS ARRAY --> ', sectionsArray);
-  //   if (!sectionsArray && sections) {
-  //     console.log('Its running...');
-  //     setSectionsArray(sections);
-  //     return;
-  //   }
-  // }, [sections]);
-
-  // useEffect(() => {
-  //   if (sections && sectionsArray) {
-  //     if (sections.length !== sectionsArray.length) {
-  //       console.log('Is this running twice?');
-  //       console.log(sections);
-  //       console.log(sectionsArray);
-  //       setSectionsArray(sections);
-
-  //       console.log(sections);
-  //     }
-  //   }
-  // }, [sections]);
   useEffect(() => {
     if (sectionsArray !== sections) {
       setSectionsArray(sections);
@@ -118,33 +93,31 @@ const SectionManager = ({
             )}
           </Droppable>
         </DragDropContext>
-        <div className="h-10 rounded-2xl flex justify-around items-center">
+        {/* <div className="h-10 rounded-2xl flex justify-around items-center">
           <button
             onClick={onNewSectionAdd}
             className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
           >
             {addingSection ? '...whoops, cancel' : 'Add new section'}
           </button>
-        </div>
+        </div> */}
         <div className="flex flex-col justify-center items-center place-content-center place-items-center">
-          {addingSection ? (
-            <div className="flex flex-col justify-center items-center place-content-center place-items-center">
-              <input
-                autoComplete="off"
-                type="text"
-                placeholder="Enter section title"
-                onKeyUp={(e) => updateTitle(e.target.value)}
-                id="section-placeholder"
-                className="focus:outline-none text-primarydark bg-white pb-4 pt-4"
-              ></input>
-              <button
-                onClick={onParticularSectionAdd}
-                className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
-              >
-                Add new section
-              </button>
-            </div>
-          ) : null}
+          <div className="flex flex-col justify-center items-center place-content-center place-items-center">
+            <input
+              autoComplete="off"
+              type="text"
+              placeholder="Enter section title"
+              // onKeyUp={(e) => setTitle(e.target.value)}
+              id="section-placeholder"
+              className="focus:outline-none text-primarydark bg-white pb-4 pt-4"
+            ></input>
+            <button
+              onClick={onParticularSectionAdd}
+              className="hover:bg-primary hover:text-white dark:hover:bg-primarydark dark:hover:text-background focus:outline-none border border-primary text-primary dark:text-primarydark dark:border-primarydark text-sm font-light py-2 px-6 rounded-2xl"
+            >
+              Add new section
+            </button>
+          </div>
         </div>
       </div>
     </div>

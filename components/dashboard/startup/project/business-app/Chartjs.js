@@ -9,6 +9,9 @@ import { db } from '../../../../../lib/firebase';
 import gsap, { Power4, Linear } from 'gsap';
 import Image from 'next/image';
 import Router from 'next/router';
+// import { defaults } from 'react-chartjs-2';
+
+// defaults.font = 'Comfortaa';
 
 const ChartJsComponent = ({
   chartImageUpdate,
@@ -513,6 +516,7 @@ const ChartJsComponent = ({
         ];
 
   console.log(field.dataset1);
+  console.log('---------- FIELD ----------');
   const data = {
     labels: field.labels && [
       ...field.labels.map((label) => {
@@ -527,78 +531,78 @@ const ChartJsComponent = ({
       // Dataset1
       {
         label: field.dataset1Label && field.dataset1Label,
-        data:
-          field.dataset1 &&
-          field.dataset1.map((data) => {
-            if (data !== '') {
-              return data;
-            }
-          }),
+        data: field.dataset1 && field.dataset1,
+        // field.dataset1 &&
+        // field.dataset1.map((data) => {
+        //   if (data !== '') {
+        //     return data;
+        //   }
+        // }),
         backgroundColor: colors,
         borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset2
       {
         label: field.dataset2Label && field.dataset2Label,
-        data:
-          field.dataset2 &&
-          field.dataset2.map((data) => {
-            if (data !== '') {
-              return data;
-            }
-          }),
+        data: field.dataset2 && field.dataset2,
+        // field.dataset2 &&
+        // field.dataset2.map((data) => {
+        //   if (data !== '') {
+        //     return data;
+        //   }
+        // }),
         backgroundColor: colors1,
         borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset3
       {
         label: field.dataset3Label && field.dataset3Label,
-        data:
-          field.dataset3 &&
-          field.dataset3.map((data) => {
-            if (data !== '') {
-              return data;
-            }
-          }),
+        data: field.dataset3 && field.dataset3,
+        // field.dataset3 &&
+        // field.dataset3.map((data) => {
+        //   if (data !== '') {
+        //     return data;
+        //   }
+        // }),
         backgroundColor: colors2,
         borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset4
       {
         label: field.dataset4Label && field.dataset4Label,
-        data:
-          field.dataset4 &&
-          field.dataset4.map((data) => {
-            if (data !== '') {
-              return data;
-            }
-          }),
+        data: field.dataset4 && field.dataset4,
+        // field.dataset4 &&
+        // field.dataset4.map((data) => {
+        //   if (data !== '') {
+        //     return data;
+        //   }
+        // }),
         backgroundColor: colors3,
         borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset5
       {
         label: field.dataset5Label && field.dataset5Label,
-        data:
-          field.dataset5 &&
-          field.dataset5.map((data) => {
-            if (data !== '') {
-              return data;
-            }
-          }),
+        data: field.dataset5 && field.dataset5,
+        // field.dataset5 &&
+        // field.dataset5.map((data) => {
+        //   if (data !== '') {
+        //     return data;
+        //   }
+        // }),
         backgroundColor: colors4,
         borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
       // Dataset6
       {
         label: field.dataset6Label && field.dataset6Label,
-        data:
-          field.dataset6 &&
-          field.dataset6.map((data) => {
-            if (data !== '') {
-              return data;
-            }
-          }),
+        data: field.dataset6 && field.dataset6,
+        // field.dataset6 &&
+        // field.dataset6.map((data) => {
+        //   if (data !== '') {
+        //     return data;
+        //   }
+        // }),
         backgroundColor: colors5,
         borderWidth: field.chartType == 'Area chart' ? 0 : field.chartType == 'Pie chart' || (field.chartType == 'Doughnut chart' && 2),
       },
@@ -607,8 +611,6 @@ const ChartJsComponent = ({
 
   console.log(data);
 
-  const [newChart, setNewChart] = useState();
-  const [datasets, setDatasets] = useState([]);
   useEffect(async () => {
     // console.log('-------- DESTROY --------');
     // newChart && await newChart.destroy() && console.log('-------- DESTROY --------');
@@ -622,98 +624,80 @@ const ChartJsComponent = ({
     document.getElementById(`${field.index}chartContainer`).innerHTML = `<canvas id=${field.index} ref=${chartRef}></canvas>`;
     const myChartRef = document.getElementById(field.index).getContext('2d');
 
-    // data.datasets.map((dataset) => {
-    //   data.labels.map((label) => {
-    //     if (label !== '' && dataset.label !== '') {
-    //       setDatasets(dataset);
-    //     }
-    //   })
-    // })
-
+    console.log('DATA --> ', data);
     // const datas = data.datasets.map((dataset) => {
-    //   const test = dataset.data.filter((datarer, index) => {
-    //     if (data.labels[index] !== '') {
-    //       return datarer
+    //   console.log(dataset.data[0]);
+    //   const test1 = dataset.data.map((datases) => {
+    //     if (datases !== undefined) {
+    //       return datases;
+    //     } else {
+    //       return '';
     //     }
-    //   })
-    //   return test
-    // })
-    console.log(data.datasets);
-    const datas = data.datasets.map((dataset) => {
-      console.log(dataset.data[0]);
-      const test1 = dataset.data.map((datases) => {
-        if (datases !== undefined) {
-          return datases;
-        } else {
-          return '';
-        }
-      });
-      const test = test1.map((datarer, index) => {
-        if (data.labels[index] !== '') {
-          return datarer;
-        }
-      });
-      const test2 = test.filter((obj) => obj !== undefined);
-      return test2;
-    });
-    console.log('DATAS --> ', datas);
+    //   });
+    //   const test = test1.map((datarer, index) => {
+    //     if (data.labels[index] !== '') {
+    //       return datarer;
+    //     }
+    //   });
+    //   const test2 = test.filter((obj) => obj !== undefined);
+    //   return test2;
+    // });
 
-    // const data1 = datas[0][0] ? datas[0][0].map((datarr) => datarr) : [];
-    // const data2 = datas[1][0] ? datas[1][0].map((datarr) => datarr) : [];
-    // const data3 = datas[2][0] ? datas[2][0].map((datarr) => datarr) : [];
-    // const data4 = datas[3][0] ? datas[3][0].map((datarr) => datarr) : [];
-    // const data5 = datas[4][0] ? datas[4][0].map((datarr) => datarr) : [];
-    // const data6 = datas[5][0] ? datas[5][0].map((datarr) => datarr) : [];
-
-    const fill = field.chartType == 'Line chart' ? false : undefined;
+    const fill = field.chartType == 'Area chart' ? true : false;
 
     const newDatasets = [
       {
         label: data.datasets[0].label,
-        data: datas[0],
+        data: data.datasets[0].data,
         backgroundColor: data.datasets[0].backgroundColor,
         borderColor: field.chartType == 'Line chart' ? 'rgba(255,185,0 ,1 )' : 'rgb(255, 255, 255)',
-        borderWidth: data.datasets[0].borderWidth,
+        // borderWidth: data.datasets[0].borderWidth,
+        borderWidth: field.chartType == 'Area chart' ? 1 : 1,
         fill: fill,
       },
       {
         label: data.datasets[1].label,
-        data: datas[1],
+        data: data.datasets[1].data,
         backgroundColor: data.datasets[1].backgroundColor,
         borderColor: field.chartType == 'Line chart' ? 'rgba(0,204,106 ,1 )' : 'rgb(255, 255, 255)',
-        borderWidth: data.datasets[1].borderWidth,
+        // borderWidth: data.datasets[1].borderWidth,
+        borderWidth: field.chartType == 'Area chart' ? 1 : 1,
         fill: fill,
       },
       {
         label: data.datasets[2].label,
-        data: datas[2],
+        data: data.datasets[2].data,
         backgroundColor: data.datasets[2].backgroundColor,
         borderColor: field.chartType == 'Line chart' ? 'rgba(0,120,215 ,1 )' : 'rgb(255, 255, 255)',
-        borderWidth: data.datasets[2].borderWidth,
+        // borderWidth: data.datasets[2].borderWidth,
+        borderWidth: field.chartType == 'Area chart' ? 1 : 1,
         fill: fill,
       },
       {
         label: data.datasets[3].label,
-        data: datas[3],
+        data: data.datasets[3].data,
         backgroundColor: data.datasets[3].backgroundColor,
         borderColor: field.chartType == 'Line chart' ? 'rgba(231,72,86 ,1 )' : 'rgb(255, 255, 255)',
-        borderWidth: data.datasets[3].borderWidth,
+        // borderWidth: data.datasets[3].borderWidth,
+        borderWidth: field.chartType == 'Area chart' ? 1 : 1,
         fill: fill,
       },
       {
         label: data.datasets[4].label,
-        data: datas[4],
+        data: data.datasets[4].data,
         backgroundColor: data.datasets[4].backgroundColor,
         borderColor: field.chartType == 'Line chart' ? 'rgba(126,115,95 ,1 )' : 'rgb(255, 255, 255)',
-        borderWidth: data.datasets[4].borderWidth,
+        // borderWidth: data.datasets[4].borderWidth,
+        borderWidth: field.chartType == 'Area chart' ? 1 : 1,
         fill: fill,
       },
       {
         label: data.datasets[5].label,
-        data: datas[5],
+        data: data.datasets[5].data,
         backgroundColor: data.datasets[5].backgroundColor,
         borderColor: field.chartType == 'Line chart' ? 'rgba(177,70,194 ,1 )' : 'rgb(255, 255, 255)',
-        borderWidth: data.datasets[5].borderWidth,
+        // borderWidth: data.datasets[5].borderWidth,
+        borderWidth: field.chartType == 'Area chart' ? 1 : 1,
         fill: fill,
       },
     ];
@@ -728,41 +712,66 @@ const ChartJsComponent = ({
       field.chartType == 'Area chart' ? 'line' : '',
     ];
 
-    window.id = new Chart(myChartRef, {
+    const chartElement = new Chart(myChartRef, {
+      // type: 'line',
       type: chartType.filter((type) => type !== ''),
       data: {
         labels: data.labels.filter((label) => label !== ''),
         datasets: newDatasets.filter((dataset) => dataset.label !== ''),
       },
       options: {
+        // bezierCurve: false,
+        // animation: false,
+        // animation: {
+        //   onComplete: function () {
+        //     console.log(chartElement.toBase64Image('image/png', 100));
+        //   },
+        // },
+        font: {
+          family: 'Comfortaa',
+          // size: size.width < 680 ? 8 : 12,
+        },
         skipNull: true,
-        responsive: true,
+        // responsive: true,
         legend: {
           position: 'bottom',
+          font: {
+            family: 'Vollkorn',
+            // size: size.width < 680 ? 8 : 12,
+          },
         },
         // defaultFontFamily: (Chart.defaults.global.defaultFontFamily =
         //   'Comfortaa'),
         scales: {
-          yAxes: [
-            {
-              stacked: field.stacked == true ? true : false,
-              ticks: {
-                beginAtZero: true,
+          x: {
+            stacked: field.stacked == true ? true : false,
+            ticks: {
+              // fontFamily: 'Comfortaa',
+              beginAtZero: true,
+              font: {
+                family: 'Comfortaa',
+                // size: size.width < 680 ? 8 : 12,
               },
             },
-          ],
-          xAxes: [
-            {
-              stacked: field.stacked == true ? true : false,
-              ticks: {
-                beginAtZero: true,
+          },
+          y: {
+            stacked: field.stacked == true ? true : false,
+            ticks: {
+              // fontFamily: 'Comfortaa',
+              beginAtZero: true,
+              font: {
+                family: 'Comfortaa',
+                // size: size.width < 680 ? 8 : 12,
               },
             },
-          ],
+          },
         },
       },
     });
+    // console.log(chartElement.toBase64Image());
     // addChart(chart, currentIndex, index, selectedSection);
+    // const chart = document.getElementById(field.index);
+    // console.log(chart.toDataURL);
   }, [data.labels, data.datasets, data]);
 
   const [label1, setLabel1] = useState('');
@@ -2003,13 +2012,13 @@ const ChartJsComponent = ({
     <div ref={provided.innerRef} {...provided.draggableProps} className="w-full grid grid-cols-12fr justify-items-center items-center mt-6">
       <div
         id={`${field.index}container`}
-        className="col-start-2 col-end-12 relative flex flex-col h-full w-full flex px-8 py-8 rounded-2xl bg-white dark:bg-background"
+        className="col-start-2 col-end-12 relative flex flex-col h-full w-full px-8 py-8 rounded-2xl bg-white dark:bg-background"
       >
         <div className="w-full h-full">
           <div id={`${field.index}chartContainer`}></div>
           {/* <canvas id={field.index} ref={chartRef} className='mt-4'></canvas> */}
           {/* <hr className='text-primary mt-4' /> */}
-          <div id={`${field.index}table`} ref={tableRef} className="w-full overflow-auto h-0">
+          <div id={`${field.index}table`} ref={tableRef} className="w-full overflow-auto h-0 mt-6">
             <table class="content-table">
               <thead>
                 <tr>
@@ -2018,84 +2027,84 @@ const ChartJsComponent = ({
                     <input
                       onChange={(e) => onLabelChange1(e.target.value)}
                       value={label1}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange2(e.target.value)}
                       value={label2}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange3(e.target.value)}
                       value={label3}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange4(e.target.value)}
                       value={label4}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange5(e.target.value)}
                       value={label5}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange6(e.target.value)}
                       value={label6}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange7(e.target.value)}
                       value={label7}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange8(e.target.value)}
                       value={label8}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange9(e.target.value)}
                       value={label9}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange10(e.target.value)}
                       value={label10}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange11(e.target.value)}
                       value={label11}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                   <th>
                     <input
                       onChange={(e) => onLabelChange12(e.target.value)}
                       value={label12}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     />
                   </th>
                 </tr>
@@ -2106,7 +2115,7 @@ const ChartJsComponent = ({
                     <input
                       onChange={(e) => onDatasetLabelChange1(e.target.value)}
                       value={dataset1Label}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     ></input>
                   </td>
                   <td>
@@ -2199,7 +2208,7 @@ const ChartJsComponent = ({
                     <input
                       onChange={(e) => onDatasetLabelChange2(e.target.value)}
                       value={dataset2Label}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     ></input>
                   </td>
                   <td>
@@ -2292,7 +2301,7 @@ const ChartJsComponent = ({
                     <input
                       onChange={(e) => onDatasetLabelChange3(e.target.value)}
                       value={dataset3Label}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     ></input>
                   </td>
                   <td>
@@ -2385,7 +2394,7 @@ const ChartJsComponent = ({
                     <input
                       onChange={(e) => onDatasetLabelChange4(e.target.value)}
                       value={dataset4Label}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     ></input>
                   </td>
                   <td>
@@ -2478,7 +2487,7 @@ const ChartJsComponent = ({
                     <input
                       onChange={(e) => onDatasetLabelChange5(e.target.value)}
                       value={dataset5Label}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     ></input>
                   </td>
                   <td>
@@ -2571,7 +2580,7 @@ const ChartJsComponent = ({
                     <input
                       onChange={(e) => onDatasetLabelChange6(e.target.value)}
                       value={dataset6Label}
-                      className="w-full bg-secondBackground focus:outline-none"
+                      className="w-full bg-primary focus:outline-none"
                     ></input>
                   </td>
                   <td>

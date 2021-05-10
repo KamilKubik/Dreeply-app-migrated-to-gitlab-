@@ -82,7 +82,7 @@ const DasboardPage = () => {
             </p>
           </div>
           <div>
-            <p className="text-primarydark dark:text-background text-center text-md sm:text-lg">How would you like to get started?</p>
+            <p className="text-primarydark dark:text-background text-center text-md sm:text-lg">Who will conquer this world if not you?</p>
           </div>
           <div>
             <img src="/software.svg" height={175} width={175} />
